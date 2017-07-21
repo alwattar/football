@@ -72,7 +72,7 @@ class Admin extends Controller{
                 if($create_new_commentor === true){
                     $msg = "Commentor createed";
                 }else{
-                    $msg = "Commentor Not created , 62432";
+                    $msg = "Commentor Not created , 6243251";
                 }
                 
                 $this->view->commMsg = $msg;
@@ -80,6 +80,39 @@ class Admin extends Controller{
             }
             
             $this->view->view("admin/new-comm");
+        }
+    }
+
+    // new commentor
+    public function newNFT(){
+        if($this->checkUSession() == false){  // if not logged in
+            $this->redirect(ADMIN_PATH . '/login');
+        }else{
+
+            // echo var_dump($this->view->channels);
+            if(isset($_POST['nft_name']) &&
+               isset($_POST['nft_logo']) &&
+               isset($_POST['nft_num'])){
+
+                // new channel
+                $n_nft = [
+                    "nft_name" => $this->protect($_POST['nft_name']),
+                    "nft_num" => intval($this->protect($_POST['nft_num'])),
+                    "nft_logo" => $this->protect($_POST['nft_logo']),
+                ];
+
+                $create_new_nft = $this->model->newNFT($n_nft);
+                if($create_new_nft === true){
+                    $msg = "NFT createed";
+                }else{
+                    $msg = "NFT Not created , 53364";
+                }
+                
+                $this->view->commMsg = $msg;
+                echo $msg;
+            }
+            
+            $this->view->view("admin/new-nft");
         }
     }
     

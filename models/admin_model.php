@@ -39,5 +39,13 @@ class Admin_Model extends Model{
 
         return $cncomm;
     }
+
+    // new NTF
+    public function newNFT($d){
+        $cn_nft = $this->db->table('nft')
+             ->insert("(nft_name, nft_logo, nft_num) values(:nft_name, :nft_logo, :nft_num)", $d);
+
+        return $cn_nft;
+    }
 }
 ?>
