@@ -184,6 +184,65 @@ class Admin extends Controller{
             $this->view->view("admin/new-champ");
         }
     }
+
+
+    // new Match
+    public function newMatch(){
+        if($this->checkUSession() == false){  // if not logged in
+            $this->redirect(ADMIN_PATH . '/login');
+        }else{
+            $this->view->channels = $this->model->getChannels();
+            $this->view->commentors = $this->model->getCommentors();
+            $this->view->champs = $this->model->getChamps();
+            
+            if(isset($_POST['mat_team1']) &&
+               isset($_POST['mat_team2']) &&
+               isset($_POST['mat_time']) &&
+               isset($_POST['mat_h']) &&
+               isset($_POST['mat_m']) &&
+               isset($_POST['mat_chan']) &&
+               isset($_POST['mat_comm']) &&
+               isset($_POST['mat_address']) &&
+               isset($_POST['mat_note']) &&
+               isset($_POST['mat_status']) &&
+               isset($_POST['mat_lang']) &&
+               isset($_POST['mat_champ'])){
+
+                $h = $this->protect($_POST['mat_h']);
+                $m = $this->protect($_POST['mat_m']);
+                $d = $this->protect($_POST['mat_time']);
+                $d = explode('/', $d);
+                
+                $mat_time = $d[2] . '-' . $d[0] . '-' . $d[1] . " $h:$m:00";
+                
+                
+                $n_mat = [
+                    "mat_team1" => $this->protect($_POST['mat_team1']),
+                    "mat_team2" => $this->protect($_POST['mat_team2']),
+                    "mat_time" => $mat_time,
+                    "mat_chan" => intval($this->protect($_POST['mat_chan'])),
+                    "mat_comm" => intval($this->protect($_POST['mat_comm'])),
+                    "mat_champ" => intval($this->protect($_POST['mat_champ'])),
+                    "mat_status" => intval($this->protect($_POST['mat_status'])),
+                    "mat_address" => $this->protect($_POST['mat_address']),
+                    "mat_note" => $this->protect($_POST['mat_note']),
+                    "mat_lang" => $this->protect($_POST['mat_lang']),
+                ];
+
+                $create_new_mat = $this->model->newMatch($n_mat);
+                if($create_new_mat === true){
+                    $msg = "Match createed";
+                }else{
+                    $msg = "Match Not created , 729351173";
+                }
+                
+                $this->view->commMsg = $msg;
+                echo $msg;
+            }
+            
+            $this->view->view("admin/new-match");
+        }
+    }
     
     // login
     public function login(){

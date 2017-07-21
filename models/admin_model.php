@@ -32,6 +32,18 @@ class Admin_Model extends Model{
         return $chans;
     }
 
+    // get all commentors
+    public function getCommentors(){
+        $chans = $this->db->table('commentor')->select('*');
+        return $chans;
+    }
+
+    // get all champs
+    public function getChamps(){
+        $chans = $this->db->table('champs')->select('*');
+        return $chans;
+    }
+
     // new commentor
     public function newComm($d){
         $cncomm = $this->db->table('commentor')
@@ -63,6 +75,14 @@ class Admin_Model extends Model{
              ->insert("(champ_name, champ_logo, champ_date, champ_loc) values(:champ_name, :champ_logo, :champ_date, :champ_loc)", $d);
 
         return $cn_champ;
+    }
+
+    // new Match
+    public function newMatch($d){
+        $cn_mat = $this->db->table('matches')
+             ->insert("(mat_team1, mat_team2, mat_time, mat_chan, mat_comm, mat_champ, mat_address, mat_status, mat_note, mat_lang) VALUES(:mat_team1, :mat_team2, :mat_time, :mat_chan, :mat_comm, :mat_champ, :mat_address, :mat_status, :mat_note, :mat_lang)", $d);
+
+        return $cn_mat;
     }
 }
 ?>
