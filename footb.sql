@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 21, 2017 at 04:42 PM
+-- Generation Time: Jul 21, 2017 at 05:05 PM
 -- Server version: 10.1.23-MariaDB-8
 -- PHP Version: 5.6.7-1
 
@@ -137,6 +137,19 @@ CREATE TABLE `transfer` (
   `mov_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `urls`
+--
+
+CREATE TABLE `urls` (
+  `url_id` int(255) NOT NULL,
+  `url_href` varchar(255) NOT NULL,
+  `url_channel` int(255) NOT NULL,
+  `url_game` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Indexes for dumped tables
 --
@@ -196,6 +209,14 @@ ALTER TABLE `transfer`
   ADD KEY `mov_club` (`mov_club`);
 
 --
+-- Indexes for table `urls`
+--
+ALTER TABLE `urls`
+  ADD PRIMARY KEY (`url_id`),
+  ADD KEY `url_channel` (`url_channel`),
+  ADD KEY `url_game` (`url_game`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -240,6 +261,11 @@ ALTER TABLE `players`
 ALTER TABLE `transfer`
   MODIFY `mov_id` int(255) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `urls`
+--
+ALTER TABLE `urls`
+  MODIFY `url_id` int(255) NOT NULL AUTO_INCREMENT;
+--
 -- Constraints for dumped tables
 --
 
@@ -268,6 +294,13 @@ ALTER TABLE `players`
 --
 ALTER TABLE `transfer`
   ADD CONSTRAINT `transfer_ibfk_1` FOREIGN KEY (`mov_club`) REFERENCES `clubs` (`cl_id`);
+
+--
+-- Constraints for table `urls`
+--
+ALTER TABLE `urls`
+  ADD CONSTRAINT `urls_ibfk_1` FOREIGN KEY (`url_channel`) REFERENCES `channels` (`chan_id`),
+  ADD CONSTRAINT `urls_ibfk_2` FOREIGN KEY (`url_game`) REFERENCES `matches` (`mat_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

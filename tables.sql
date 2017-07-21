@@ -76,3 +76,13 @@ mov_sal int(255) not null,
 mov_date timestamp,
 FOREIGN KEY (mov_club) references clubs(cl_id)
 )ENGINE=InnoDB default charset utf8;
+
+
+CREATE TABLE urls(
+url_id int(255) primary key auto_increment,
+url_href varchar(255) not null,
+url_channel int(255) not null,
+url_game int(255) not null,
+FOREIGN KEY (url_channel) references channels(chan_id),
+FOREIGN KEY (url_game) references matches(mat_id)
+)ENGINE=InnoDB default charset utf8;

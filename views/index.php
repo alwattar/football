@@ -1,3 +1,4 @@
+
 <?php include 'header.php' ?>
 <!-- to remove last choice: localStorage.setItem('ud', null); -->
 <div class="survey " style="display:none">
@@ -63,7 +64,7 @@
 		 width: "400",
 		 height: "280",
 		 autostart: true,
-		 file: "https://live52.vkuserlive.com/639903/live/0d6f4IRPcJgRGxw1/playlist.m3u8"
+		 file: "https://live76.vkuserlive.com/620010/live/CteWO8xAf9A/playlist.m3u8"
 		 
 	     });
 	    </script> 
