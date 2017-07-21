@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 21, 2017 at 05:05 PM
+-- Generation Time: Jul 21, 2017 at 06:51 PM
 -- Server version: 10.1.23-MariaDB-8
 -- PHP Version: 5.6.7-1
 
@@ -150,6 +150,26 @@ CREATE TABLE `urls` (
   `url_game` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `u_id` int(255) NOT NULL,
+  `u_name` varchar(50) NOT NULL,
+  `u_email` varchar(50) NOT NULL,
+  `u_pass` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`u_id`, `u_name`, `u_email`, `u_pass`) VALUES
+(1, 'admin', 'admin@email', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
+
 --
 -- Indexes for dumped tables
 --
@@ -217,6 +237,12 @@ ALTER TABLE `urls`
   ADD KEY `url_game` (`url_game`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`u_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -229,7 +255,7 @@ ALTER TABLE `champs`
 -- AUTO_INCREMENT for table `channels`
 --
 ALTER TABLE `channels`
-  MODIFY `chan_id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `chan_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `clubs`
 --
@@ -265,6 +291,11 @@ ALTER TABLE `transfer`
 --
 ALTER TABLE `urls`
   MODIFY `url_id` int(255) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `u_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --

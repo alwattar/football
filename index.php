@@ -35,6 +35,18 @@ require_once("./libs/Route.php");
 // index controller
 $r->addRoute("/index","index@index");
 
+$r->addRoute(ADMIN_R ,"admin@index");
+$r->addRoute(ADMIN_R . '/login' ,"admin@login");
+$r->addRoute(ADMIN_R . '/new-chan' ,"admin@newChan");
+$r->addRoute(ADMIN_R . '/new-commentor' ,"admin@newComm");
+$r->addRoute(ADMIN_R . '/new-ntf' ,"admin@newNTF");
+$r->addRoute(ADMIN_R . '/new-club' ,"admin@newClub");
+$r->addRoute(ADMIN_R . '/new-champ' ,"admin@newChamp");
+$r->addRoute(ADMIN_R . '/new-match' ,"admin@newMatch");
+$r->addRoute(ADMIN_R . '/new-url' ,"admin@newMatch");
+$r->addRoute(ADMIN_R . '/new-players' ,"admin@newMatch");
+$r->addRoute(ADMIN_R . '/logout' ,"admin@logout");
+
 if(isset($_GET['route'])){
     $route = "/" . rtrim($_GET['route'],"/");
     $r->getRoute($route);

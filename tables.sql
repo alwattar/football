@@ -1,9 +1,18 @@
+CREATE TABLE users(
+u_id int(255) primary key auto_increment,
+u_name varchar(50) not null,
+u_email varchar(50) not null,
+u_pass varchar(40) not null 
+)ENGINE=InnoDB default charset utf8;
+
+
 CREATE TABLE channels(
 chan_id int(255) primary key auto_increment,
 chan_name varchar(255) not null,
 chan_logo varchar(255) not null,
 chan_lang varchar(10) not null default 'ar'
 )ENGINE=InnoDB default charset utf8;
+
 
 CREATE TABLE commentor(
 comm_id int(255) primary key auto_increment,
@@ -13,12 +22,14 @@ comm_chan int(255) not null,
 FOREIGN KEY (comm_chan) references channels(chan_id)
 )ENGINE=InnoDB default charset utf8;
 
+
 CREATE TABLE nft(
 nft_id int(255) primary key auto_increment,
 nft_name varchar(255) not null,
 nft_logo varchar(255) not null,
 nft_num int(255) not null
 )ENGINE=InnoDB default charset utf8;
+
 
 CREATE TABLE clubs(
 cl_id int(255) primary key auto_increment,

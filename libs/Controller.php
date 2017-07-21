@@ -388,5 +388,24 @@ class Controller {
             'pattern'    => $pattern
 	    );
 	}
+
+
+    // check user session
+
+    public function checkUSession(){
+
+        $db = new DB();
+        if(isset($_SESSION['username']) && isset($_SESSION['password'])){
+            $username = $_SESSION['username'];
+            $password = $_SESSION['password'];
+            $user = $db->table('users')->at("where u_name = '{$username}' and u_pass = '{$password}'")->select("*")[0];
+            if(count($user) > 0)
+                return true;
+            else
+                return false;
+        }else{
+            return false;
+        }
+    }
 }   
 ?>
