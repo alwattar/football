@@ -27,3 +27,24 @@ $('.count').each(function () {
 
 
 
+// this function to open finder popup to select image
+function finderPopup(inputId) {
+    var finderPopup = CKFinder.popup( {
+	chooseFiles: true,
+	width: 800,
+	height: 600,
+	onInit: function( finder ) {
+	    console.log('lol');
+	    finder.on( 'files:choose', function( evt ) {
+		var file = evt.data.files.first();
+		var output = document.getElementById( inputId );
+		output.value = file.getUrl();
+	    } );
+
+	    finder.on( 'file:choose:resizedImage', function( evt ) {
+		var output = document.getElementById( inputId );
+		output.value = evt.data.resizedUrl;
+	    } );
+	}
+    } );
+}
