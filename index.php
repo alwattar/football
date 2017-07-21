@@ -40,7 +40,7 @@ $r->addRoute(ADMIN_R . '/login' ,"admin@login");  // done
 $r->addRoute(ADMIN_R . '/new-chan' ,"admin@newChan");  // done
 $r->addRoute(ADMIN_R . '/new-commentor' ,"admin@newComm");  // done
 $r->addRoute(ADMIN_R . '/new-nft' ,"admin@newNFT");  // done
-$r->addRoute(ADMIN_R . '/new-club' ,"admin@newClub");
+$r->addRoute(ADMIN_R . '/new-club' ,"admin@newClub");  // done
 $r->addRoute(ADMIN_R . '/new-champ' ,"admin@newChamp");
 $r->addRoute(ADMIN_R . '/new-match' ,"admin@newMatch");
 $r->addRoute(ADMIN_R . '/new-url' ,"admin@newMatch");
