@@ -38,7 +38,7 @@
 		</div>
             </div>
             <div class="col-sm-4">
-		<img src="img/arrow.png">
+		<img src="<?php echo PUBLIC_PATH ?>img/arrow.png">
             </div>
             <div class="col-sm-4">
 		<ul>
