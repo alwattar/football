@@ -1,7 +1,7 @@
 <?php
 
 define('DEFAULT_LANG','en');
-define("URL","/ArFrame"); // the base url If the Base is '/' set the value empty define("URL","");
+define("URL","/football"); // the base url If the Base is '/' set the value empty define("URL","");
 
 define("IMG_PATH", URL . "/public/img/");
 define("CSS_PATH", URL . "/public/css/");
