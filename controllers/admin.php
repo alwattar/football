@@ -15,8 +15,6 @@ class Admin extends Controller{
         }
     }
 
-
-
     // create new channel
     public function newChan(){
         if($this->checkUSession() == false){  // if not logged in
@@ -195,7 +193,8 @@ class Admin extends Controller{
             $this->view->commentors = $this->model->getCommentors();
             $this->view->champs = $this->model->getChamps();
             
-            if(isset($_POST['mat_team1']) &&
+            if(isset($_POST['mat_name']) &&
+               isset($_POST['mat_team2']) &&
                isset($_POST['mat_team2']) &&
                isset($_POST['mat_time']) &&
                isset($_POST['mat_h']) &&
@@ -217,6 +216,7 @@ class Admin extends Controller{
                 
                 
                 $n_mat = [
+                    "mat_name" => $this->protect($_POST['mat_name']),
                     "mat_team1" => $this->protect($_POST['mat_team1']),
                     "mat_team2" => $this->protect($_POST['mat_team2']),
                     "mat_time" => $mat_time,
@@ -241,6 +241,117 @@ class Admin extends Controller{
             }
             
             $this->view->view("admin/new-match");
+        }
+    }
+
+    // new url
+    public function newUrl(){
+        if($this->checkUSession() == false){  // if not logged in
+            $this->redirect(ADMIN_PATH . '/login');
+        }else{
+
+            $this->view->channels = $this->model->getChannels();
+            $this->view->matches = $this->model->getMatches();
+            
+            if(isset($_POST['url_href']) &&
+               isset($_POST['url_channel']) &&
+               isset($_POST['url_game'])){
+                    
+                $n_url = [
+                    "url_href" => $this->protect($_POST['url_href']),
+                    "url_channel" => intval($this->protect($_POST['url_channel'])),
+                    "url_game" => intval($this->protect($_POST['url_game'])),
+                ];
+
+                $create_new_url = $this->model->newUrl($n_url);
+                if($create_new_url === true){
+                    $msg = "URL createed";
+                }else{
+                    $msg = "URL Not created , 7626373";
+                }
+                
+                $this->view->commMsg = $msg;
+                echo $msg;
+            }
+            
+            $this->view->view("admin/new-url");
+        }
+    }
+
+    // create new transfer
+    public function newTransfer(){
+        if($this->checkUSession() == false){  // if not logged in
+            $this->redirect(ADMIN_PATH . '/login');
+        }else{
+            $this->view->clubs = $this->model->getClubs();
+
+            if(isset($_POST['mov_pl']) &&
+               isset($_POST['mov_sal']) &&
+               isset($_POST['mov_club']) &&
+               isset($_POST['mov_date'])){
+                
+                $d = $this->protect($_POST['mov_date']);
+                $d = explode('/', $d);
+                $mov_date = $d[2] . '-' . $d[0] . '-' . $d[1] . " 00:00:00";
+                
+                $nc_transfer = [
+                    "mov_pl" => $this->protect($_POST['mov_pl']),
+                    "mov_sal" => intval($this->protect($_POST['mov_sal'])),
+                    "mov_club" => intval($this->protect($_POST['mov_club'])),
+                    "mov_date" => $mov_date,
+                ];
+
+                $create_new_transfer = $this->model->newTransfer($nc_transfer);
+                if($create_new_transfer === true){
+                    $msg = "Transfer createed";
+                }else{
+                    $msg = "Transfer Not created , 253";
+                }
+                
+                $this->view->chanMsg = $msg;
+                echo $msg;
+            }
+            
+            $this->view->view("admin/new-transfer");
+        }
+    }
+
+    // create new player
+    public function newPlayer(){
+        if($this->checkUSession() == false){  // if not logged in
+            $this->redirect(ADMIN_PATH . '/login');
+        }else{
+            $this->view->clubs = $this->model->getClubs();
+
+            if(isset($_POST['pl_name']) &&
+               isset($_POST['pl_nat']) &&
+               isset($_POST['pl_leng']) &&
+               isset($_POST['pl_chanum']) &&
+               isset($_POST['pl_goals']) &&
+               isset($_POST['pl_curclub'])){
+
+                
+                $nc_player = [
+                    "pl_name" => $this->protect($_POST['pl_name']),
+                    "pl_nat" => $this->protect($_POST['pl_nat']),
+                    "pl_leng" => intval($this->protect($_POST['pl_leng'])),
+                    "pl_chanum" => intval($this->protect($_POST['pl_chanum'])),
+                    "pl_goals" => intval($this->protect($_POST['pl_goals'])),
+                    "pl_curclub" => $this->protect($_POST['pl_curclub']),
+                ];
+
+                $create_new_player = $this->model->newPlayer($nc_player);
+                if($create_new_player === true){
+                    $msg = "Player createed";
+                }else{
+                    $msg = "Player Not created , 252633";
+                }
+                
+                $this->view->chanMsg = $msg;
+                echo $msg;
+            }
+            
+            $this->view->view("admin/new-player");
         }
     }
     

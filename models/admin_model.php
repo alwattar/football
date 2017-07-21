@@ -44,6 +44,18 @@ class Admin_Model extends Model{
         return $chans;
     }
 
+    // get all Matches
+    public function getMatches(){
+        $chans = $this->db->table('matches')->select('*');
+        return $chans;
+    }
+
+    // get all Clubs
+    public function getClubs(){
+        $chans = $this->db->table('clubs')->select('*');
+        return $chans;
+    }
+
     // new commentor
     public function newComm($d){
         $cncomm = $this->db->table('commentor')
@@ -80,9 +92,36 @@ class Admin_Model extends Model{
     // new Match
     public function newMatch($d){
         $cn_mat = $this->db->table('matches')
-             ->insert("(mat_team1, mat_team2, mat_time, mat_chan, mat_comm, mat_champ, mat_address, mat_status, mat_note, mat_lang) VALUES(:mat_team1, :mat_team2, :mat_time, :mat_chan, :mat_comm, :mat_champ, :mat_address, :mat_status, :mat_note, :mat_lang)", $d);
+             ->insert("(mat_name, mat_team1, mat_team2, mat_time, mat_chan, mat_comm, mat_champ, mat_address, mat_status, mat_note, mat_lang) VALUES(:mat_name, :mat_team1, :mat_team2, :mat_time, :mat_chan, :mat_comm, :mat_champ, :mat_address, :mat_status, :mat_note, :mat_lang)", $d);
 
         return $cn_mat;
+    }
+
+
+    // new URL
+    public function newUrl($d){
+        $cn_url = $this->db->table('urls')
+             ->insert("(url_href, url_channel, url_game) values(:url_href, :url_channel, :url_game)", $d);
+
+        return $cn_url;
+    }
+
+
+    // new transfer
+    public function newTransfer($d){
+        $cn_transfer = $this->db->table('transfer')
+             ->insert("(mov_pl, mov_club, mov_sal, mov_date) values(:mov_pl, :mov_club, :mov_sal, :mov_date)", $d);
+
+        return $cn_transfer;
+    }
+
+
+    // new transfer
+    public function newPlayer($d){
+        $cn_player = $this->db->table('players')
+             ->insert("(pl_name, pl_nat, pl_leng, pl_chanum, pl_goals, pl_curclub) VALUES(:pl_name, :pl_nat, :pl_leng, :pl_chanum, :pl_goals, :pl_curclub)", $d);
+
+        return $cn_player;
     }
 }
 ?>

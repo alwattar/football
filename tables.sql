@@ -50,6 +50,7 @@ champ_date timestamp not null
 
 CREATE TABLE matches(
 mat_id int(255) primary key auto_increment,
+mat_name varchar(255) not null,
 mat_team1 varchar(255) not null,
 mat_team2 varchar(255) not null,
 mat_time timestamp not null,
@@ -74,7 +75,7 @@ pl_leng int(255) not null,
 pl_chanum int(255) not null,
 pl_goals int(255) not null,
 pl_curclub int(255) not null,
-pl_lastedit timestamp not null,
+pl_lastedit timestamp not null default current_timestamp,
 FOREIGN KEY (pl_curclub) references clubs(cl_id)
 )ENGINE=InnoDB default charset utf8;
 

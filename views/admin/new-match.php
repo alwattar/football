@@ -6,13 +6,14 @@ New MATCH
 <br/>
 <br/>
 <?php if($this->channels == false){ ?>
-    <a href="<?php echo ADMIN_PATH ?>/new-chan">Please add one CHANNEL at LEAST before adding new match</a>
+<a href="<?php echo ADMIN_PATH ?>/new-chan">Please add one CHANNEL at LEAST before adding new match</a>
 <?php }else if($this->commentors == false){ ?>
     <a href="<?php echo ADMIN_PATH ?>/new-commentor">Please add one COMMENTOR at LEAST before adding new match</a>
 <?php }else if($this->champs == false){ ?>
     <a href="<?php echo ADMIN_PATH ?>/new-champ">Please add one CHAMP at LEAST before adding new match</a>
 <?php }else{ ?>
     <form action="" method="post">
+	<input name="mat_name" type="text" placeholder="match name"/> <br/>
 	Match status
 	<select name="mat_status">
 	    <option value="0">Not started yet</option>

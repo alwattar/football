@@ -42,10 +42,10 @@ $r->addRoute(ADMIN_R . '/new-commentor' ,"admin@newComm");  // done
 $r->addRoute(ADMIN_R . '/new-nft' ,"admin@newNFT");  // done
 $r->addRoute(ADMIN_R . '/new-club' ,"admin@newClub");  // done
 $r->addRoute(ADMIN_R . '/new-champ' ,"admin@newChamp"); // done
-$r->addRoute(ADMIN_R . '/new-match' ,"admin@newMatch");
-$r->addRoute(ADMIN_R . '/new-url' ,"admin@newUrl");
-$r->addRoute(ADMIN_R . '/new-player' ,"admin@newPlayer");
-$r->addRoute(ADMIN_R . '/new-transfer' ,"admin@newTransfer");
+$r->addRoute(ADMIN_R . '/new-match' ,"admin@newMatch"); // done
+$r->addRoute(ADMIN_R . '/new-url' ,"admin@newUrl");  // done
+$r->addRoute(ADMIN_R . '/new-player' ,"admin@newPlayer");  // done
+$r->addRoute(ADMIN_R . '/new-transfer' ,"admin@newTransfer");  // done
 $r->addRoute(ADMIN_R . '/logout' ,"admin@logout");
 
 if(isset($_GET['route'])){
