@@ -55,5 +55,14 @@ class Admin_Model extends Model{
 
         return $cn_club;
     }
+
+
+    // new Champ
+    public function newChamp($d){
+        $cn_champ = $this->db->table('champs')
+             ->insert("(champ_name, champ_logo, champ_date, champ_loc) values(:champ_name, :champ_logo, :champ_date, :champ_loc)", $d);
+
+        return $cn_champ;
+    }
 }
 ?>

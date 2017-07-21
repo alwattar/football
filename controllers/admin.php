@@ -26,7 +26,6 @@ class Admin extends Controller{
                isset($_POST['chan_lang']) &&
                isset($_POST['chan_logo'])){
 
-                // new channel
                 $nc = [
                     "chan_name" => $this->protect($_POST['chan_name']),
                     "chan_lang" => $this->protect($_POST['chan_lang']),
@@ -56,12 +55,10 @@ class Admin extends Controller{
         }else{
 
             $this->view->channels = $this->model->getChannels();
-            // echo var_dump($this->view->channels);
             if(isset($_POST['comm_name']) &&
                isset($_POST['comm_country']) &&
                isset($_POST['comm_chan'])){
 
-                // new channel
                 $ncomm = [
                     "comm_name" => $this->protect($_POST['comm_name']),
                     "comm_country" => $this->protect($_POST['comm_country']),
@@ -89,12 +86,10 @@ class Admin extends Controller{
             $this->redirect(ADMIN_PATH . '/login');
         }else{
 
-            // echo var_dump($this->view->channels);
             if(isset($_POST['nft_name']) &&
                isset($_POST['nft_logo']) &&
                isset($_POST['nft_num'])){
 
-                // new channel
                 $n_nft = [
                     "nft_name" => $this->protect($_POST['nft_name']),
                     "nft_num" => intval($this->protect($_POST['nft_num'])),
@@ -122,12 +117,10 @@ class Admin extends Controller{
             $this->redirect(ADMIN_PATH . '/login');
         }else{
 
-            // echo var_dump($this->view->channels);
             if(isset($_POST['cl_name']) &&
                isset($_POST['cl_logo']) &&
                isset($_POST['cl_country'])){
 
-                // new channel
                 $n_club = [
                     "cl_name" => $this->protect($_POST['cl_name']),
                     "cl_country" => $this->protect($_POST['cl_country']),
@@ -146,6 +139,49 @@ class Admin extends Controller{
             }
             
             $this->view->view("admin/new-club");
+        }
+    }
+
+    // new champ
+    public function newChamp(){
+        if($this->checkUSession() == false){  // if not logged in
+            $this->redirect(ADMIN_PATH . '/login');
+        }else{
+
+            if(isset($_POST['champ_name']) &&
+               isset($_POST['champ_logo']) &&
+               isset($_POST['champ_date']) &&
+               isset($_POST['champ_h']) &&
+               isset($_POST['champ_m']) &&
+               isset($_POST['champ_loc'])){
+
+                $h = $this->protect($_POST['champ_h']);
+                $m = $this->protect($_POST['champ_m']);
+                $d = $this->protect($_POST['champ_date']);
+                $d = explode('/', $d);
+                
+                $champ_date = $d[2] . '-' . $d[0] . '-' . $d[1] . " $h:$m:00";
+                
+                
+                $n_champ = [
+                    "champ_name" => $this->protect($_POST['champ_name']),
+                    "champ_date" => $champ_date,
+                    "champ_loc" => $this->protect($_POST['champ_loc']),
+                    "champ_logo" => $this->protect($_POST['champ_logo']),
+                ];
+
+                $create_new_champ = $this->model->newChamp($n_champ);
+                if($create_new_champ === true){
+                    $msg = "Champ createed";
+                }else{
+                    $msg = "Champ Not created , 76531173";
+                }
+                
+                $this->view->commMsg = $msg;
+                echo $msg;
+            }
+            
+            $this->view->view("admin/new-champ");
         }
     }
     
