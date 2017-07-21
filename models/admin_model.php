@@ -47,5 +47,13 @@ class Admin_Model extends Model{
 
         return $cn_nft;
     }
+
+    // new club
+    public function newClub($d){
+        $cn_club = $this->db->table('clubs')
+             ->insert("(cl_name, cl_logo, cl_country) values(:cl_name, :cl_logo, :cl_country)", $d);
+
+        return $cn_club;
+    }
 }
 ?>

@@ -2,7 +2,7 @@
 
 <br/>
 <br/>
-New commentor
+New NFT
 <br/>
 <br/>
 <form action="" method="post">

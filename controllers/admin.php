@@ -83,7 +83,7 @@ class Admin extends Controller{
         }
     }
 
-    // new commentor
+    // new NFT
     public function newNFT(){
         if($this->checkUSession() == false){  // if not logged in
             $this->redirect(ADMIN_PATH . '/login');
@@ -113,6 +113,39 @@ class Admin extends Controller{
             }
             
             $this->view->view("admin/new-nft");
+        }
+    }
+
+    // new CLUB
+    public function newClub(){
+        if($this->checkUSession() == false){  // if not logged in
+            $this->redirect(ADMIN_PATH . '/login');
+        }else{
+
+            // echo var_dump($this->view->channels);
+            if(isset($_POST['cl_name']) &&
+               isset($_POST['cl_logo']) &&
+               isset($_POST['cl_country'])){
+
+                // new channel
+                $n_club = [
+                    "cl_name" => $this->protect($_POST['cl_name']),
+                    "cl_country" => $this->protect($_POST['cl_country']),
+                    "cl_logo" => $this->protect($_POST['cl_logo']),
+                ];
+
+                $create_new_club = $this->model->newClub($n_club);
+                if($create_new_club === true){
+                    $msg = "CLUB createed";
+                }else{
+                    $msg = "CLUB Not created , 763364";
+                }
+                
+                $this->view->commMsg = $msg;
+                echo $msg;
+            }
+            
+            $this->view->view("admin/new-club");
         }
     }
     

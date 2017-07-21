@@ -35,11 +35,11 @@ require_once("./libs/Route.php");
 // index controller
 $r->addRoute("/index","index@index");
 
-$r->addRoute(ADMIN_R ,"admin@index");
-$r->addRoute(ADMIN_R . '/login' ,"admin@login");
-$r->addRoute(ADMIN_R . '/new-chan' ,"admin@newChan");
-$r->addRoute(ADMIN_R . '/new-commentor' ,"admin@newComm");
-$r->addRoute(ADMIN_R . '/new-nft' ,"admin@newNFT");
+$r->addRoute(ADMIN_R ,"admin@index");  // done
+$r->addRoute(ADMIN_R . '/login' ,"admin@login");  // done
+$r->addRoute(ADMIN_R . '/new-chan' ,"admin@newChan");  // done
+$r->addRoute(ADMIN_R . '/new-commentor' ,"admin@newComm");  // done
+$r->addRoute(ADMIN_R . '/new-nft' ,"admin@newNFT");  // done
 $r->addRoute(ADMIN_R . '/new-club' ,"admin@newClub");
 $r->addRoute(ADMIN_R . '/new-champ' ,"admin@newChamp");
 $r->addRoute(ADMIN_R . '/new-match' ,"admin@newMatch");
