@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 21, 2017 at 06:51 PM
+-- Generation Time: Jul 21, 2017 at 09:51 PM
 -- Server version: 10.1.23-MariaDB-8
 -- PHP Version: 5.6.7-1
 
@@ -81,6 +81,7 @@ CREATE TABLE `commentor` (
 
 CREATE TABLE `matches` (
   `mat_id` int(255) NOT NULL,
+  `mat_name` varchar(255) NOT NULL,
   `mat_team1` varchar(255) NOT NULL,
   `mat_team2` varchar(255) NOT NULL,
   `mat_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -120,7 +121,7 @@ CREATE TABLE `players` (
   `pl_chanum` int(255) NOT NULL,
   `pl_goals` int(255) NOT NULL,
   `pl_curclub` int(255) NOT NULL,
-  `pl_lastedit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `pl_lastedit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -255,7 +256,7 @@ ALTER TABLE `champs`
 -- AUTO_INCREMENT for table `channels`
 --
 ALTER TABLE `channels`
-  MODIFY `chan_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `chan_id` int(255) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `clubs`
 --
