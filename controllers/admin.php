@@ -16,6 +16,8 @@ class Admin extends Controller{
     }
 
 
+
+    // create new channel
     public function newChan(){
         if($this->checkUSession() == false){  // if not logged in
             $this->redirect(ADMIN_PATH . '/login');
@@ -47,6 +49,41 @@ class Admin extends Controller{
     }
 
 
+    // new commentor
+    public function newComm(){
+        if($this->checkUSession() == false){  // if not logged in
+            $this->redirect(ADMIN_PATH . '/login');
+        }else{
+
+            $this->view->channels = $this->model->getChannels();
+            // echo var_dump($this->view->channels);
+            if(isset($_POST['comm_name']) &&
+               isset($_POST['comm_country']) &&
+               isset($_POST['comm_chan'])){
+
+                // new channel
+                $ncomm = [
+                    "comm_name" => $this->protect($_POST['comm_name']),
+                    "comm_country" => $this->protect($_POST['comm_country']),
+                    "comm_chan" => intval($this->protect($_POST['comm_chan'])),
+                ];
+
+                $create_new_commentor = $this->model->newComm($ncomm);
+                if($create_new_commentor === true){
+                    $msg = "Commentor createed";
+                }else{
+                    $msg = "Commentor Not created , 62432";
+                }
+                
+                $this->view->commMsg = $msg;
+                echo $msg;
+            }
+            
+            $this->view->view("admin/new-comm");
+        }
+    }
+    
+    // login
     public function login(){
         if($this->checkUSession() == true){  // if logged in
             $this->redirect(ADMIN_PATH);
@@ -73,6 +110,7 @@ class Admin extends Controller{
     }
 
 
+    // logout
     public function logout(){
         session_destroy();
         $this->redirect(ADMIN_PATH);
