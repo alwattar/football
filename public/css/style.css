@@ -147,6 +147,7 @@ html,body{
     background: #19b090;
     color:white;
     overflow: hidden;
+    height: 45px;
 }
 .navbaro div{
     position: relative;
@@ -159,12 +160,24 @@ html,body{
 }
 .navbaro ul li{
     display: inline-block;
+    height: 45px;
     padding:15px;
     border-right: 1px solid #353535 ;
 }
-.navbaro ul li:nth-child(2){
+
+.navbaro>div:nth-child(1)>ul>li:nth-child(2){
     border-bottom: 1px solid #353535;
 }
-.navbaro ul li:nth-child(4){
+
+.navbaro>div>ul>li:nth-child(4){
     border:none;
+}
+
+.navbaro>div:nth-child(3)>ul>li:nth-child(1){
+    border-left: 1px solid #353535;
+}
+
+.navbaro>div>ul>li>i{
+    margin:0;
+    padding:0;
 }

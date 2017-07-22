@@ -25,9 +25,8 @@
     </div>
     <div class="container">
 	<div class="bg-team"></div>
-	<div class="row navbaro">
+	<div class="row navbaro hidden-xs">
             <div class="col-sm-4">
-		<div>
                     <ul>
 			<li>Home</li>
 			<li>Matches <i class="fa fa-sort-desc" aria-hidden="true"></i></li>
@@ -35,10 +34,12 @@
 			<li>Contact</li>
 			
                     </ul>
-		</div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-1">
 		<img src="<?php echo IMG_PATH ?>arrow.png">
+            </div>
+            <div class="col-sm-3">
+		
             </div>
             <div class="col-sm-4">
 		<ul>
@@ -50,8 +51,13 @@
             </div>
             
 	</div>
-	<br>
-	<div class="row">
+	<div class="cont-body">
+	    
+	</div>
+	
+    </div>
+</div>
+<!--<div class="row">
             <?php if($errMsg == ""){ ?>
 		<div id="player"></div>
 	    <?php }else{ ?>
@@ -68,7 +74,5 @@
 		 
 	     });
 	    </script> 
-	</div>
-    </div>
-</div>
+	</div> -->
 <?php include 'footer.php' ?>
