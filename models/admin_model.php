@@ -85,6 +85,12 @@ class Admin_Model extends Model{
         return $clubs;
     }
 
+    // get Club by id
+    public function getClubById($id){
+        $club = $this->db->table('clubs')->at('where cl_id = ' . $id)->select('*');
+        return $club;
+    }
+
     // new commentor
     public function newComm($d){
         $cncomm = $this->db->table('commentor')
@@ -146,6 +152,14 @@ class Admin_Model extends Model{
     }
 
 
+    // delete club
+    public function delClub($d){
+        $dclub = $this->db->table('clubs')
+            ->at('where cl_id = ' . $d)
+            ->delete();
+        return $dclub;
+    }
+
     // new Champ
     public function newChamp($d){
         $cn_champ = $this->db->table('champs')
@@ -189,5 +203,13 @@ class Admin_Model extends Model{
         return $cn_player;
     }
 
+    // edit club
+    public function editClub($d){
+        $ec = $this->db
+            ->table('clubs')
+            ->at("where cl_id = :cl_id")
+            ->update("cl_name = :cl_name, cl_country = :cl_country, cl_logo = :cl_logo", $d);
+        return $ec;
+    }
 }
 ?>

@@ -253,7 +253,7 @@ class Admin extends Controller{
             $msg = "NFT DELETED";
             echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-nft'},1200)</script>";
         }else{
-            $msg = "NFT Not DELETED , trr2524";
+            $msg = "NFT Not DELETED , trr25248252";
         }
 
         echo $msg;
@@ -265,32 +265,95 @@ class Admin extends Controller{
             $this->redirect(ADMIN_PATH . '/login');
         }else{
 
-            if(isset($_POST['cl_name']) &&
-               isset($_POST['cl_logo']) &&
-               isset($_POST['cl_country'])){
+            $this->view->clubs = $this->model->getClubs();
+            if(isset($_GET['do'])){
 
-                $n_club = [
-                    "cl_name" => $this->protect($_POST['cl_name']),
-                    "cl_country" => $this->protect($_POST['cl_country']),
-                    "cl_logo" => $this->protect($_POST['cl_logo']),
-                ];
-
-                $create_new_club = $this->model->newClub($n_club);
-                if($create_new_club === true){
-                    $msg = "CLUB createed";
-                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-club'},1200)</script>";
+                if(isset($_GET['id'])){
+                    $id = intval($_GET['id']);
+                    if($_GET['do'] == 'delete'){
+                        $this->delClub($id);
+                    }else if($_GET['do'] == 'edit'){
+                        $this->editClub($id);
+                    }
                 }else{
-                    $msg = "CLUB Not created , 763364";
+                    $this->redirect(ADMIN_PATH . '/new-nft');
                 }
+            }else{                
+                if(isset($_POST['cl_name']) &&
+                   isset($_POST['cl_logo']) &&
+                   isset($_POST['cl_country'])){
+
+                    $n_club = [
+                        "cl_name" => $this->protect($_POST['cl_name']),
+                        "cl_country" => $this->protect($_POST['cl_country']),
+                        "cl_logo" => $this->protect($_POST['cl_logo']),
+                    ];
+
+                    $create_new_club = $this->model->newClub($n_club);
+                    if($create_new_club === true){
+                        $msg = "CLUB createed";
+                        echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-club'},1200)</script>";
+                    }else{
+                        $msg = "CLUB Not created , 763364";
+                    }
                 
-                $this->view->commMsg = $msg;
-                echo $msg;
-            }
+                    $this->view->commMsg = $msg;
+                    echo $msg;
+                }
             
-            $this->view->view("admin/new-club");
+                $this->view->view("admin/new-club");
+            }
         }
     }
 
+    
+    // edit club
+    public function editClub($id){
+        $cl = $this->model->getClubById($id);
+        if($cl !== false){
+            if(isset($_POST['cl_name']) &&
+               isset($_POST['cl_id']) &&
+               isset($_POST['cl_logo']) &&
+               isset($_POST['cl_country'])){
+
+                $e_cl = [
+                    "cl_name" => $this->protect($_POST['cl_name']),
+                    "cl_country" => $this->protect($_POST['cl_country']),
+                    "cl_id" => intval($this->protect($_POST['cl_id'])),
+                    "cl_logo" => $this->protect($_POST['cl_logo']),
+                ];
+
+                $edit_club = $this->model->editClub($e_cl);
+                if($edit_club != false){
+                    $msg = "CLUB UPDATED";
+                    echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
+                }else{
+                    $msg = "CLUB Not UPDATED , dhft27353";
+                }
+
+                echo $msg;
+            }
+            $this->view->cl = $cl[0];
+            $this->view->view('admin/edit-club');
+        }
+        else $this->redirect(ADMIN_PATH . '/new-nft');        
+        
+    }
+    
+    // delete club
+    public function delClub($id){
+        $del_club = $this->model->delClub($id);
+        // echo var_dump($del_club);
+        if($del_club != false){
+            $msg = "CLUB DELETED";
+            echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-club'},1200)</script>";
+        }else{
+            $msg = "CLUB Not DELETED , errn2342524";
+        }
+
+        echo $msg;
+    }
+    
     // new champ
     public function newChamp(){
         if($this->checkUSession() == false){  // if not logged in
