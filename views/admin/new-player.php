@@ -1,10 +1,5 @@
 <?php require_once('include/header.php') ?>
-
-<br/>
-<br/>
-New Player
-<br/>
-<br/>
+<p><h1>New Player</h1></p>
 <?php if($this->clubs == false){ ?>
     <a href="<?php echo ADMIN_PATH ?>/new-club">Please add one CLUB at LEAST before adding new Player</a>
 <?php }else{ ?>
@@ -27,4 +22,27 @@ New Player
 	<button>CREATE</button>
     </form>
 <?php } ?>
+<?php if($this->players != false){ ?>
+    <?php foreach($this->players as $pl){ ?>
+	Player Id: <?php echo $pl->pl_id ?>
+	<br/>
+	Player Name: <?php echo $pl->pl_name ?>
+	<br/>
+	Player Club: <?php echo $pl->cl_name ?>
+	<br/>
+	Player nat:  <?php echo $pl->pl_nat ?>
+	<br/>
+	Player length:  <?php echo $pl->pl_leng ?>
+	<br/>
+	Player goals:  <?php echo $pl->pl_goals ?>
+	<br/>
+	Player champs:  <?php echo $pl->pl_chanum ?>
+	<br/>
+ 	<a href="<?php echo ADMIN_PATH ?>/new-player&do=edit&id=<?php echo $pl->pl_id ?>">Edit</a> |
+	<a href="<?php echo ADMIN_PATH ?>/new-player&do=delete&id=<?php echo $pl->pl_id ?>">DELETE</a>
+	<br/>
+	--------
+	<br/>
+    <?php  } ?>
+<?php  } ?>
 <?php require_once('include/footer.php') ?>

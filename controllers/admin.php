@@ -830,6 +830,7 @@ class Admin extends Controller{
             $this->redirect(ADMIN_PATH . '/login');
         }else{
             $this->view->clubs = $this->model->getClubs();
+            $this->view->players = $this->model->getPlayers();
             if(isset($_GET['do'])){
                 if(isset($_GET['id'])){
                     $id = intval($_GET['id']);
@@ -864,7 +865,7 @@ class Admin extends Controller{
                         $msg = "Player createed";
                         echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-player'},1200)</script>";
                     }else{
-                        $msg = "Player Not created , 252633";
+                        $msg = "Player Not created , 252163p23";
                     }
                 
                     $this->view->chanMsg = $msg;
@@ -874,6 +875,62 @@ class Admin extends Controller{
                 $this->view->view("admin/new-player");
             }
         }
+    }
+
+
+    // edit player
+    public function editPlayer($id){
+        $pl = $this->model->getPlayerById($id);
+        if($pl != false){
+            if(isset($_POST['pl_name']) &&
+               isset($_POST['pl_id']) &&
+               isset($_POST['pl_nat']) &&
+               isset($_POST['pl_leng']) &&
+               isset($_POST['pl_chanum']) &&
+               isset($_POST['pl_goals']) &&
+               isset($_POST['pl_curclub'])){
+
+                
+                $e_player = [
+                    "pl_name" => $this->protect($_POST['pl_name']),
+                    "pl_nat" => $this->protect($_POST['pl_nat']),
+                    "pl_id" => intval($this->protect($_POST['pl_id'])),
+                    "pl_leng" => intval($this->protect($_POST['pl_leng'])),
+                    "pl_chanum" => intval($this->protect($_POST['pl_chanum'])),
+                    "pl_goals" => intval($this->protect($_POST['pl_goals'])),
+                    "pl_curclub" => $this->protect($_POST['pl_curclub']),
+                ];
+
+                $edit_pl = $this->model->editPlayer($e_player);
+                
+                if($edit_pl != false){
+                    $msg = "Player UPDATED";
+                    echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
+                }else{
+                    $msg = "Player Not UPDATED , plErr2753";
+                }
+
+                echo $msg;
+            }
+            $this->view->pl = $pl[0];
+            $this->view->view('admin/edit-player');
+        }
+        else $this->redirect(ADMIN_PATH . '/new-player');
+        
+    }
+    
+    // delete player
+    public function delPlayer($id){
+        $del_player = $this->model->delPlayer($id);
+        // echo var_dump($del_player);
+        if($del_player != false){
+            $msg = "Player DELETED";
+            echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-player'},1200)</script>";
+        }else{
+            $msg = "Player Not DELETED , playerErr9301";
+        }
+
+        echo $msg;
     }
     
     // login

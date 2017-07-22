@@ -277,6 +277,15 @@ class Admin_Model extends Model{
         return $dt;
     }
 
+
+    // del player
+    public function delPlayer($d){
+        $dt = $this->db->table('players')
+            ->at('where pl_id = ' . $d)
+            ->delete();
+        return $dt;
+    }
+
     // edit champ
     public function editChamp($d){
         $ec = $this->db
@@ -334,6 +343,35 @@ class Admin_Model extends Model{
             ->update("mov_pl = :mov_pl, mov_sal = :mov_sal, mov_club = :mov_club, mov_date = :mov_date", $d);
 
         return $et;
+    }
+
+    // get all players
+    public function getPlayers(){
+        $p = $this->db
+           ->table('players INNER JOIN clubs ON clubs.cl_id = players.pl_curclub')
+           ->select('clubs.*, players.*');
+        return $p;
+    }
+
+    // get player by id
+    public function getPlayerById($id){
+        $p = $this->db
+           ->table('players INNER JOIN clubs ON clubs.cl_id = players.pl_curclub')
+           ->at("WHERE players.pl_id = $id")
+           ->select('clubs.*, players.*');
+        return $p;
+    }
+
+    // edit player
+
+    public function editPlayer($d){
+        $ep = $this->db
+            ->table('players')
+            ->at("where pl_id = :pl_id")
+            ->update("pl_name = :pl_name, pl_nat = :pl_nat, pl_leng = :pl_leng, pl_chanum = :pl_chanum, pl_goals = :pl_goals, pl_curclub = :pl_curclub" ,$d);
+        
+        return $ep;
+        
     }
 }
 ?>
