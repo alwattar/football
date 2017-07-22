@@ -12,9 +12,9 @@
 		<h4>Teams: </h4>
 		<select class="my-team selectsearch">
                     <option value=""> </option>
-                    <option value="<?php echo PUBLIC_PATH ?>img/clubs/chelsea.jpg">Chelsea</option>
-                    <option value="<?php echo PUBLIC_PATH ?>img/clubs/barcelona.jpg">Barcelona</option>
-                    <option value="<?php echo PUBLIC_PATH ?>img/clubs/realmadrid.jpg">Real Madrid</option>
+                    <option value="<?php echo IMG_PATH ?>clubs/chelsea.jpg">Chelsea</option>
+                    <option value="<?php echo IMG_PATH ?>clubs/barcelona.jpg">Barcelona</option>
+                    <option value="<?php echo IMG_PATH ?>clubs/realmadrid.jpg">Real Madrid</option>
 		</select>
             </div>
 	</div>
@@ -38,7 +38,7 @@
 		</div>
             </div>
             <div class="col-sm-4">
-		<img src="<?php echo PUBLIC_PATH ?>img/arrow.png">
+		<img src="<?php echo IMG_PATH ?>arrow.png">
             </div>
             <div class="col-sm-4">
 		<ul>

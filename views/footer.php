@@ -1,6 +1,6 @@
-<script src="<?php echo PUBLIC_PATH ?>js/jquery-1.12.4.min.js"></script>
-<script src="<?php echo PUBLIC_PATH ?>js/wow.min.js"></script>
-<script src="<?php echo PUBLIC_PATH ?>js/main.js"></script>
+<script src="<?php echo JS_PATH ?>jquery-1.12.4.min.js"></script>
+<script src="<?php echo JS_PATH ?>wow.min.js"></script>
+<script src="<?php echo JS_PATH ?>main.js"></script>
 <script>
  var ud = localStorage.getItem('ud');
  if(ud != 'true'){
@@ -23,7 +23,7 @@
  });
 </script>
 
-<script src="<?php echo PUBLIC_PATH ?>js/selectize.js"></script>
+<script src="<?php echo JS_PATH ?>selectize.js"></script>
 <script>
  $('.selectsearch').selectize();
 </script>
