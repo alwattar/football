@@ -454,7 +454,7 @@ class Admin extends Controller{
             $this->view->champ = $champ[0];
             $this->view->view('admin/edit-champ');
         }
-        else $this->redirect(ADMIN_PATH . '/new-champ');        
+        else $this->redirect(ADMIN_PATH . '/new-champ');
         
     }
     
@@ -480,7 +480,78 @@ class Admin extends Controller{
             $this->view->channels = $this->model->getChannels();
             $this->view->commentors = $this->model->getCommentors();
             $this->view->champs = $this->model->getChamps();
+            $this->view->matches = $this->model->getMatches();
             
+            if(isset($_GET['do'])){
+
+                if(isset($_GET['id'])){
+                    $id = intval($_GET['id']);
+                    if($_GET['do'] == 'delete'){
+                        $this->delMatch($id);
+                    }else if($_GET['do'] == 'edit'){
+                        $this->editMatch($id);
+                    }
+                }else{
+                    $this->redirect(ADMIN_PATH . '/new-nft');
+                }
+            }else{
+                if(isset($_POST['mat_name']) &&
+                   isset($_POST['mat_team2']) &&
+                   isset($_POST['mat_team2']) &&
+                   isset($_POST['mat_time']) &&
+                   isset($_POST['mat_h']) &&
+                   isset($_POST['mat_m']) &&
+                   isset($_POST['mat_chan']) &&
+                   isset($_POST['mat_comm']) &&
+                   isset($_POST['mat_address']) &&
+                   isset($_POST['mat_note']) &&
+                   isset($_POST['mat_status']) &&
+                   isset($_POST['mat_lang']) &&
+                   isset($_POST['mat_champ'])){
+
+                    $h = $this->protect($_POST['mat_h']);
+                    $m = $this->protect($_POST['mat_m']);
+                    $d = $this->protect($_POST['mat_time']);
+                    $d = explode('/', $d);
+                
+                    $mat_time = $d[2] . '-' . $d[0] . '-' . $d[1] . " $h:$m:00";
+                
+                
+                    $n_mat = [
+                        "mat_name" => $this->protect($_POST['mat_name']),
+                        "mat_team1" => $this->protect($_POST['mat_team1']),
+                        "mat_team2" => $this->protect($_POST['mat_team2']),
+                        "mat_time" => $mat_time,
+                        "mat_chan" => intval($this->protect($_POST['mat_chan'])),
+                        "mat_comm" => intval($this->protect($_POST['mat_comm'])),
+                        "mat_champ" => intval($this->protect($_POST['mat_champ'])),
+                        "mat_status" => intval($this->protect($_POST['mat_status'])),
+                        "mat_address" => $this->protect($_POST['mat_address']),
+                        "mat_note" => $this->protect($_POST['mat_note']),
+                        "mat_lang" => $this->protect($_POST['mat_lang']),
+                    ];
+
+                    $create_new_mat = $this->model->newMatch($n_mat);
+                    if($create_new_mat === true){
+                        $msg = "Match createed";
+                        echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-match'},1200)</script>";
+                    }else{
+                        $msg = "Match Not created , 729351173";
+                    }
+                
+                    $this->view->commMsg = $msg;
+                    echo $msg;
+                }
+            
+                $this->view->view("admin/new-match");
+            }
+        }
+    }
+
+    // edit match
+    public function editMatch($id){
+        $mat = $this->model->getMatchById($id);
+        if($mat !== false){
             if(isset($_POST['mat_name']) &&
                isset($_POST['mat_team2']) &&
                isset($_POST['mat_team2']) &&
@@ -503,12 +574,13 @@ class Admin extends Controller{
                 $mat_time = $d[2] . '-' . $d[0] . '-' . $d[1] . " $h:$m:00";
                 
                 
-                $n_mat = [
+                $e_mat = [
                     "mat_name" => $this->protect($_POST['mat_name']),
                     "mat_team1" => $this->protect($_POST['mat_team1']),
                     "mat_team2" => $this->protect($_POST['mat_team2']),
                     "mat_time" => $mat_time,
                     "mat_chan" => intval($this->protect($_POST['mat_chan'])),
+                    "mat_id" => intval($this->protect($_POST['mat_id'])),
                     "mat_comm" => intval($this->protect($_POST['mat_comm'])),
                     "mat_champ" => intval($this->protect($_POST['mat_champ'])),
                     "mat_status" => intval($this->protect($_POST['mat_status'])),
@@ -517,22 +589,38 @@ class Admin extends Controller{
                     "mat_lang" => $this->protect($_POST['mat_lang']),
                 ];
 
-                $create_new_mat = $this->model->newMatch($n_mat);
-                if($create_new_mat === true){
-                    $msg = "Match createed";
-                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-match'},1200)</script>";
+                $edit_match = $this->model->editMatch($e_mat);
+                if($edit_match != false){
+                    $msg = "Match updates";
+                    echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }else{
-                    $msg = "Match Not created , 729351173";
+                    $msg = "Match Not updates , 253h253";
                 }
                 
                 $this->view->commMsg = $msg;
                 echo $msg;
             }
-            
-            $this->view->view("admin/new-match");
+            $this->view->mat = $mat[0];
+            $this->view->view('admin/edit-match');
         }
+        else $this->redirect(ADMIN_PATH . '/new-match');
+        
     }
+    
+    // delete match
+    public function delMatch($id){
+        $del_match = $this->model->delMatch($id);
+        // echo var_dump($del_match);
+        if($del_match != false){
+            $msg = "MATCH DELETED";
+            echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-match'},1200)</script>";
+        }else{
+            $msg = "MATCH Not DELETED , errn231324";
+        }
 
+        echo $msg;
+    }
+    
     // new url
     public function newUrl(){
         if($this->checkUSession() == false){  // if not logged in

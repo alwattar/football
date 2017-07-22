@@ -1,10 +1,5 @@
 <?php require_once('include/header.php') ?>
-
-<br/>
-<br/>
-New MATCH
-<br/>
-<br/>
+<p><h1>New MATCH</h1></p>
 <?php if($this->channels == false){ ?>
 <a href="<?php echo ADMIN_PATH ?>/new-chan">Please add one CHANNEL at LEAST before adding new match</a>
 <?php }else if($this->commentors == false){ ?>
@@ -63,5 +58,24 @@ New MATCH
 	<br/>
 	<button>CREATE</button>
     </form>
+<?php } ?>
+
+<?php if($this->matches != false){ ?>
+    <p><h1>ALL MATCHS</h1></p>
+    <?php foreach($this->matches as $mat){ ?>
+	Match ID: <?php echo $mat->mat_id ?>
+	<br/>
+	Match name: <?php echo $mat->mat_name ?>
+	<br/>
+	Match channel: <?php echo $mat->chan_name ?>
+	<br/>
+	Match status: <?php echo $this->matStatus($mat->mat_status) ?>
+	<br/>
+	<a href="<?php echo ADMIN_PATH ?>/new-match&do=edit&id=<?php echo $mat->mat_id ?>">Edit</a> |
+	<a href="<?php echo ADMIN_PATH ?>/new-match&do=delete&id=<?php echo $mat->mat_id ?>">DELETE</a>
+	<br/>
+	------------
+	<br/>
+    <?php } ?>
 <?php } ?>
 <?php require_once('include/footer.php') ?>

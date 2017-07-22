@@ -5,12 +5,10 @@
     <input name="champ_name" type="text" placeholder="champ Name" value="<?php echo $this->champ->champ_name ?>"/><br/>
     <input name="champ_loc" type="text" placeholder="champ location" value="<?php echo $this->champ->champ_loc ?>"/><br/>
     <?php
-    $d = explode(" ", $this->champ->champ_date);
-    $d1 = explode('-', $d[0]);
-    $time = explode(':', $d[1]);
-    $date = $d1[1] . '/' . $d1[2] . '/' . $d1[0];
-    $h = $time[0];
-    $m = $time[1];
+    $timeInfo = $this->timeInfo($this->champ->champ_date);
+    $date = $timeInfo['date'];
+    $h = $timeInfo['h'];
+    $m = $timeInfo['m'];
     ?>
     <br/>
     <input name="champ_date" class="ui-datepicker" type="text" placeholder="champ date" value="<?php echo $date ?>"/> at hour

@@ -61,9 +61,18 @@ class Admin_Model extends Model{
         return $nft;
     }
 
+    // get match by id
+    public function getMatchById($id){
+        $nft = $this->db
+             ->table('matches INNER JOIN channels ON channels.chan_id = matches.mat_chan INNER JOIN commentor ON commentor.comm_id = matches.mat_comm INNER JOIN champs ON champs.champ_id = matches.mat_champ')
+             ->at("where mat_id = $id")
+             ->select('channels.*, matches.*, commentor.*, champs.*');
+        return $nft;
+    }
+
     // get all commentors
     public function getCommentors(){
-        $comms = $this->db->table('commentor inner join channels on channels.chan_id = commentor.comm_chan')->select('commentor.*, channels.*');
+        $comms = $this->db->table('commentor INNER JOIN channels ON channels.chan_id = commentor.comm_chan')->select('commentor.*, channels.*');
         return $comms;
     }
 
@@ -81,7 +90,9 @@ class Admin_Model extends Model{
 
     // get all Matches
     public function getMatches(){
-        $matchs = $this->db->table('matches')->select('*');
+        $matchs = $this->db
+                ->table('matches INNER JOIN channels ON channels.chan_id = matches.mat_chan')
+                ->select('channels.*, matches.*');
         return $matchs;
     }
 
@@ -225,6 +236,14 @@ class Admin_Model extends Model{
         return $dc;
     }
 
+    // del match
+    public function delMatch($d){
+        $dc = $this->db->table('matches')
+            ->at('where mat_id = ' . $d)
+            ->delete();
+        return $dc;
+    }
+
     // edit champ
     public function editChamp($d){
         $ec = $this->db
@@ -232,6 +251,16 @@ class Admin_Model extends Model{
             ->at("where champ_id = :champ_id")
             ->update("champ_name = :champ_name, champ_date = :champ_date, champ_logo = :champ_logo, champ_loc = :champ_loc", $d);
         return $ec;
+    }
+
+    // edit match
+    public function editMatch($d){
+        $ematch = $this->db
+                ->table('matches')
+                ->at("where mat_id = :mat_id")
+                ->update("mat_name = :mat_name, mat_team1 = :mat_team1, mat_team2 = :mat_team2, mat_time = :mat_time, mat_chan = :mat_chan, mat_comm = :mat_comm, mat_champ = :mat_champ, mat_status = :mat_status, mat_address = :mat_address, mat_note = :mat_note, mat_lang = :mat_lang", $d);
+
+        return $ematch;
     }
 }
 ?>

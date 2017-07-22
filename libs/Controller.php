@@ -407,5 +407,35 @@ class Controller {
             return false;
         }
     }
+
+    // match status
+
+    public function matStatus($s){
+
+        if($s == '0')
+            return "Not started yet";
+        else if($s == '0')
+            return "Started";
+        else
+            return "Finished";
+    }
+
+    // time date h:n:s
+    public function timeInfo($timestamp){
+        $d = explode(" ", $timestamp);
+        $d1 = explode('-', $d[0]);
+        $time = explode(':', $d[1]);
+        $date = $d1[1] . '/' . $d1[2] . '/' . $d1[0];
+        $h = $time[0];
+        $m = $time[1];
+        
+        $info = [
+            'date' => $date,
+            'h' => $h,
+            'm' => $m
+        ];
+
+        return $info;
+    }
 }   
 ?>
