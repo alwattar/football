@@ -20,6 +20,7 @@
 	<a href="<?php echo ADMIN_PATH ?>/new-club&do=delete&id=<?php echo $cl->cl_id ?>">DELETE</a>
 	<br/>
 	-----------
+        <br/>
     <?Php } ?>
 <?php } ?>
 <?php require_once('include/footer.php') ?>
