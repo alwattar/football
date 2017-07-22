@@ -1,11 +1,12 @@
 <?php require_once('include/header.php') ?>
-<p><h1>New MATCH</h1></p>
+<?php require_once('include/sidebar.php') ?>
+<h1>المباريات</h1>
 <?php if($this->channels == false){ ?>
-<a href="<?php echo ADMIN_PATH ?>/new-chan">Please add one CHANNEL at LEAST before adding new match</a>
+<a href="<?php echo ADMIN_PATH ?>/new-chan">الرجاء اضافة قناة واحدة على الأقل قبل البدء بعملية إدخال مباراة</a>
 <?php }else if($this->commentors == false){ ?>
-    <a href="<?php echo ADMIN_PATH ?>/new-commentor">Please add one COMMENTOR at LEAST before adding new match</a>
+    <a href="<?php echo ADMIN_PATH ?>/new-commentor">الرجاء ادخال معلق واحد على الأقل قبل البدء بمعلية إدخال مباراة</a>
 <?php }else if($this->champs == false){ ?>
-    <a href="<?php echo ADMIN_PATH ?>/new-champ">Please add one CHAMP at LEAST before adding new match</a>
+    <a href="<?php echo ADMIN_PATH ?>/new-champ">الرجاء ادخال بطولة واحدة على الأقل قبل البدء بعملية إدخال مباراة</a>
 <?php }else{ ?>
     <form action="" method="post">
 	<input name="mat_name" type="text" placeholder="match name"/> <br/>

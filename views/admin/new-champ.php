@@ -1,5 +1,5 @@
 <?php require_once('include/header.php') ?>
-<p><h1>New Champ</h1></p>
+<h1>New Champ</h1>
 <form action="" method="post">
     <input name="champ_name" type="text" placeholder="champ Name"/><br/>
     <input name="champ_loc" type="text" placeholder="champ location"/><br/>

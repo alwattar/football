@@ -48,6 +48,9 @@
                 <a href="<?php echo ADMIN_PATH ?>/new-champ">
                     <li><i class="fa fa-bar-chart" aria-hidden="true"></i>البطولات</li>
                 </a>
+                <a href="<?php echo ADMIN_PATH ?>/new-chan">
+                    <li><i class="fa fa-bar-chart" aria-hidden="true"></i>القنوات الناقلة</li>
+                </a>
 
 
 
@@ -56,7 +59,7 @@
 
 
                 <a href="<?php echo ADMIN_PATH ?>/logout">
-                    <li><i class="fa fa-power-off" aria-hidden="true"></i> Logout
+                    <li><i class="fa fa-power-off" aria-hidden="true"></i> تسجيل الخروج
                     </li>
                 </a>
             </ul>
