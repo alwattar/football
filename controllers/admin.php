@@ -483,7 +483,7 @@ class Admin extends Controller{
             $this->view->matches = $this->model->getMatches();
             
             if(isset($_GET['do'])){
-
+                
                 if(isset($_GET['id'])){
                     $id = intval($_GET['id']);
                     if($_GET['do'] == 'delete'){
@@ -629,33 +629,94 @@ class Admin extends Controller{
 
             $this->view->channels = $this->model->getChannels();
             $this->view->matches = $this->model->getMatches();
+            $this->view->urls = $this->model->getUrls();
+            if(isset($_GET['do'])){
+                
+                if(isset($_GET['id'])){
+                    $id = intval($_GET['id']);
+                    if($_GET['do'] == 'delete'){
+                        $this->delUrl($id);
+                    }else if($_GET['do'] == 'edit'){
+                        $this->editUrl($id);
+                    }
+                }else{
+                    $this->redirect(ADMIN_PATH . '/new-nft');
+                }
+            }else{
+                if(isset($_POST['url_href']) &&
+                   isset($_POST['url_channel']) &&
+                   isset($_POST['url_game'])){
+                    
+                    $n_url = [
+                        "url_href" => $this->protect($_POST['url_href']),
+                        "url_channel" => intval($this->protect($_POST['url_channel'])),
+                        "url_game" => intval($this->protect($_POST['url_game'])),
+                    ];
+
+                    $create_new_url = $this->model->newUrl($n_url);
+                    if($create_new_url === true){
+                        $msg = "URL createed";
+                        echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-url'},1200)</script>";
+                    }else{
+                        $msg = "URL Not created , 7626373";
+                    }
+                
+                    $this->view->commMsg = $msg;
+                    echo $msg;
+                }
             
+                $this->view->view("admin/new-url");
+            }
+        }
+    }
+
+    // edit url
+    public function editUrl($id){
+        $url = $this->model->getUrlById($id);
+        if($url != false){
             if(isset($_POST['url_href']) &&
+               isset($_POST['url_id']) &&
                isset($_POST['url_channel']) &&
                isset($_POST['url_game'])){
                     
-                $n_url = [
+                $e_url = [
                     "url_href" => $this->protect($_POST['url_href']),
+                    "url_id" => intval($this->protect($_POST['url_id'])),
                     "url_channel" => intval($this->protect($_POST['url_channel'])),
                     "url_game" => intval($this->protect($_POST['url_game'])),
                 ];
 
-                $create_new_url = $this->model->newUrl($n_url);
-                if($create_new_url === true){
-                    $msg = "URL createed";
-                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-url'},1200)</script>";
+                $edit_url = $this->model->editUrl($e_url);
+                if($edit_url != false){
+                    $msg = "URL UPDATED";
+                    echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }else{
-                    $msg = "URL Not created , 7626373";
+                    $msg = "URL Not UPDATED , 2125";
                 }
-                
-                $this->view->commMsg = $msg;
+
                 echo $msg;
             }
-            
-            $this->view->view("admin/new-url");
+            $this->view->url = $url[0];
+            $this->view->view('admin/edit-url');
         }
+        else $this->redirect(ADMIN_PATH . '/new-url');
+        
     }
+    
+    // delete url
+    public function delUrl($id){
+        $del_url = $this->model->delUrl($id);
+        // echo var_dump($del_url);
+        if($del_url != false){
+            $msg = "URL DELETED";
+            echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-url'},1200)</script>";
+        }else{
+            $msg = "URL Not DELETED , urlErr8262";
+        }
 
+        echo $msg;
+    }
+    
     // create new transfer
     public function newTransfer(){
         if($this->checkUSession() == false){  // if not logged in
