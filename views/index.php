@@ -21,10 +21,42 @@
     </div>
 </div>
 <div class="whole-site">
-    <div class="bg-team">        
-    </div>
-    <div class="container">
-	<div class="bg-team"></div>
+    <!--<div class="bg-team">        
+    </div>-->
+    <div>
+	<!-- <div class="bg-team"></div>-->
+	<div class="row line">
+	    <div class="col-sm-8"></div>
+	    <div class="col-sm-4"></div>
+	</div>
+	<div class="row lang">
+	    <div class="col-sm-3">
+	        <ul>
+	            <a><li>EN</li></a>
+	            <a><li>AR</li></a>
+	        </ul>
+	    </div>
+	    
+	</div>
+	
+	<div class="row logoz">
+        <div class="col-sm-6">
+           <div class="row">
+              <div class="col-sm-2">
+                الأخبار
+            </div>
+               <div class="col-sm-10">
+                انتقال نيمار إلى باريس سانجرما ليس مؤكداً
+            </div>
+            
+           </div>
+            
+         </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <img src=" <?php echo IMG_PATH ?>marma.png">
+        </div>
+	</div>
 	<div class="row navbaro hidden-xs">
             <div class="col-sm-4">
                     <ul>
@@ -52,7 +84,52 @@
             
 	</div>
 	<div class="cont-body">
-	    
+	    <div class="row">
+	         <ul>
+	             <a href=""><li><span>Tomorrow Matches</span></li></a>
+	             <a href="" class="active"><li><span>Today's Matches</span></li></a>
+	             <a href=""><li><span>Yesterday Matches</span></li></a>
+	         </ul>
+	         <div class="matchs-new">
+                 <div>
+                     <div class="row text-center">
+                         <div class="col-sm-5">
+                             <h4>Manchester United</h4>
+                             <img src="<?php echo IMG_PATH ?>clubs-logo/manchester_united.png">
+                         </div>
+                         <div class="col-sm-2">
+                             <h4>8:00 am</h4>
+                         </div>
+                         <div class="col-sm-5">
+                            <img src="<?php echo IMG_PATH ?>clubs-logo/chelsea.png">
+                             <h4>Manchester City</h4>
+                         </div>
+                     </div>
+                     <ul>
+	             <a href="">
+                     <li>
+	                 <span>Champion</span>
+	                 <h5>Champion Liga</h5>
+	                 </li>
+	             </a>
+	             <a href="">
+                     <li>
+                         <span>Commentator</span>
+                         <h5>Esam Shwwali</h5>
+                     </li>
+	             </a>
+	             <a href="">
+                     <li>
+                         <span>Channels</span>
+                         <h5>Bein Sport 1 HD</h5>
+                     </li>
+	             </a>
+	         </ul>
+                 </div>
+	             
+	         </div>
+	         
+	    </div>
 	</div>
 	
     </div>
