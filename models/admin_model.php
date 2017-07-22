@@ -73,6 +73,12 @@ class Admin_Model extends Model{
         return $champs;
     }
 
+    // get champ by id
+    public function getChampById($id){
+        $champs = $this->db->table('champs')->at("where champ_id = $id")->select('*');
+        return $champs;
+    }
+
     // get all Matches
     public function getMatches(){
         $matchs = $this->db->table('matches')->select('*');
@@ -209,6 +215,22 @@ class Admin_Model extends Model{
             ->table('clubs')
             ->at("where cl_id = :cl_id")
             ->update("cl_name = :cl_name, cl_country = :cl_country, cl_logo = :cl_logo", $d);
+        return $ec;
+    }
+    // del champ
+    public function delChamp($d){
+        $dc = $this->db->table('champs')
+            ->at('where champ_id = ' . $d)
+            ->delete();
+        return $dc;
+    }
+
+    // edit champ
+    public function editChamp($d){
+        $ec = $this->db
+            ->table('champs')
+            ->at("where champ_id = :champ_id")
+            ->update("champ_name = :champ_name, champ_date = :champ_date, champ_logo = :champ_logo, champ_loc = :champ_loc", $d);
         return $ec;
     }
 }

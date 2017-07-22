@@ -278,7 +278,7 @@ class Admin extends Controller{
                 }else{
                     $this->redirect(ADMIN_PATH . '/new-nft');
                 }
-            }else{                
+            }else{
                 if(isset($_POST['cl_name']) &&
                    isset($_POST['cl_logo']) &&
                    isset($_POST['cl_country'])){
@@ -336,7 +336,7 @@ class Admin extends Controller{
             $this->view->cl = $cl[0];
             $this->view->view('admin/edit-club');
         }
-        else $this->redirect(ADMIN_PATH . '/new-nft');        
+        else $this->redirect(ADMIN_PATH . '/new-club');
         
     }
     
@@ -353,6 +353,8 @@ class Admin extends Controller{
 
         echo $msg;
     }
+
+
     
     // new champ
     public function newChamp(){
@@ -360,6 +362,63 @@ class Admin extends Controller{
             $this->redirect(ADMIN_PATH . '/login');
         }else{
 
+            $this->view->champs = $this->model->getChamps();
+            if(isset($_GET['do'])){
+
+                if(isset($_GET['id'])){
+                    $id = intval($_GET['id']);
+                    if($_GET['do'] == 'delete'){
+                        $this->delChamp($id);
+                    }else if($_GET['do'] == 'edit'){
+                        $this->editChamp($id);
+                    }
+                }else{
+                    $this->redirect(ADMIN_PATH . '/new-nft');
+                }
+            }else{
+                if(isset($_POST['champ_name']) &&
+                   isset($_POST['champ_logo']) &&
+                   isset($_POST['champ_date']) &&
+                   isset($_POST['champ_h']) &&
+                   isset($_POST['champ_m']) &&
+                   isset($_POST['champ_loc'])){
+
+                    $h = $this->protect($_POST['champ_h']);
+                    $m = $this->protect($_POST['champ_m']);
+                    $d = $this->protect($_POST['champ_date']);
+                    $d = explode('/', $d);
+                
+                    $champ_date = $d[2] . '-' . $d[0] . '-' . $d[1] . " $h:$m:00";
+                
+                
+                    $n_champ = [
+                        "champ_name" => $this->protect($_POST['champ_name']),
+                        "champ_date" => $champ_date,
+                        "champ_loc" => $this->protect($_POST['champ_loc']),
+                        "champ_logo" => $this->protect($_POST['champ_logo']),
+                    ];
+
+                    $create_new_champ = $this->model->newChamp($n_champ);
+                    if($create_new_champ === true){
+                        $msg = "Champ createed";
+                        echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-champ'},1200)</script>";
+                    }else{
+                        $msg = "Champ Not created , 765323";
+                    }
+                
+                    $this->view->commMsg = $msg;
+                    echo $msg;
+                }
+            
+                $this->view->view("admin/new-champ");
+            }
+        }
+    }
+
+    // edit champ
+    public function editChamp($id){
+        $champ = $this->model->getChampById($id);
+        if($champ !== false){
             if(isset($_POST['champ_name']) &&
                isset($_POST['champ_logo']) &&
                isset($_POST['champ_date']) &&
@@ -373,32 +432,46 @@ class Admin extends Controller{
                 $d = explode('/', $d);
                 
                 $champ_date = $d[2] . '-' . $d[0] . '-' . $d[1] . " $h:$m:00";
-                
-                
-                $n_champ = [
+
+                $e_champ = [
+                    "champ_id" => intval($this->protect($_POST['champ_id'])),
                     "champ_name" => $this->protect($_POST['champ_name']),
                     "champ_date" => $champ_date,
                     "champ_loc" => $this->protect($_POST['champ_loc']),
                     "champ_logo" => $this->protect($_POST['champ_logo']),
                 ];
 
-                $create_new_champ = $this->model->newChamp($n_champ);
-                if($create_new_champ === true){
-                    $msg = "Champ createed";
-                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-champ'},1200)</script>";
+                $edit_champ = $this->model->editChamp($e_champ);
+                if($edit_champ != false){
+                    $msg = "CHAMP UPDATED";
+                    echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }else{
-                    $msg = "Champ Not created , 76531173";
+                    $msg = "CHAMP Not UPDATED , 2724bh225";
                 }
-                
-                $this->view->commMsg = $msg;
+
                 echo $msg;
             }
-            
-            $this->view->view("admin/new-champ");
+            $this->view->champ = $champ[0];
+            $this->view->view('admin/edit-champ');
         }
+        else $this->redirect(ADMIN_PATH . '/new-champ');        
+        
     }
+    
+    // delete champ
+    public function delChamp($id){
+        $del_champ = $this->model->delChamp($id);
+        // echo var_dump($del_champ);
+        if($del_champ != false){
+            $msg = "CHAMP DELETED";
+            echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-champ'},1200)</script>";
+        }else{
+            $msg = "CHAMP Not DELETED , errn23435324";
+        }
 
-
+        echo $msg;
+    }
+    
     // new Match
     public function newMatch(){
         if($this->checkUSession() == false){  // if not logged in
