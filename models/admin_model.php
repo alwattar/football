@@ -50,26 +50,26 @@ class Admin_Model extends Model{
 
     // get all commentors
     public function getCommentors(){
-        $chans = $this->db->table('commentor')->select('*');
-        return $chans;
+        $comms = $this->db->table('commentor inner join channels on channels.chan_id = commentor.comm_chan')->select('commentor.*, channels.*');
+        return $comms;
     }
 
     // get all champs
     public function getChamps(){
-        $chans = $this->db->table('champs')->select('*');
-        return $chans;
+        $champs = $this->db->table('champs')->select('*');
+        return $champs;
     }
 
     // get all Matches
     public function getMatches(){
-        $chans = $this->db->table('matches')->select('*');
-        return $chans;
+        $matchs = $this->db->table('matches')->select('*');
+        return $matchs;
     }
 
     // get all Clubs
     public function getClubs(){
-        $chans = $this->db->table('clubs')->select('*');
-        return $chans;
+        $clubs = $this->db->table('clubs')->select('*');
+        return $clubs;
     }
 
     // new commentor
@@ -78,6 +78,24 @@ class Admin_Model extends Model{
              ->insert("(comm_name, comm_country, comm_chan) values(:comm_name, :comm_country, :comm_chan)", $d);
 
         return $cncomm;
+    }
+
+    // edit commentor
+    public function editComm($d){
+        $ecomm = $this->db
+               ->table('commentor')
+               ->at("where comm_id = :comm_id")
+               ->update("comm_name = :comm_name, comm_chan = :comm_chan, comm_country = :comm_country", $d);
+
+        return $ecomm;
+    }
+
+    // delete commentor
+    public function delComm($d){
+        $dc = $this->db->table('commentor')
+            ->at('where comm_id = ' . $d)
+            ->delete();
+        return $dc;
     }
 
     // new NTF

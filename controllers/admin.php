@@ -52,13 +52,13 @@ class Admin extends Controller{
 
                     if($edit_channel != false){
                         $msg = "Channel Updated";
+                        echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                     }else{
                         $msg = "Channel Not Updated , err262432";
                     }
                 
                     $this->view->chanMsg = $msg;
                     echo $msg;
-                    echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }
             }
             
@@ -76,13 +76,13 @@ class Admin extends Controller{
                 $create_new_channel = $this->model->newChan($nc);
                 if($create_new_channel === true){
                     $msg = "Channel createed";
+                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-chan'},1200)</script>";
                 }else{
                     $msg = "Channel Not created , 62432";
                 }
                 
                 $this->view->chanMsg = $msg;
                 echo $msg;
-                echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
             }
             
             $this->view->view("admin/new-chan");
@@ -95,12 +95,55 @@ class Admin extends Controller{
         if($this->checkUSession() == false){  // if not logged in
             $this->redirect(ADMIN_PATH . '/login');
         }else{
-
+            
             $this->view->channels = $this->model->getChannels();
+            $this->view->commentors = $this->model->getCommentors();
+            // delete commentor
+            if(isset($_GET['del'])){
+                $comm_id = intval($_GET['del']);
+                $del_comm = $this->model->delComm($comm_id);
+                if($del_comm != false){
+                    $msg = "Commentor Deleted";
+                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-commentor'},1200)</script>";
+                }else{
+                    $msg = "Commentor Not Deleted , err62465";
+                }
+                
+                $this->view->chanMsg = $msg;
+                echo $msg;
+            }
+            // edit commentor
+            if(isset($_POST['comm_edit']) && $_POST['comm_edit'] == 'comm_edit'){
+                if(isset($_POST['comm_name']) &&
+                   isset($_POST['comm_country']) &&
+                   isset($_POST['comm_chan'])){
+                
+                    $ecomm = [
+                        "comm_name" => $this->protect($_POST['comm_name']),
+                        "comm_country" => $this->protect($_POST['comm_country']),
+                        "comm_id" => intval($this->protect($_POST['comm_id'])),
+                        "comm_chan" => intval($this->protect($_POST['comm_chan'])),
+                    ];
+                    
+                    $edit_comm = $this->model->editComm($ecomm);
+                    // echo var_dump($edit_comm);
+                    if($edit_comm != false){
+                        $msg = "Commentor Updated";
+                        echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
+                    }else{
+                        $msg = "commentor Not Updated , Eroro26342";
+                    }
+
+                    echo $msg;
+                    
+                }
+            }
+            // new commentor
             if(isset($_POST['comm_name']) &&
+               !isset($_POST['comm_edit']) &&
                isset($_POST['comm_country']) &&
                isset($_POST['comm_chan'])){
-
+                
                 $ncomm = [
                     "comm_name" => $this->protect($_POST['comm_name']),
                     "comm_country" => $this->protect($_POST['comm_country']),
@@ -110,6 +153,7 @@ class Admin extends Controller{
                 $create_new_commentor = $this->model->newComm($ncomm);
                 if($create_new_commentor === true){
                     $msg = "Commentor createed";
+                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-commentor'},1200)</script>";
                 }else{
                     $msg = "Commentor Not created , 6243251";
                 }
@@ -141,6 +185,7 @@ class Admin extends Controller{
                 $create_new_nft = $this->model->newNFT($n_nft);
                 if($create_new_nft === true){
                     $msg = "NFT createed";
+                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-nft'},1200)</script>";
                 }else{
                     $msg = "NFT Not created , 53364";
                 }
@@ -172,6 +217,7 @@ class Admin extends Controller{
                 $create_new_club = $this->model->newClub($n_club);
                 if($create_new_club === true){
                     $msg = "CLUB createed";
+                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-club'},1200)</script>";
                 }else{
                     $msg = "CLUB Not created , 763364";
                 }
@@ -215,6 +261,7 @@ class Admin extends Controller{
                 $create_new_champ = $this->model->newChamp($n_champ);
                 if($create_new_champ === true){
                     $msg = "Champ createed";
+                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-champ'},1200)</script>";
                 }else{
                     $msg = "Champ Not created , 76531173";
                 }
@@ -276,6 +323,7 @@ class Admin extends Controller{
                 $create_new_mat = $this->model->newMatch($n_mat);
                 if($create_new_mat === true){
                     $msg = "Match createed";
+                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-match'},1200)</script>";
                 }else{
                     $msg = "Match Not created , 729351173";
                 }
@@ -310,6 +358,7 @@ class Admin extends Controller{
                 $create_new_url = $this->model->newUrl($n_url);
                 if($create_new_url === true){
                     $msg = "URL createed";
+                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-url'},1200)</script>";
                 }else{
                     $msg = "URL Not created , 7626373";
                 }
@@ -348,6 +397,7 @@ class Admin extends Controller{
                 $create_new_transfer = $this->model->newTransfer($nc_transfer);
                 if($create_new_transfer === true){
                     $msg = "Transfer createed";
+                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-transfer'},1200)</script>";
                 }else{
                     $msg = "Transfer Not created , 253";
                 }
@@ -387,6 +437,7 @@ class Admin extends Controller{
                 $create_new_player = $this->model->newPlayer($nc_player);
                 if($create_new_player === true){
                     $msg = "Player createed";
+                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-player'},1200)</script>";
                 }else{
                     $msg = "Player Not created , 252633";
                 }
