@@ -48,6 +48,19 @@ class Admin_Model extends Model{
         return $chans;
     }
 
+    // get all nfts
+    public function getNFTS(){
+        $nfts = $this->db->table('nft')->select('*');
+        return $nfts;
+    }
+
+
+    // get nft by id
+    public function getNFTById($id){
+        $nft = $this->db->table('nft')->at("where nft_id = $id")->select('*');
+        return $nft;
+    }
+
     // get all commentors
     public function getCommentors(){
         $comms = $this->db->table('commentor inner join channels on channels.chan_id = commentor.comm_chan')->select('commentor.*, channels.*');
@@ -104,6 +117,24 @@ class Admin_Model extends Model{
              ->insert("(nft_name, nft_logo, nft_num) values(:nft_name, :nft_logo, :nft_num)", $d);
 
         return $cn_nft;
+    }
+
+    // edit NTF
+    public function editNFT($d){
+        $edit_nft = $this->db
+                ->table('nft')
+                ->at("where nft_id = :nft_id")
+                ->update("nft_name = :nft_name, nft_logo = :nft_logo, nft_num = :nft_num", $d);
+        
+        return $edit_nft;
+    }
+
+    // delete nft
+    public function delNFT($d){
+        $dnft = $this->db->table('nft')
+            ->at('where nft_id = ' . $d)
+            ->delete();
+        return $dnft;
     }
 
     // new club

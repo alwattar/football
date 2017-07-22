@@ -31,7 +31,7 @@
 		Commentor Channel
 		<br/>	
 		<select name="comm_chan">
-		    <option value="<?php echo $com->comm_chan ?>"><?php echo $c->chan_name ?></option>
+		    <option value="<?php echo $com->comm_chan ?>"><?php echo $com->chan_name ?></option>
 		    <?php foreach($this->channels as $c){ ?>
 			<?php if($c->chan_id == $com->comm_chan) continue ?>
 			<option value="<?php echo $c->chan_id ?>"><?php echo $c->chan_name ?></option>

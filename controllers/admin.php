@@ -171,33 +171,94 @@ class Admin extends Controller{
         if($this->checkUSession() == false){  // if not logged in
             $this->redirect(ADMIN_PATH . '/login');
         }else{
+            $this->view->nfts = $this->model->getNFTS();
+            if(isset($_GET['do'])){
 
+                if(isset($_GET['id'])){
+                    $id = intval($_GET['id']);
+                    if($_GET['do'] == 'delete'){
+                        $this->delNFT($id);
+                    }else if($_GET['do'] == 'edit'){
+                        $this->editNFT($id);
+                    }
+                }else{
+                    $this->redirect(ADMIN_PATH . '/new-nft');
+                }
+            }else{
+                if(isset($_POST['nft_name']) &&
+                   isset($_POST['nft_logo']) &&
+                   isset($_POST['nft_num'])){
+
+                    $n_nft = [
+                        "nft_name" => $this->protect($_POST['nft_name']),
+                        "nft_num" => intval($this->protect($_POST['nft_num'])),
+                        "nft_logo" => $this->protect($_POST['nft_logo']),
+                    ];
+
+                    $create_new_nft = $this->model->newNFT($n_nft);
+                    if($create_new_nft === true){
+                        $msg = "NFT createed";
+                        echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-nft'},1200)</script>";
+                    }else{
+                        $msg = "NFT Not created , 53364";
+                    }
+                
+                    $this->view->commMsg = $msg;
+                    echo $msg;
+                }
+            
+                $this->view->view("admin/new-nft");
+            }
+        }
+    }
+
+    // edit nft
+    public function editNFT($id){
+        $nft = $this->model->getNFTById($id);
+        if($nft !== false){
             if(isset($_POST['nft_name']) &&
+               isset($_POST['nft_id']) &&
                isset($_POST['nft_logo']) &&
                isset($_POST['nft_num'])){
 
-                $n_nft = [
+                $e_nft = [
                     "nft_name" => $this->protect($_POST['nft_name']),
+                    "nft_id" => intval($this->protect($_POST['nft_id'])),
                     "nft_num" => intval($this->protect($_POST['nft_num'])),
                     "nft_logo" => $this->protect($_POST['nft_logo']),
                 ];
 
-                $create_new_nft = $this->model->newNFT($n_nft);
-                if($create_new_nft === true){
-                    $msg = "NFT createed";
-                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-nft'},1200)</script>";
+                $edit_nft = $this->model->editNFT($e_nft);
+                if($edit_nft != false){
+                    $msg = "NFT UPDATED";
+                    echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }else{
-                    $msg = "NFT Not created , 53364";
+                    $msg = "NFT Not UPDATED , trr2524";
                 }
-                
-                $this->view->commMsg = $msg;
+
                 echo $msg;
             }
-            
-            $this->view->view("admin/new-nft");
+            $this->view->nft = $nft[0];
+            $this->view->view('admin/edit-nft');
         }
+        else $this->redirect(ADMIN_PATH . '/new-nft');        
+        
     }
+    
+    // delete nft
+    public function delNFT($id){
+        $del_nft = $this->model->delNFT($id);
+        // echo var_dump($del_nft);
+        if($del_nft != false){
+            $msg = "NFT DELETED";
+            echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-nft'},1200)</script>";
+        }else{
+            $msg = "NFT Not DELETED , trr2524";
+        }
 
+        echo $msg;
+    }
+    
     // new CLUB
     public function newClub(){
         if($this->checkUSession() == false){  // if not logged in
