@@ -1,5 +1,5 @@
 <?php require_once('include/header.php') ?>
-<p><h1>New Transfer</h1></p>
+<p><h1>Edit Transfer</h1></p>
 <?php if($this->clubs == false){ ?>
     <a href="<?php echo ADMIN_PATH ?>/new-club">Please add one CLUB at LEAST before adding new transfer</a>
 <?php }else{ ?>
