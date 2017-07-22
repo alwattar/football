@@ -20,8 +20,51 @@ class Admin extends Controller{
         if($this->checkUSession() == false){  // if not logged in
             $this->redirect(ADMIN_PATH . '/login');
         }else{
+            $this->view->channels = $this->model->getChannels();
+
+            if(isset($_GET['del'])){
+                $channel_id = intval($_GET['del']);
+                $del_channel = $this->model->delChannel($channel_id);
+                if($del_channel != false){
+                    $msg = "Channel Deleted";
+                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-chan'},1200)</script>";
+                }else{
+                    $msg = "Channel Not Deleted , err665";
+                }
+                
+                $this->view->chanMsg = $msg;
+                echo $msg;
+            }
+            if(isset($_POST['chan_edit']) && $_POST['chan_edit'] == 'chan_edit'){
+                if(isset($_POST['chan_name']) &&
+                   isset($_POST['chan_id']) &&
+                   isset($_POST['chan_lang']) &&
+                   isset($_POST['chan_logo'])){
+
+                    $e_channel = [
+                        "chan_id" => intval($this->protect($_POST['chan_id'])),
+                        "chan_name" => $this->protect($_POST['chan_name']),
+                        "chan_lang" => $this->protect($_POST['chan_lang']),
+                        "chan_logo" => $this->protect($_POST['chan_logo']),
+                    ];
+
+                    $edit_channel = $this->model->editChannel($e_channel);
+
+                    if($edit_channel != false){
+                        $msg = "Channel Updated";
+                    }else{
+                        $msg = "Channel Not Updated , err262432";
+                    }
+                
+                    $this->view->chanMsg = $msg;
+                    echo $msg;
+                    echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
+                }
+            }
+            
             if(isset($_POST['chan_name']) &&
                isset($_POST['chan_lang']) &&
+               !isset($_POST['chan_edit']) &&
                isset($_POST['chan_logo'])){
 
                 $nc = [
@@ -39,6 +82,7 @@ class Admin extends Controller{
                 
                 $this->view->chanMsg = $msg;
                 echo $msg;
+                echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
             }
             
             $this->view->view("admin/new-chan");

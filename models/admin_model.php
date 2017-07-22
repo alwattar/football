@@ -26,6 +26,22 @@ class Admin_Model extends Model{
         return $cnc;
     }
 
+    // edit channel
+    public function editChannel($d){
+        $ec = $this->db->table('channels')
+            ->at('where chan_id = :chan_id')
+            ->update('chan_name = :chan_name, chan_lang = :chan_lang, chan_logo = :chan_logo', $d);
+        return $ec;
+    }
+
+    // delete channel
+    public function delChannel($d){
+        $dc = $this->db->table('channels')
+            ->at('where chan_id = ' . $d)
+            ->delete();
+        return $dc;
+    }
+
     // get all channel
     public function getChannels(){
         $chans = $this->db->table('channels')->select('*');
@@ -123,5 +139,6 @@ class Admin_Model extends Model{
 
         return $cn_player;
     }
+
 }
 ?>

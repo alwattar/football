@@ -1,4 +1,10 @@
-
-This is admin page
-
-
+<a href="<?php echo ADMIN_PATH ?>/new-chan">New Chan</a> <br/>
+<a href="<?php echo ADMIN_PATH ?>/new-commentor">New Commentor</a> <br/>
+<a href="<?php echo ADMIN_PATH ?>/new-nft">New Nft</a> <br/>
+<a href="<?php echo ADMIN_PATH ?>/new-club">New Club</a> <br/>
+<a href="<?php echo ADMIN_PATH ?>/new-champ">New Champ</a> <br/>
+<a href="<?php echo ADMIN_PATH ?>/new-match">New Match</a> <br/>
+<a href="<?php echo ADMIN_PATH ?>/new-url">New Url</a> <br/>
+<a href="<?php echo ADMIN_PATH ?>/new-player">New Player</a> <br/>
+<a href="<?php echo ADMIN_PATH ?>/new-transfer">New Transfer</a> <br/>
+<a href="<?php echo ADMIN_PATH ?>/logout">Logout</a> <br/>
