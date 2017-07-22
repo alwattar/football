@@ -1,10 +1,5 @@
 <?php require_once('include/header.php') ?>
-
-<br/>
-<br/>
-New Transfer
-<br/>
-<br/>
+<p><h1>New Transfer</h1></p>
 <?php if($this->clubs == false){ ?>
     <a href="<?php echo ADMIN_PATH ?>/new-club">Please add one CLUB at LEAST before adding new transfer</a>
 <?php }else{ ?>
@@ -24,5 +19,23 @@ New Transfer
 	<br/>
 	<button>CREATE</button>
     </form>
+<?php } ?>
+<?php if($this->mov != false){ ?>
+    <?php foreach($this->mov as $mov){ ?>
+	Transfer ID: <?php echo $mov->mov_id ?>
+	<br/>
+	Transfer Player: <?php echo $mov->mov_pl ?>
+	<br/>
+	Transfer Club: <?php echo $mov->cl_name ?>
+	<br/>
+	<?php $date = $this->timeInfo($mov->mov_date)['date'] ?>
+	Transfer date: <?php echo $date ?>
+	<br/>
+	<a href="<?php echo ADMIN_PATH ?>/new-transfer&do=edit&id=<?php echo $mov->mov_id ?>">Edit</a> |
+	<a href="<?php echo ADMIN_PATH ?>/new-transfer&do=delete&id=<?php echo $mov->mov_id ?>">DELETE</a>
+	<br/>
+	----------
+	<br/>
+    <?php } ?>
 <?php } ?>
 <?php require_once('include/footer.php') ?>

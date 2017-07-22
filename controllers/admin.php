@@ -276,7 +276,7 @@ class Admin extends Controller{
                         $this->editClub($id);
                     }
                 }else{
-                    $this->redirect(ADMIN_PATH . '/new-nft');
+                    $this->redirect(ADMIN_PATH . '/new-club');
                 }
             }else{
                 if(isset($_POST['cl_name']) &&
@@ -373,7 +373,7 @@ class Admin extends Controller{
                         $this->editChamp($id);
                     }
                 }else{
-                    $this->redirect(ADMIN_PATH . '/new-nft');
+                    $this->redirect(ADMIN_PATH . '/new-champ');
                 }
             }else{
                 if(isset($_POST['champ_name']) &&
@@ -492,7 +492,7 @@ class Admin extends Controller{
                         $this->editMatch($id);
                     }
                 }else{
-                    $this->redirect(ADMIN_PATH . '/new-nft');
+                    $this->redirect(ADMIN_PATH . '/new-match');
                 }
             }else{
                 if(isset($_POST['mat_name']) &&
@@ -631,7 +631,6 @@ class Admin extends Controller{
             $this->view->matches = $this->model->getMatches();
             $this->view->urls = $this->model->getUrls();
             if(isset($_GET['do'])){
-                
                 if(isset($_GET['id'])){
                     $id = intval($_GET['id']);
                     if($_GET['do'] == 'delete'){
@@ -640,7 +639,7 @@ class Admin extends Controller{
                         $this->editUrl($id);
                     }
                 }else{
-                    $this->redirect(ADMIN_PATH . '/new-nft');
+                    $this->redirect(ADMIN_PATH . '/new-url');
                 }
             }else{
                 if(isset($_POST['url_href']) &&
@@ -723,8 +722,59 @@ class Admin extends Controller{
             $this->redirect(ADMIN_PATH . '/login');
         }else{
             $this->view->clubs = $this->model->getClubs();
+            $this->view->mov = $this->model->getTransfers();
+            if(isset($_GET['do'])){
+                if(isset($_GET['id'])){
+                    $id = intval($_GET['id']);
+                    if($_GET['do'] == 'delete'){
+                        $this->delTransfer($id);
+                    }else if($_GET['do'] == 'edit'){
+                        $this->editTransfer($id);
+                    }
+                }else{
+                    $this->redirect(ADMIN_PATH . '/new-transfer');
+                }
+            }else{                
+                if(isset($_POST['mov_pl']) &&
+                   isset($_POST['mov_sal']) &&
+                   isset($_POST['mov_club']) &&
+                   isset($_POST['mov_date'])){
+                
+                    $d = $this->protect($_POST['mov_date']);
+                    $d = explode('/', $d);
+                    $mov_date = $d[2] . '-' . $d[0] . '-' . $d[1] . " 00:00:00";
+                
+                    $nc_transfer = [
+                        "mov_pl" => $this->protect($_POST['mov_pl']),
+                        "mov_sal" => intval($this->protect($_POST['mov_sal'])),
+                        "mov_club" => intval($this->protect($_POST['mov_club'])),
+                        "mov_date" => $mov_date,
+                    ];
 
+                    $create_new_transfer = $this->model->newTransfer($nc_transfer);
+                    if($create_new_transfer === true){
+                        $msg = "Transfer createed";
+                        echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-transfer'},1200)</script>";
+                    }else{
+                        $msg = "Transfer Not created , 25312";
+                    }
+                
+                    $this->view->chanMsg = $msg;
+                    echo $msg;
+                }
+            
+                $this->view->view("admin/new-transfer");
+            }
+        }
+    }
+
+
+    // edit transfer
+    public function editTransfer($id){
+        $mov = $this->model->getTransferById($id);
+        if($mov != false){
             if(isset($_POST['mov_pl']) &&
+               isset($_POST['mov_id']) &&
                isset($_POST['mov_sal']) &&
                isset($_POST['mov_club']) &&
                isset($_POST['mov_date'])){
@@ -733,66 +783,96 @@ class Admin extends Controller{
                 $d = explode('/', $d);
                 $mov_date = $d[2] . '-' . $d[0] . '-' . $d[1] . " 00:00:00";
                 
-                $nc_transfer = [
+                $e_transfer = [
                     "mov_pl" => $this->protect($_POST['mov_pl']),
+                    "mov_id" => intval($this->protect($_POST['mov_id'])),
                     "mov_sal" => intval($this->protect($_POST['mov_sal'])),
                     "mov_club" => intval($this->protect($_POST['mov_club'])),
                     "mov_date" => $mov_date,
                 ];
 
-                $create_new_transfer = $this->model->newTransfer($nc_transfer);
-                if($create_new_transfer === true){
-                    $msg = "Transfer createed";
-                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-transfer'},1200)</script>";
-                }else{
-                    $msg = "Transfer Not created , 253";
-                }
+                $edit_mov = $this->model->editTransfer($e_transfer);
                 
-                $this->view->chanMsg = $msg;
+                if($edit_mov != false){
+                    $msg = "Transfer UPDATED";
+                    echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
+                }else{
+                    $msg = "Transfer Not UPDATED , er22125";
+                }
+
                 echo $msg;
             }
-            
-            $this->view->view("admin/new-transfer");
+            $this->view->mov = $mov[0];
+            $this->view->view('admin/edit-transfer');
         }
+        else $this->redirect(ADMIN_PATH . '/new-transfer');
+        
+    }
+    
+    // delete transfer
+    public function delTransfer($id){
+        $del_transfer = $this->model->delTransfer($id);
+        // echo var_dump($del_transfer);
+        if($del_transfer != false){
+            $msg = "Transfer DELETED";
+            echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-transfer'},1200)</script>";
+        }else{
+            $msg = "Transfer Not DELETED , transErr826219";
+        }
+
+        echo $msg;
     }
 
+    
     // create new player
     public function newPlayer(){
         if($this->checkUSession() == false){  // if not logged in
             $this->redirect(ADMIN_PATH . '/login');
         }else{
             $this->view->clubs = $this->model->getClubs();
-
-            if(isset($_POST['pl_name']) &&
-               isset($_POST['pl_nat']) &&
-               isset($_POST['pl_leng']) &&
-               isset($_POST['pl_chanum']) &&
-               isset($_POST['pl_goals']) &&
-               isset($_POST['pl_curclub'])){
-
-                
-                $nc_player = [
-                    "pl_name" => $this->protect($_POST['pl_name']),
-                    "pl_nat" => $this->protect($_POST['pl_nat']),
-                    "pl_leng" => intval($this->protect($_POST['pl_leng'])),
-                    "pl_chanum" => intval($this->protect($_POST['pl_chanum'])),
-                    "pl_goals" => intval($this->protect($_POST['pl_goals'])),
-                    "pl_curclub" => $this->protect($_POST['pl_curclub']),
-                ];
-
-                $create_new_player = $this->model->newPlayer($nc_player);
-                if($create_new_player === true){
-                    $msg = "Player createed";
-                    echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-player'},1200)</script>";
+            if(isset($_GET['do'])){
+                if(isset($_GET['id'])){
+                    $id = intval($_GET['id']);
+                    if($_GET['do'] == 'delete'){
+                        $this->delPlayer($id);
+                    }else if($_GET['do'] == 'edit'){
+                        $this->editPlayer($id);
+                    }
                 }else{
-                    $msg = "Player Not created , 252633";
+                    $this->redirect(ADMIN_PATH . '/new-player');
                 }
+            }else{
+                if(isset($_POST['pl_name']) &&
+                   isset($_POST['pl_nat']) &&
+                   isset($_POST['pl_leng']) &&
+                   isset($_POST['pl_chanum']) &&
+                   isset($_POST['pl_goals']) &&
+                   isset($_POST['pl_curclub'])){
+
                 
-                $this->view->chanMsg = $msg;
-                echo $msg;
-            }
+                    $nc_player = [
+                        "pl_name" => $this->protect($_POST['pl_name']),
+                        "pl_nat" => $this->protect($_POST['pl_nat']),
+                        "pl_leng" => intval($this->protect($_POST['pl_leng'])),
+                        "pl_chanum" => intval($this->protect($_POST['pl_chanum'])),
+                        "pl_goals" => intval($this->protect($_POST['pl_goals'])),
+                        "pl_curclub" => $this->protect($_POST['pl_curclub']),
+                    ];
+
+                    $create_new_player = $this->model->newPlayer($nc_player);
+                    if($create_new_player === true){
+                        $msg = "Player createed";
+                        echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-player'},1200)</script>";
+                    }else{
+                        $msg = "Player Not created , 252633";
+                    }
+                
+                    $this->view->chanMsg = $msg;
+                    echo $msg;
+                }
             
-            $this->view->view("admin/new-player");
+                $this->view->view("admin/new-player");
+            }
         }
     }
     

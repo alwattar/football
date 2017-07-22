@@ -124,7 +124,7 @@ class Admin_Model extends Model{
         $club = $this->db->table('clubs')->at('where cl_id = ' . $id)->select('*');
         return $club;
     }
-
+    
     // new commentor
     public function newComm($d){
         $cncomm = $this->db->table('commentor')
@@ -269,6 +269,14 @@ class Admin_Model extends Model{
         return $dc;
     }
 
+    // del transfer
+    public function delTransfer($d){
+        $dt = $this->db->table('transfer')
+            ->at('where mov_id = ' . $d)
+            ->delete();
+        return $dt;
+    }
+
     // edit champ
     public function editChamp($d){
         $ec = $this->db
@@ -294,9 +302,38 @@ class Admin_Model extends Model{
         $eurl = $this->db
                ->table('urls')
                ->at("where url_id = :url_id")
-               ->update("url_href = :url_href, url_channel = :url_channel, url_game = :url_game", $d);
+               ->update("url_href = :url_href, url_id = :url_id, url_channel = :url_channel, url_game = :url_game", $d);
 
         return $eurl;
+    }
+
+    // get all transfers
+    public function getTransfers(){
+        $tr = $this->db
+            ->table('transfer INNER JOIN clubs ON clubs.cl_id = transfer.mov_club')
+            ->select('clubs.*, transfer.*');
+
+        return $tr;
+    }
+
+    // get transfer by id
+    public function getTransferById($id){
+        $transfer = $this->db
+              ->table('transfer INNER JOIN clubs ON clubs.cl_id = transfer.mov_club')
+              ->at('where mov_id = ' . $id)
+              ->select('clubs.*, transfer.*');
+        return $transfer;
+    }
+
+    // edit transfer
+
+    public function editTransfer($d){
+        $et = $this->db
+            ->table('transfer')
+            ->at("where mov_id = :mov_id")
+            ->update("mov_pl = :mov_pl, mov_sal = :mov_sal, mov_club = :mov_club, mov_date = :mov_date", $d);
+
+        return $et;
     }
 }
 ?>
