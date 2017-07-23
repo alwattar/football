@@ -26,7 +26,10 @@ class Index extends Controller{
             }
 
             $matches = $this->model->getMatchOfDay();
-            $final_matches = $this->getMatchesByDay($matches, $m_time);
+            if($matches != false)
+                $final_matches = $this->getMatchesByDay($matches, $m_time);
+            else
+                $final_matches = [];
             echo json_encode($final_matches);
         }
 
