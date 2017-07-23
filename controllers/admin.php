@@ -475,6 +475,28 @@ class Admin extends Controller{
             $this->view->commentors = $this->model->getCommentors();
             $this->view->champs = $this->model->getChamps();
             $this->view->matches = $this->model->getMatches();
+            $clubs = $this->model->getClubs();
+            $nfts = $this->model->getNFTS();
+            $teams = [];
+
+            if($clubs != false){
+                foreach($clubs as $cl){
+                    $teams[] = [
+                        'name' => $cl->cl_name,
+                        'id' => $cl->cl_id . '_c',
+                    ];
+                }
+            }
+            if($nfts != false){
+                foreach($nfts as $nft){
+                    $teams[] = [
+                        'name' => $nft->nft_name,
+                        'id' => $nft->nft_id . '_n',
+                    ];
+                }
+            }
+
+            $this->view->teams = $teams;
             
             if(isset($_GET['do'])){
                 

@@ -91,6 +91,7 @@ class Admin_Model extends Model{
     public function getCommentors(){
         $comms = $this->db->table('commentor INNER JOIN channels ON channels.chan_id = commentor.comm_chan')->select('commentor.*, channels.*');
         return $comms;
+
     }
 
     // get all champs

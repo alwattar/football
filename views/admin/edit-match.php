@@ -32,8 +32,19 @@
 	<?php } ?>
     </select>
     minutes <br/>
-    <input name="mat_team1" type="text" placeholder="Team 1" value="<?php echo $this->mat->mat_team1 ?>"/> <br/>
-    <input name="mat_team2" type="text" placeholder="Team 2" value="<?php echo $this->mat->mat_team2 ?>"/> <br/>
+    <br/>
+    <select name="mat_team1">
+	<?php foreach($this->teams as $team){ $team = (object) $team; ?>
+	    <option value="<?php echo $team->id ?>"><?php echo $team->name ?></option>
+	<?php } ?>
+    </select>
+    <br/>
+    <select name="mat_team2">
+	<?php foreach($this->teams as $team){ $team = (object) $team; ?>
+	    <option value="<?php echo $team->id ?>"><?php echo $team->name ?></option>
+	<?php } ?>
+    </select>
+    <br/>
     <input name="mat_address" type="text" placeholder="Match address" value="<?php echo $this->mat->mat_address ?>"/> <br/>
     <input name="mat_lang" type="text" placeholder="Match Lang" value="<?php echo $this->mat->mat_lang ?>"/> <br/>
     <textarea name="mat_note" type="text" placeholder="Match note"><?php echo $this->mat->mat_note ?></textarea> <br/>

@@ -437,5 +437,28 @@ class Controller {
 
         return $info;
     }
+
+    public function getTeam($id_type){
+        $info = explode('_', $id_type);
+        $id = intval($info[0]);
+        $type = $info[1];
+        if($type == 'c'){
+            $table = 'clubs';
+            $p = 'cl';
+        }
+        else if($type == 'n'){
+            $table = 'nft';
+            $p = 'nft';
+        }
+
+        $db = new DB();
+        echo var_dump($db);
+        $team = $db->table($table)->at("where " . $p . "_id = " . $id)->select("*");
+        echo var_dump($team);
+        if($team != false)
+            return $data = ["team" => (array) $team[0], 'p' => $p];
+        else
+            return false;
+    }
 }   
 ?>

@@ -25,7 +25,11 @@
 	<br/>
 	<select name="url_game">
 	    <?php foreach($this->matches as $math){ ?>
-		<option value="<?php echo $math->mat_id ?>"><?php echo $math->mat_time ?> <?php echo $math->mat_team1 ?> ضد  <?php echo $math->mat_team2 ?></option>
+		<?php
+		$team1 = $this->getTeam($math->mat_team1);
+		$team2 = $this->getTeam($math->mat_team2);
+		?>
+		<option value="<?php echo $math->mat_id ?>"><?php echo $math->mat_time ?> <?php echo $team1['team'][$team1['p'] . '_name'] ?> ضد  <?php echo $team2['team'][$team2['p'] . '_name'] ?></option>
 	    <?php } ?>
 	</select>
 	<br/>
