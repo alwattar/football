@@ -1,24 +1,22 @@
 <?php require_once('include/header.php') ?>
-<h1>New Champ</h1>
+<div class="adminpanel">
+<?php require_once('include/sidebar.php') ?>
+<div class="mainbar">
+     <div class="mainbarcontainer">
+         <div class="row">
+             <h1>بطولات جديدة</h1>
 <form action="" method="post">
-    <input name="champ_name" type="text" placeholder="champ Name"/><br/>
-    <input name="champ_loc" type="text" placeholder="champ location"/><br/>
-    <input name="champ_date" class="ui-datepicker" type="text" placeholder="champ date"/> at hour
-    <select name="champ_h">
-	<?php for($i = 1;  $i <= 23; $i++){?>
-	    <option value="<?php echo str_pad($i, 2, '0', STR_PAD_LEFT) ?>"><?php echo str_pad($i, 2, '0', STR_PAD_LEFT) ?></option>
-	<?php } ?>
-    </select>
-    and
-    <select name="champ_m">
-	<?php for($i = 0;  $i < 60; $i++){?>
-	    <option value="<?php echo str_pad($i, 2, '0', STR_PAD_LEFT) ?>"><?php echo str_pad($i, 2, '0', STR_PAD_LEFT) ?></option>
-	<?php } ?>
-    </select>
-    minutes <br/>
-    
+    <input name="champ_name" type="text" placeholder="اسم البطولة"/><br/>
+    <input name="champ_loc" type="text" placeholder="مكان البطولة"/><br/>
+        
+        
+  <div  class="datetimepicker">
+    <input class="add-on" data-format="yyyy/MM/dd hh:mm:ss" type="text" name="champ_date" placeholder="تاريخ البطولة" >
+  </div>
+
+        
     <input name="champ_logo" id="champ-logo" size="42" type="text" placeholder="champ logo"/> <span onclick="finderPopup('champ-logo')">Select logo</span> <br/>
-    <button>CREATE</button>
+    <button>انشاء</button>
 </form>
 <?php if($this->champs != false){ ?>
     <?php foreach($this->champs as $champ){ ?>
@@ -37,4 +35,7 @@
 	<br/>
     <?php  } ?>
 <?php  } ?>
+             
+         </div></div></div>
+
 <?php require_once('include/footer.php') ?>

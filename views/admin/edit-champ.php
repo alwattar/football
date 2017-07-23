@@ -1,5 +1,6 @@
 <?php require_once('include/header.php') ?>
-<p><h1>Edit Champ</h1></p>
+
+<h1>Edit Champ</h1>
 <form action="" method="post">
     <input name="champ_id" type="hidden" value="<?php echo $this->champ->champ_id ?>"/><br/>
     <input name="champ_name" type="text" placeholder="champ Name" value="<?php echo $this->champ->champ_name ?>"/><br/>

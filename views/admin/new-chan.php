@@ -1,16 +1,21 @@
 <?php require_once('include/header.php') ?>
-<p><h1>New Channel: </h1></p>
+<div class="adminpanel">
+<?php require_once('include/sidebar.php') ?>
+<div class="mainbar">
+     <div class="mainbarcontainer">
+         <div class="row">
+             <h1>قناة جديدة</h1>
 <form action="" method="post">
-    <input name="chan_name" type="text" placeholder="Channel Name"/><br/>
-    <input name="chan_lang" type="text" placeholder="Channel lang"/><br/>
-    <input name="chan_logo" id="chan-logo" type="text" size="42" placeholder="Channel Logo Url"/> <span onclick="finderPopup('chan-logo')" id="">Select logo</span>
+    <input name="chan_name" type="text" placeholder="اسم القناة"/><br/>
+    <input name="chan_lang" type="text" placeholder="لغة القناة"/><br/>
+    <input name="chan_logo" id="chan-logo" type="text" size="42" placeholder="شعار القناة"/> <span onclick="finderPopup('chan-logo')" id="">Select logo</span>
     <br/>
     <br/>
-    <button>CREATE</button>
+    <button>انشاء</button>
 </form>
 
 <?php if($this->channels != false){ ?>
-    <p><h1>All Channels: </h1></p>
+    <h1>جميع القنوات </h1>
     <?php foreach($this->channels as $ch){ ?>
 	---------------------
 	<form name="edit-chan" method="post">
@@ -25,4 +30,6 @@
 	</form>
     <?php } ?>
 <?php } ?>
+         </div></div></div>
+
 <?php require_once('include/footer.php') ?>

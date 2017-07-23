@@ -1,14 +1,24 @@
+
 <?php require_once('include/header.php') ?>
-<p><h1>New Transfer</h1></p>
+
+<div class="adminpanel">
+<?php require_once('include/sidebar.php') ?>
+<div class="mainbar">
+     <div class="mainbarcontainer">
+         <div class="row">
+             <h1>الانتقالات</h1>
 <?php if($this->clubs == false){ ?>
     <a href="<?php echo ADMIN_PATH ?>/new-club">Please add one CLUB at LEAST before adding new transfer</a>
 <?php }else{ ?>
     <form action="" method="post">
-	<input name="mov_pl" type="text" placeholder="Player name"/><br/>
-	<input name="mov_sal" type="number" placeholder="sallary"/><br/>
-	<input name="mov_date" class="ui-datepicker" type="text" placeholder="date"/><br/>
-	<br/>
-	Club:
+	<input name="mov_pl" type="text" placeholder="اسم اللاعب"/><br/>
+	<input name="mov_sal" type="number" placeholder="الراتب"/><br/>
+	
+	<div  class="datetimepicker">
+    <input class="add-on" data-format="yyyy/MM/dd hh:mm:ss" type="text" name="mov_date" placeholder="تاريخ الانتقال" >
+  </div>
+	
+	النادي:
 	<br/>
 	<select name="mov_club">
 	    <?php foreach($this->clubs as $cl){ ?>
@@ -17,7 +27,7 @@
 	</select>
 	<br/>
 	<br/>
-	<button>CREATE</button>
+	<button>إنشاء</button>
     </form>
 <?php } ?>
 <?php if($this->mov != false){ ?>
@@ -38,4 +48,6 @@
 	<br/>
     <?php } ?>
 <?php } ?>
+         </div></div></div>
+
 <?php require_once('include/footer.php') ?>

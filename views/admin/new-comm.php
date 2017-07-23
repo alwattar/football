@@ -1,13 +1,17 @@
 <?php require_once('include/header.php') ?>
-
-<p><h1>New commentor</h1></p>
+<div class="adminpanel">
+<?php require_once('include/sidebar.php') ?>
+<div class="mainbar">
+     <div class="mainbarcontainer">
+         <div class="row">
+             <h1>معلق جديد</h1>
 <?php if($this->channels == false){ ?>
     <a href="<?php echo ADMIN_PATH ?>/new-chan">Please add channel first</a>
 <?php }else{ ?>
     <form action="" method="post">
-	<input name="comm_name" type="text" placeholder="Commentor Name"/><br/>
-	<input name="comm_country" type="text" placeholder="Commentor lang"/><br/>
-	Commentor Channel
+	<input name="comm_name" type="text" placeholder="اسم المعلق"/><br/>
+	<input name="comm_country" type="text" placeholder="لغة التعليق"/><br/>
+	القناة 
 	<br/>	
 	<select name="comm_chan">
 	    <?php foreach($this->channels as $c){ ?>
@@ -16,10 +20,10 @@
 	</select>
 	<br/>
 	<br/>
-	<button>CREATE</button>
+	<button>إنشاء </button>
     </form>
     <?php if($this->commentors != false){ ?>
-	<p><h1>All Commentors</h1></p>
+	<h1>جميع المعلقين</h1>
 	<?php foreach($this->commentors as $com){ ?>
 	    ----------------
 	    <form action="" method="post">
@@ -44,5 +48,7 @@
 	<?php } ?>
     <?php } ?>
 <?php } ?>
+         </div></div></div>
+
 
 <?php require_once('include/footer.php') ?>

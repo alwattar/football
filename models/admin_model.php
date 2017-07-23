@@ -108,10 +108,16 @@ class Admin_Model extends Model{
     // get all Matches
     public function getMatches(){
         $matchs = $this->db
-                ->table('matches INNER JOIN channels ON channels.chan_id = matches.mat_chan')
+                ->table('matches INNER JOIN channels ON channels.chan_id ')
                 ->select('channels.*, matches.*');
         return $matchs;
     }
+    //public function getMatches(){
+    //    $matchs = $this->db
+    //            ->table('matches INNER JOIN channels ON channels.chan_id = matches.mat_chan')
+    //            ->select('channels.*, matches.*');
+    //    return $matchs;
+   // }
 
     // get all Clubs
     public function getClubs(){
@@ -205,7 +211,7 @@ class Admin_Model extends Model{
     // new Match
     public function newMatch($d){
         $cn_mat = $this->db->table('matches')
-             ->insert("(mat_name, mat_team1, mat_team2, mat_time, mat_chan, mat_comm, mat_champ, mat_address, mat_status, mat_note, mat_lang) VALUES(:mat_name, :mat_team1, :mat_team2, :mat_time, :mat_chan, :mat_comm, :mat_champ, :mat_address, :mat_status, :mat_note, :mat_lang)", $d);
+             ->insert("(mat_team1, mat_team2, mat_time, mat_champ, mat_address, mat_note) VALUES(:mat_team1, :mat_team2, :mat_time, :mat_champ, :mat_address, :mat_note)", $d);
 
         return $cn_mat;
     }

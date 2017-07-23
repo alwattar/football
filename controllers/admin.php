@@ -379,21 +379,11 @@ class Admin extends Controller{
                 if(isset($_POST['champ_name']) &&
                    isset($_POST['champ_logo']) &&
                    isset($_POST['champ_date']) &&
-                   isset($_POST['champ_h']) &&
-                   isset($_POST['champ_m']) &&
                    isset($_POST['champ_loc'])){
 
-                    $h = $this->protect($_POST['champ_h']);
-                    $m = $this->protect($_POST['champ_m']);
-                    $d = $this->protect($_POST['champ_date']);
-                    $d = explode('/', $d);
-                
-                    $champ_date = $d[2] . '-' . $d[0] . '-' . $d[1] . " $h:$m:00";
-                
-                
                     $n_champ = [
                         "champ_name" => $this->protect($_POST['champ_name']),
-                        "champ_date" => $champ_date,
+                        "champ_date" => $this->protect($_POST['champ_date']),
                         "champ_loc" => $this->protect($_POST['champ_loc']),
                         "champ_logo" => $this->protect($_POST['champ_logo']),
                     ];
@@ -495,40 +485,23 @@ class Admin extends Controller{
                     $this->redirect(ADMIN_PATH . '/new-match');
                 }
             }else{
-                if(isset($_POST['mat_name']) &&
-                   isset($_POST['mat_team2']) &&
-                   isset($_POST['mat_team2']) &&
-                   isset($_POST['mat_time']) &&
-                   isset($_POST['mat_h']) &&
-                   isset($_POST['mat_m']) &&
-                   isset($_POST['mat_chan']) &&
-                   isset($_POST['mat_comm']) &&
+                if(isset($_POST['mat_team1'])   &&
+                   isset($_POST['mat_team2'])   &&
+                   isset($_POST['mat_time'])    &&
+                   isset($_POST['mat_champ'])   &&
                    isset($_POST['mat_address']) &&
-                   isset($_POST['mat_note']) &&
-                   isset($_POST['mat_status']) &&
-                   isset($_POST['mat_lang']) &&
-                   isset($_POST['mat_champ'])){
+                   isset($_POST['mat_note'])    
+                    ){
 
-                    $h = $this->protect($_POST['mat_h']);
-                    $m = $this->protect($_POST['mat_m']);
-                    $d = $this->protect($_POST['mat_time']);
-                    $d = explode('/', $d);
-                
-                    $mat_time = $d[2] . '-' . $d[0] . '-' . $d[1] . " $h:$m:00";
-                
-                
                     $n_mat = [
-                        "mat_name" => $this->protect($_POST['mat_name']),
                         "mat_team1" => $this->protect($_POST['mat_team1']),
                         "mat_team2" => $this->protect($_POST['mat_team2']),
-                        "mat_time" => $mat_time,
-                        "mat_chan" => intval($this->protect($_POST['mat_chan'])),
-                        "mat_comm" => intval($this->protect($_POST['mat_comm'])),
+                        "mat_time" => $this->protect($_POST['mat_time']),
                         "mat_champ" => intval($this->protect($_POST['mat_champ'])),
-                        "mat_status" => intval($this->protect($_POST['mat_status'])),
                         "mat_address" => $this->protect($_POST['mat_address']),
-                        "mat_note" => $this->protect($_POST['mat_note']),
-                        "mat_lang" => $this->protect($_POST['mat_lang']),
+                        "mat_note" => $this->protect($_POST['mat_note'])
+                        
+                        
                     ];
 
                     $create_new_mat = $this->model->newMatch($n_mat);
@@ -740,15 +713,11 @@ class Admin extends Controller{
                    isset($_POST['mov_club']) &&
                    isset($_POST['mov_date'])){
                 
-                    $d = $this->protect($_POST['mov_date']);
-                    $d = explode('/', $d);
-                    $mov_date = $d[2] . '-' . $d[0] . '-' . $d[1] . " 00:00:00";
-                
                     $nc_transfer = [
                         "mov_pl" => $this->protect($_POST['mov_pl']),
                         "mov_sal" => intval($this->protect($_POST['mov_sal'])),
                         "mov_club" => intval($this->protect($_POST['mov_club'])),
-                        "mov_date" => $mov_date,
+                        "mov_date" => $this->protect($_POST['mov_date'])
                     ];
 
                     $create_new_transfer = $this->model->newTransfer($nc_transfer);

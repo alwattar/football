@@ -1,16 +1,22 @@
 <?php require_once('include/header.php') ?>
-<p><h1>New Player</h1></p>
+<div class="adminpanel">
+<?php require_once('include/sidebar.php') ?>
+<div class="mainbar">
+     <div class="mainbarcontainer">
+         <div class="row">
+             
+             <h1>لاعب جديد</h1>
 <?php if($this->clubs == false){ ?>
     <a href="<?php echo ADMIN_PATH ?>/new-club">Please add one CLUB at LEAST before adding new Player</a>
 <?php }else{ ?>
     <form action="" method="post">
-	<input name="pl_name" type="text" placeholder="Player name"/><br/>
-	<input name="pl_nat" type="text" placeholder="player nat"/><br/>
+	<input name="pl_name" type="text" placeholder="اسم اللاعب"/><br/>
+	<input name="pl_nat" type="text" placeholder="جنسية اللاعب"/><br/>
 	<input name="pl_leng" type="number" placeholder="player length"/><br/>
-	<input name="pl_chanum" type="number" placeholder="player champs number"/><br/>
-	<input name="pl_goals" type="number" placeholder="player goals number"/><br/>
+	<input name="pl_chanum" type="number" placeholder="عدد البطولات"/><br/>
+	<input name="pl_goals" type="number" placeholder="عدد الاهداف المحققة"/><br/>
 	<br/>
-	Club:
+	النادي:
 	<br/>
 	<select name="pl_curclub">
 	    <?php foreach($this->clubs as $cl){ ?>
@@ -45,4 +51,6 @@
 	<br/>
     <?php  } ?>
 <?php  } ?>
+         </div></div></div>
+
 <?php require_once('include/footer.php') ?>
