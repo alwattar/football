@@ -108,8 +108,8 @@ class Admin_Model extends Model{
     // get all Matches
     public function getMatches(){
         $matchs = $this->db
-                ->table('matches INNER JOIN channels ON channels.chan_id ')
-                ->select('channels.*, matches.*');
+                ->table('matches')
+                ->select('*');
         return $matchs;
     }
     //public function getMatches(){
