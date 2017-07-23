@@ -34,6 +34,7 @@ require_once("./libs/Route.php");
 
 // index controller
 $r->addRoute("/index","index@index");
+$r->addRoute("/get-match","index@getMatchOfDay");
 
 $r->addRoute(ADMIN_R ,"admin@index");  // done
 $r->addRoute(ADMIN_R . '/login' ,"admin@login");  // done
@@ -47,7 +48,6 @@ $r->addRoute(ADMIN_R . '/new-url' ,"admin@newUrl");  // done
 $r->addRoute(ADMIN_R . '/new-player' ,"admin@newPlayer");  // done
 $r->addRoute(ADMIN_R . '/new-transfer' ,"admin@newTransfer");  // done
 $r->addRoute(ADMIN_R . '/logout' ,"admin@logout");
-$r->addRoute("/get-match","index@getMatchOfDay");
 
 if(isset($_GET['route'])){
     $route = "/" . rtrim($_GET['route'],"/");

@@ -12,5 +12,9 @@ class Index extends Controller{
         $this->view->view("index");
     }
 
+    public function getMatchOfDay(){
+        $this->model->getMatchOfDay();
+    }
+
 }
 ?>
