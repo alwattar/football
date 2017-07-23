@@ -452,9 +452,9 @@ class Controller {
         }
 
         $db = new DB();
-        echo var_dump($db);
+        // echo var_dump($db);
         $team = $db->table($table)->at("where " . $p . "_id = " . $id)->select("*");
-        echo var_dump($team);
+        // echo var_dump($team);
         if($team != false)
             return $data = ["team" => (array) $team[0], 'p' => $p];
         else

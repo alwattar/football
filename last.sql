@@ -81,8 +81,8 @@ CREATE TABLE `commentor` (
 
 CREATE TABLE `matches` (
   `mat_id` int(255) NOT NULL,
-  `mat_team1` varchar(255) NOT NULL,
-  `mat_team2` varchar(255) NOT NULL,
+  `mat_team1` varchar(3) NOT NULL,
+  `mat_team2` varchar(3) NOT NULL,
   `mat_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `mat_champ` int(255) NOT NULL,
   `mat_address` varchar(255) NOT NULL,

@@ -26,15 +26,40 @@ class Index extends Controller{
             }
 
             $matches = $this->model->getMatchOfDay();
-            if($matches != false)
+            if($matches != false){
                 $final_matches = $this->getMatchesByDay($matches, $m_time);
+                $final_matches = $this->procMatches($final_matches);
+                // echo var_dump($final_matches);
+            }
             else
                 $final_matches = [];
+
             echo json_encode($final_matches);
         }
 
     }
 
+
+    // proxess matches
+    public function procMatches($matches){
+        $final_matches = [];
+        foreach($matches as $m){
+            $team1 = $this->getTeam($m->mat_team1);
+            $team2 = $this->getTeam($m->mat_team2);
+            $team1_name = $team1['team'][$team1['p'] . '_name'];
+            $team1_logo = $team1['team'][$team1['p'] . '_logo'];
+            $team2_name = $team2['team'][$team2['p'] . '_name'];
+            $team2_logo = $team2['team'][$team2['p'] . '_logo'];
+            $m->team1_name = $team1_name;
+            $m->team1_logo = $team1_logo;
+            $m->team2_name = $team2_name;
+            $m->team2_logo = $team2_logo;
+
+            $final_matches[] = $m;
+        }
+
+        return $final_matches;
+    }
 
     // get matchs by day
     public function getMatchesByDay($matches, $m_time = false){

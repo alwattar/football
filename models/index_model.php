@@ -12,5 +12,6 @@ class Index_Model extends Model{
                  ->select("channels.*, matches.*, commentor.*, champs.*, urls.*");
         return $matches;
     }
+    
 }
 ?>
