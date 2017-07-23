@@ -60,13 +60,13 @@ try{
 }
 
 // matches-to-be-adde
-$.get('/get-match?day=today', function(data){
+$.get(window.baseUrl + '/get-match?day=today', function(data){
     $('.matches-to-be-added').html('');
     $('.matches-to-be-added').append(data);
 });
 $('.get-matches-day').click(function(){
     var theDay = $(this).data('day');
-    $.get('/get-match?day=' + theDay, function(data){
+    $.get(window.baseUrl + '/get-match?day=' + theDay, function(data){
 	$('.matches-to-be-added').html('');
 	$('.matches-to-be-added').append(data);
     });
