@@ -30,11 +30,13 @@ class Index extends Controller{
                 $final_matches = $this->getMatchesByDay($matches, $m_time);
                 $final_matches = $this->procMatches($final_matches);
                 // echo var_dump($final_matches);
+                $this->view->matches = $final_matches;
+                $this->view->view('match-block');
             }
             else
                 $final_matches = [];
 
-            echo json_encode($final_matches);
+            // echo json_encode($final_matches);
         }
 
     }

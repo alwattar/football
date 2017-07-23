@@ -1,3 +1,4 @@
+window.baseUrl = '/football';
 //----START--------ANIMATE ON SCROLL----------------//
 wow = new WOW({animateClass: 'animated',
               offset: 100});
@@ -50,17 +51,23 @@ function finderPopup(inputId) {
 }
 
 try{
-    
-               
-         
- 
     $('.datetimepicker').datetimepicker({
       locale: 'ru'
     });
 
-
-     
-    
 }catch(err){
     console.log(err);
 }
+
+// matches-to-be-adde
+$.get(window.baseUrl + '/get-match?day=today', function(data){
+    $('.matches-to-be-added').html('');
+    $('.matches-to-be-added').append(data);
+});
+$('.get-matches-day').click(function(){
+    var theDay = $(this).data('day');
+    $.get(window.baseUrl + '/get-match?day=' + theDay, function(data){
+	$('.matches-to-be-added').html('');
+	$('.matches-to-be-added').append(data);
+    });
+});
