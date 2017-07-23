@@ -14,6 +14,10 @@ class Admin extends Controller{
             $this->view->view("admin/admin_index");
         }
     }
+    
+    public function getMatchOfDay(){
+        
+    }
 
     // create new channel
     public function newChan(){
@@ -617,11 +621,13 @@ class Admin extends Controller{
             }else{
                 if(isset($_POST['url_href']) &&
                    isset($_POST['url_channel']) &&
+                   isset($_POST['url_comm']) &&
                    isset($_POST['url_game'])){
                     
                     $n_url = [
                         "url_href" => $this->protect($_POST['url_href']),
                         "url_channel" => intval($this->protect($_POST['url_channel'])),
+                        "url_comm" => intval($this->protect($_POST['url_comm'])),
                         "url_game" => intval($this->protect($_POST['url_game'])),
                     ];
 

@@ -47,6 +47,7 @@ $r->addRoute(ADMIN_R . '/new-url' ,"admin@newUrl");  // done
 $r->addRoute(ADMIN_R . '/new-player' ,"admin@newPlayer");  // done
 $r->addRoute(ADMIN_R . '/new-transfer' ,"admin@newTransfer");  // done
 $r->addRoute(ADMIN_R . '/logout' ,"admin@logout");
+$r->addRoute("/get-match","index@getMatchOfDay");
 
 if(isset($_GET['route'])){
     $route = "/" . rtrim($_GET['route'],"/");

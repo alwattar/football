@@ -29,6 +29,11 @@
 	    <?php } ?>
 	</select>
 	<br/>
+	<select name="url_comm">
+	    <?php foreach($this->comm as $com){ ?>
+		<option value="<?php echo $com->comm_id ?>"><?php echo $ch->comm_name ?></option>
+	    <?php } ?>
+	</select>
 	<br/>
 	<button>CREATE</button>
     </form>

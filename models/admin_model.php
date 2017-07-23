@@ -220,7 +220,7 @@ class Admin_Model extends Model{
     // new URL
     public function newUrl($d){
         $cn_url = $this->db->table('urls')
-             ->insert("(url_href, url_channel, url_game) values(:url_href, :url_channel, :url_game)", $d);
+             ->insert("(url_href, url_channel, url_comm, url_game) values(:url_href, :url_channel, :url_comm, :url_game)", $d);
 
         return $cn_url;
     }
