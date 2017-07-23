@@ -607,6 +607,7 @@ class Admin extends Controller{
             $this->view->channels = $this->model->getChannels();
             $this->view->matches = $this->model->getMatches();
             $this->view->urls = $this->model->getUrls();
+            $this->view->comm = $this->model->getCommentors();
             if(isset($_GET['do'])){
                 if(isset($_GET['id'])){
                     $id = intval($_GET['id']);
