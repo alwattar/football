@@ -121,5 +121,14 @@ class Index extends Controller{
         return $match_object;
     }
 
+
+    // change url streaming
+    public function changeUrlStreaming(){
+        if(isset($_GET['s_url'])){
+            $this->view->s_url = $this->protect($_GET['s_url']);
+            $this->view->view('change-url');
+        }
+    }
+
 }
 ?>

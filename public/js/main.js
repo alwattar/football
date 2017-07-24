@@ -1,7 +1,7 @@
 window.baseUrl = '/football';
 //----START--------ANIMATE ON SCROLL----------------//
 wow = new WOW({animateClass: 'animated',
-              offset: 100});
+               offset: 100});
 wow.init();
 //----END----------ANIMATE ON SCROLL------------//
 //----START----Smooth Scroll TO DIV -------------//
@@ -52,37 +52,53 @@ function finderPopup(inputId) {
 
 try{
     $('.datetimepicker').datetimepicker({
-      locale: 'ru'
+	locale: 'ru'
     });
 
 }catch(err){
     console.log(err);
 }
 
-// matches-to-be-adde
-$.get(window.baseUrl + '/get-match?day=today', function(data){
-    $('.matches-to-be-added').html('');
-    $('.matches-to-be-added').append(data);
-    var index_active = document.getElementsByClassName('index-active')[1].classList.add("active");
-});
-$('.get-matches-day').click(function(){
-    var theDay = $(this).data('day');
-    var tabs = document.getElementsByClassName('index-active');
-    if(theDay == 'today'){
-	tabs[0].classList.remove("active");
-	tabs[1].classList.add("active");
-	tabs[2].classList.remove("active");
-    }else if(theDay == 'yesterday'){
-	tabs[0].classList.remove("active");
-	tabs[1].classList.remove("active");
-	tabs[2].classList.add("active");
-    }else{
-	tabs[0].classList.add("active");
-	tabs[1].classList.remove("active");
-	tabs[2].classList.remove("active");
-    }
-    $.get(window.baseUrl + '/get-match?day=' + theDay, function(data){
+try{
+    // matches-to-be-adde
+    $.get(window.baseUrl + '/get-match?day=today', function(data){
 	$('.matches-to-be-added').html('');
 	$('.matches-to-be-added').append(data);
+	var index_active = document.getElementsByClassName('index-active')[1].classList.add("active");
     });
-});
+    $('.get-matches-day').click(function(){
+	var theDay = $(this).data('day');
+	var tabs = document.getElementsByClassName('index-active');
+	if(theDay == 'today'){
+	    tabs[0].classList.remove("active");
+	    tabs[1].classList.add("active");
+	    tabs[2].classList.remove("active");
+	}else if(theDay == 'yesterday'){
+	    tabs[0].classList.remove("active");
+	    tabs[1].classList.remove("active");
+	    tabs[2].classList.add("active");
+	}else{
+	    tabs[0].classList.add("active");
+	    tabs[1].classList.remove("active");
+	    tabs[2].classList.remove("active");
+	}
+	$.get(window.baseUrl + '/get-match?day=' + theDay, function(data){
+	    $('.matches-to-be-added').html('');
+	    $('.matches-to-be-added').append(data);
+	});
+    });
+}catch(err){
+    console.log(err);
+}
+
+
+try{
+    $('.change-s-url').on('click', function(){
+	$.get(window.baseUrl + '/get-match-url?s_url=' + $(this).data('surl'), function(data){
+	    $('#ref-player').html(data);
+	    console.log(data);
+	});
+    });
+}catch(err){
+    console.log(err);
+}
