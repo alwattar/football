@@ -63,9 +63,24 @@ try{
 $.get(window.baseUrl + '/get-match?day=today', function(data){
     $('.matches-to-be-added').html('');
     $('.matches-to-be-added').append(data);
+    var index_active = document.getElementsByClassName('index-active')[1].classList.add("active");
 });
 $('.get-matches-day').click(function(){
     var theDay = $(this).data('day');
+    var tabs = document.getElementsByClassName('index-active');
+    if(theDay == 'today'){
+	tabs[0].classList.remove("active");
+	tabs[1].classList.add("active");
+	tabs[2].classList.remove("active");
+    }else if(theDay == 'yesterday'){
+	tabs[0].classList.remove("active");
+	tabs[1].classList.remove("active");
+	tabs[2].classList.add("active");
+    }else{
+	tabs[0].classList.add("active");
+	tabs[1].classList.remove("active");
+	tabs[2].classList.remove("active");
+    }
     $.get(window.baseUrl + '/get-match?day=' + theDay, function(data){
 	$('.matches-to-be-added').html('');
 	$('.matches-to-be-added').append(data);

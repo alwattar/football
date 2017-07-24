@@ -85,9 +85,9 @@
 	<div class="cont-body">
 	    <div class="row">
 	        <ul>
-	            <a><li><span data-day="tomorrow" class="get-matches-day">Tomorrow Matches</span></li></a>
-	            <a class="active"><li><span data-day="today" class="get-matches-day">Today's Matches</span></li></a>
-	            <a><li><span data-day="yesterday" class="get-matches-day">Yesterday Matches</span></li></a>
+	            <a class="index-active"><li><span data-day="tomorrow" class="get-matches-day">Tomorrow Matches</span></li></a>
+	            <a class="index-active"><li><span data-day="today" class="get-matches-day">Today's Matches</span></li></a>
+	            <a class="index-active"><li><span data-day="yesterday" class="get-matches-day">Yesterday Matches</span></li></a>
 	        </ul>
 		<!-- matches's place -->
 		<div class="matches-to-be-added">
