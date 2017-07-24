@@ -1,8 +1,13 @@
 <?php include_once('header.php') ?>
-<!-- ++++++++++++++++++++++++++++    m * s       m * s -->
-<?php if(($this->match->mat_time +  intval((60 * 60) + (15 * 60))) <= time()){ ?>
+<?php if(time() > strtotime($this->match->mat_time) + (140 * 60)){ ?>
     Matche Finished !!
+<?php }else if(time() < strtotime($this->match->mat_time)){ ?>
+    Not started yet
 <?php }else{ ?>
+    <br/>
+    <br/>
+    --------
+    <br/>
     CHAN_ID : <?php echo $this->match->mat_id ?> <br/>
     chan_NAME : <?php echo $this->match->chan_name ?> <br/>
     CHAN_LOGO : <?php echo $this->match->chan_logo ?> <br/>
