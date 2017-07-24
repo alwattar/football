@@ -37,6 +37,10 @@
 			    </li>
 			</a>
 		    </ul>
+
+		    <center>
+			<a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3>show match</h3></a>
+		    </center>
 		</div>
 	    </div>
 	<?php } ?>

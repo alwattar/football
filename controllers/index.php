@@ -83,5 +83,43 @@ class Index extends Controller{
         }
     }
 
+
+    // get match by id
+    public function showMatch(){
+        if(isset($_GET['id'])){
+            $id = intval($_GET['id']);
+            $match = $this->model->getMatchById($id);
+            if($match != false){
+                // to get teams info 
+                $match = $this->procMatches($match);
+                $match = $match[0];
+                $match = $this->getStreamingUrlsOfMatch($match);
+                $this->view->match = $match;
+                $this->view->view('show-match');
+            }else{
+                echo "Match not found Template<br/>";
+                $this->view->view('404');
+            }
+        }
+    }
+
+
+    // get all streaming urls
+    public function getStreamingUrlsOfMatch($match_object){
+        $urls = $this->model->getUrlsStreaming($match_object->mat_id);
+        $match_object->urls_streaming = (object) [];
+        foreach($urls as $k => $v){
+            $match_object->urls_streaming->$k = $v;
+        }
+        // echo '<pre>';
+        // // echo var_dump($match_object);
+        // print_r($match_object);
+        // echo "<br/>";
+        // echo "<br/>";
+        // echo "<br/>";
+
+        return $match_object;
+    }
+
 }
 ?>

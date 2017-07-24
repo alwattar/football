@@ -34,6 +34,7 @@ require_once("./libs/Route.php");
 
 // index controller
 $r->addRoute("/index","index@index");
+$r->addRoute("/index/show-match","index@showMatch");
 $r->addRoute("/get-match","index@getMatchOfDay");
 
 $r->addRoute(ADMIN_R ,"admin@index");  // done
