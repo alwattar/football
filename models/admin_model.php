@@ -81,9 +81,9 @@ class Admin_Model extends Model{
     // get match by id
     public function getMatchById($id){
         $nft = $this->db
-             ->table('matches INNER JOIN channels ON channels.chan_id = matches.mat_chan INNER JOIN commentor ON commentor.comm_id = matches.mat_comm INNER JOIN champs ON champs.champ_id = matches.mat_champ')
+             ->table('matches INNER JOIN champs ON champs.champ_id = matches.mat_champ')
              ->at("where mat_id = $id")
-             ->select('channels.*, matches.*, commentor.*, champs.*');
+             ->select('matches.*, champs.*');
         return $nft;
     }
 
@@ -307,8 +307,8 @@ class Admin_Model extends Model{
         $ematch = $this->db
                 ->table('matches')
                 ->at("where mat_id = :mat_id")
-                ->update(" mat_team1 = :mat_team1, mat_team2 = :mat_team2, mat_time = :mat_time, mat_chan = :mat_chan, mat_comm = :mat_comm, mat_champ = :mat_champ, mat_team1_goal = :mat_team1_goal, mat_team2_goal = :mat_team2_goal,
-                mat_summ = :mat_summ, mat_goals = :mat_goals , mat_status = :mat_status, mat_address = :mat_address, mat_note = :mat_note, mat_lang = :mat_lang", $d);
+                ->update(" mat_team1 = :mat_team1, mat_team2 = :mat_team2, mat_time = :mat_time, mat_champ = :mat_champ, mat_team1_goal = :mat_team1_goal, mat_team2_goal = :mat_team2_goal,
+                mat_summ = :mat_summ, mat_goals = :mat_goals , mat_address = :mat_address, mat_note = :mat_note, mat_lang = :mat_lang", $d);
 
         return $ematch;
     }

@@ -12,7 +12,7 @@
 			</div>
 			<div class="col-sm-2">
 			    
-			    <h4><?php echo date('h:m A', strtotime($m->mat_time)); ?></h4>
+			    <h4><?php echo date('h:i A', strtotime($m->mat_time)); ?></h4>
 			</div>
 			<div class="col-sm-5">
 			    <div>
@@ -44,7 +44,7 @@
 		    <center>
 			<?php if(time() > strtotime($m->mat_time) + (110 * 60)){ ?>
 			    <a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3>انتهت المباراة</h3></a>
-			<?php }else if(time() > strtotime($m->mat_time)){ ?>
+			<?php }else if(time() < strtotime($m->mat_time)){ ?>
 			    <a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3>لم تبدأ المباراة بعد</h3></a>
 			<?php }else{ ?>
 			    <a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3>شاهد الأن</h3></a>

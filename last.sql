@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2017 at 10:37 AM
+-- Generation Time: Jul 25, 2017 at 04:37 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -82,11 +82,15 @@ CREATE TABLE `commentor` (
 CREATE TABLE `matches` (
   `mat_id` int(255) NOT NULL,
   `mat_team1` varchar(3) NOT NULL,
+  `mat_team1_goal` int(255) NOT NULL DEFAULT '0',
   `mat_team2` varchar(3) NOT NULL,
+  `mat_team2_goal` int(255) NOT NULL DEFAULT '0',
   `mat_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `mat_champ` int(255) NOT NULL,
   `mat_address` varchar(255) NOT NULL,
   `mat_note` varchar(255) NOT NULL,
+  `mat_summ` varchar(255) NOT NULL,
+  `mat_goals` varchar(255) NOT NULL,
   `mat_status` enum('0','1','2') NOT NULL DEFAULT '0',
   `mat_lang` varchar(255) NOT NULL DEFAULT 'ar'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -143,6 +147,7 @@ CREATE TABLE `transfer` (
 
 CREATE TABLE `urls` (
   `url_id` int(255) NOT NULL,
+  `url_name` varchar(255) NOT NULL,
   `url_href` varchar(255) NOT NULL,
   `url_channel` int(255) NOT NULL,
   `url_comm` int(255) NOT NULL,

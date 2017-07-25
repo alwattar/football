@@ -555,11 +555,8 @@ class Admin extends Controller{
                isset($_POST['mat_team1']) &&
                isset($_POST['mat_team2']) &&
                isset($_POST['mat_time']) &&
-               isset($_POST['mat_chan']) &&
-               isset($_POST['mat_comm']) &&
                isset($_POST['mat_address']) &&
                isset($_POST['mat_note']) &&
-               isset($_POST['mat_status']) &&
                isset($_POST['mat_lang']) &&
                isset($_POST['mat_team1_goal']) &&
                isset($_POST['mat_team2_goal']) &&
@@ -572,11 +569,8 @@ class Admin extends Controller{
                     "mat_team1" => $this->protect($_POST['mat_team1']),
                     "mat_team2" => $this->protect($_POST['mat_team2']),
                     "mat_time" => $this->protect($_POST['mat_time']),
-                    "mat_chan" => intval($this->protect($_POST['mat_chan'])),
-                    "mat_comm" => intval($this->protect($_POST['mat_comm'])),
                     "mat_address" => $this->protect($_POST['mat_address']),
                     "mat_note" => $this->protect($_POST['mat_note']),
-                    "mat_status" => intval($this->protect($_POST['mat_status'])),
                     "mat_lang" => $this->protect($_POST['mat_lang']),
                     "mat_team1_goal" => $this->protect($_POST['mat_team1_goal']),
                     "mat_team2_goal" => $this->protect($_POST['mat_team2_goal']),

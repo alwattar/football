@@ -1,7 +1,7 @@
 <?php include_once('header.php') ?>
 <?php if(time() > strtotime($this->match->mat_time) + (110 * 60)){ ?>
     Matche Finished !!
-<?php }else if(time() > strtotime($this->match->mat_time)){ ?>
+<?php }else if(time() < strtotime($this->match->mat_time)){ ?>
     Not started yet
 <?php }else{ ?>
     <div class="whole-site">
