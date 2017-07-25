@@ -41,10 +41,15 @@
 			    </li>
 			</a>
 		    </ul>
-
-		    
-			<a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3>شاهد الأن</h3></a>
-		   
+		    <center>
+			<?php if(time() > strtotime($m->mat_time) + (110 * 60)){ ?>
+			    <a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3>انتهت المباراة</h3></a>
+			<?php }else if(time() > strtotime($m->mat_time)){ ?>
+			    <a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3>لم تبدأ المباراة بعد</h3></a>
+			<?php }else{ ?>
+			    <a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3>شاهد الأن</h3></a>
+			<?php } ?>
+		    </center>
 		</div>
 	    </div>
 	<?php } ?>
