@@ -221,7 +221,7 @@ class Admin_Model extends Model{
     // new URL
     public function newUrl($d){
         $cn_url = $this->db->table('urls')
-             ->insert("(url_href, url_channel, url_comm, url_game) values(:url_href, :url_channel, :url_comm, :url_game)", $d);
+             ->insert("(url_name, url_href, url_channel, url_comm, url_game) values(:url_name, :url_href, :url_channel, :url_comm, :url_game)", $d);
 
         return $cn_url;
     }
@@ -307,7 +307,8 @@ class Admin_Model extends Model{
         $ematch = $this->db
                 ->table('matches')
                 ->at("where mat_id = :mat_id")
-                ->update("mat_name = :mat_name, mat_team1 = :mat_team1, mat_team2 = :mat_team2, mat_time = :mat_time, mat_chan = :mat_chan, mat_comm = :mat_comm, mat_champ = :mat_champ, mat_status = :mat_status, mat_address = :mat_address, mat_note = :mat_note, mat_lang = :mat_lang", $d);
+                ->update(" mat_team1 = :mat_team1, mat_team2 = :mat_team2, mat_time = :mat_time, mat_chan = :mat_chan, mat_comm = :mat_comm, mat_champ = :mat_champ, mat_team1_goal = :mat_team1_goal, mat_team2_goal = :mat_team2_goal,
+                mat_summ = :mat_summ, mat_goals = :mat_goals , mat_status = :mat_status, mat_address = :mat_address, mat_note = :mat_note, mat_lang = :mat_lang", $d);
 
         return $ematch;
     }

@@ -1,8 +1,14 @@
 <?php require_once('include/header.php') ?>
-<p><h1>EDIT MATCH</h1></p>
+<div class="adminpanel">
+<?php require_once('include/sidebar.php') ?>
+<div class="mainbar">
+	<div class="mainbarcontainer">
+            <div class="row">
+            
+            <h1>EDIT MATCH</h1>
 <form action="" method="post">
     <input name="mat_id" type="hidden" value="<?php echo $this->mat->mat_id ?>"/> <br/>
-    <input name="mat_name" type="text" placeholder="match name" value="<?php echo $this->mat->mat_name ?>"/> <br/>
+    
     Match status
     <select name="mat_status">
 	<option value="<?php echo $this->mat->mat_status ?>"><?php echo $this->matStatus($this->mat->mat_status) ?></option>
@@ -11,27 +17,10 @@
 	<option value="2">Finished</option>
     </select>
     <br/>
-    <?php
-    $timeInfo = $this->timeInfo($this->mat->mat_time);
-    $date = $timeInfo['date'];
-    $h = $timeInfo['h'];
-    $m = $timeInfo['m'];
-    ?>
-    <input name="mat_time" class="ui-datepicker" type="text" placeholder="mat date" value="<?php echo $date ?>"/> at hour
-    <select name="mat_h">
-	<option value="<?php echo $h ?>"><?php echo $h ?></option>
-	<?php for($i = 1;  $i <= 23; $i++){?>
-	    <option value="<?php echo str_pad($i, 2, '0', STR_PAD_LEFT) ?>"><?php echo str_pad($i, 2, '0', STR_PAD_LEFT) ?></option>
-	<?php } ?>
-    </select>
-    and
-    <select name="mat_m">
-	<option value="<?php echo $m ?>"><?php echo $m ?></option>
-	<?php for($i = 0;  $i < 60; $i++){?>
-	    <option value="<?php echo str_pad($i, 2, '0', STR_PAD_LEFT) ?>"><?php echo str_pad($i, 2, '0', STR_PAD_LEFT) ?></option>
-	<?php } ?>
-    </select>
-    minutes <br/>
+    <div  class="datetimepicker">
+			    <input class="add-on" data-format="yyyy/MM/dd hh:mm:ss" type="text" name="mat_time"  value="<?php echo $team->time ?>" >
+    </div>
+    
     <br/>
     <select name="mat_team1">
 	<?php foreach($this->teams as $team){ $team = (object) $team; ?>
@@ -72,7 +61,17 @@
 	<?php } ?>
     </select>
     <br/>
+    <input name="mat_team1_goal" value="<?php echo $this->mat->mat_team1_goal ?>" type="text" placeholder="نتائج الفريق الأول"/> 
+    <br/>
+    <input name="mat_team2_goal" value="<?php echo $this->mat->mat_team2_goal ?>" type="text" placeholder="نتائج الفريق الثاني"/> 
+    <br/>
+    <input name="mat_summ" value="<?php echo $this->mat->mat_summ ?>" type="text" placeholder="ملخص المباراة"/> 
+    <br/>
+    <input name="mat_goals" value="<?php echo $this->mat->mat_goals ?>" type="text" placeholder="ملخص الأهداف"/> 
     <br/>
     <button>SAVE</button>
 </form>
+            
+        </div></div></div>
+
 <?php require_once('include/footer.php') ?>

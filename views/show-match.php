@@ -126,15 +126,7 @@
      <?php echo $errMsg ?>
      </div>
      <?php } ?>
-     <script>
-     var player = jwplayer('player').setup({
-     width: "400",
-     height: "280",
-     autostart: true,
-     file: "https://live76.vkuserlive.com/620010/live/CteWO8xAf9A/playlist.m3u8"
      
-     });
-     </script> 
      </div>
      </div>
 <?php include_once('footer.php') ?>

@@ -49,6 +49,14 @@
 			<br/>
 			Match status: <?php echo $this->matStatus($mat->mat_status) ?>
 			<br/>
+			TEAM1 Goals: <?php echo $mat->mat_team1_goal ?>
+			<br/>
+			TEAM2 Goals: <?php echo $mat->mat_team1_goal ?>
+			<br/>
+			mat_summ: <?php echo $mat->mat_summ ?>
+			<br/>
+			mat_goals: <?php echo $mat->mat_goals ?>
+			<br/>
 			<a href="<?php echo ADMIN_PATH ?>/new-match&do=edit&id=<?php echo $mat->mat_id ?>">Edit</a> |
 			<a href="<?php echo ADMIN_PATH ?>/new-match&do=delete&id=<?php echo $mat->mat_id ?>">DELETE</a>
 			<br/>

@@ -10,6 +10,7 @@
     <a href="<?php echo ADMIN_PATH ?>/new-match">Please add one MATCH at LEAST before adding new URL</a>
 <?php }else{ ?>
     <form action="" method="post">
+    <input name="url_name" type="text" placeholder="URL NAME"/><br/>
 	<input name="url_href" type="text" placeholder="URL href"/><br/>
 	<br/>
 	URL channel:
@@ -46,6 +47,8 @@
     
     <?php foreach($this->urls as $url){ ?>
 	Url #ID : <?php echo $url->url_id ?>
+	<br/>
+	Url NAME : <?php echo $url->url_name ?>
 	<br/>
 	Url Href : <?php echo $url->url_href ?>
 	<br/>

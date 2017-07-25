@@ -551,41 +551,38 @@ class Admin extends Controller{
     public function editMatch($id){
         $mat = $this->model->getMatchById($id);
         if($mat !== false){
-            if(isset($_POST['mat_name']) &&
-               isset($_POST['mat_team2']) &&
+            if(isset($_POST['mat_id']) &&
+               isset($_POST['mat_team1']) &&
                isset($_POST['mat_team2']) &&
                isset($_POST['mat_time']) &&
-               isset($_POST['mat_h']) &&
-               isset($_POST['mat_m']) &&
                isset($_POST['mat_chan']) &&
                isset($_POST['mat_comm']) &&
                isset($_POST['mat_address']) &&
                isset($_POST['mat_note']) &&
                isset($_POST['mat_status']) &&
                isset($_POST['mat_lang']) &&
+               isset($_POST['mat_team1_goal']) &&
+               isset($_POST['mat_team2_goal']) &&
+               isset($_POST['mat_summ']) &&
+               isset($_POST['mat_goals']) &&
                isset($_POST['mat_champ'])){
-
-                $h = $this->protect($_POST['mat_h']);
-                $m = $this->protect($_POST['mat_m']);
-                $d = $this->protect($_POST['mat_time']);
-                $d = explode('/', $d);
-                
-                $mat_time = $d[2] . '-' . $d[0] . '-' . $d[1] . " $h:$m:00";
-                
                 
                 $e_mat = [
-                    "mat_name" => $this->protect($_POST['mat_name']),
+                    "mat_id" => intval($this->protect($_POST['mat_id'])),
                     "mat_team1" => $this->protect($_POST['mat_team1']),
                     "mat_team2" => $this->protect($_POST['mat_team2']),
-                    "mat_time" => $mat_time,
+                    "mat_time" => $this->protect($_POST['mat_time']),
                     "mat_chan" => intval($this->protect($_POST['mat_chan'])),
-                    "mat_id" => intval($this->protect($_POST['mat_id'])),
                     "mat_comm" => intval($this->protect($_POST['mat_comm'])),
-                    "mat_champ" => intval($this->protect($_POST['mat_champ'])),
-                    "mat_status" => intval($this->protect($_POST['mat_status'])),
                     "mat_address" => $this->protect($_POST['mat_address']),
                     "mat_note" => $this->protect($_POST['mat_note']),
+                    "mat_status" => intval($this->protect($_POST['mat_status'])),
                     "mat_lang" => $this->protect($_POST['mat_lang']),
+                    "mat_team1_goal" => $this->protect($_POST['mat_team1_goal']),
+                    "mat_team2_goal" => $this->protect($_POST['mat_team2_goal']),
+                    "mat_summ" => $this->protect($_POST['mat_summ']),
+                    "mat_goals" => $this->protect($_POST['mat_goals']),
+                    "mat_champ" => intval($this->protect($_POST['mat_champ']))                    
                 ];
 
                 $edit_match = $this->model->editMatch($e_mat);
@@ -642,12 +639,14 @@ class Admin extends Controller{
                     $this->redirect(ADMIN_PATH . '/new-url');
                 }
             }else{
-                if(isset($_POST['url_href']) &&
+                if(isset($_POST['url_name']) &&
+                    isset($_POST['url_href']) &&
                    isset($_POST['url_channel']) &&
                    isset($_POST['url_comm']) &&
                    isset($_POST['url_game'])){
                     
                     $n_url = [
+                        "url_name" => $this->protect($_POST['url_name']),
                         "url_href" => $this->protect($_POST['url_href']),
                         "url_channel" => intval($this->protect($_POST['url_channel'])),
                         "url_comm" => intval($this->protect($_POST['url_comm'])),
