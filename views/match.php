@@ -1,4 +1,3 @@
-
 <?php include 'header.php' ?>
 <!-- to remove last choice: localStorage.setItem('ud', null); -->
 <div class="survey " style="display:none">
