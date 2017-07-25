@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('Asia/Damascus');
+date_default_timezone_set('Europe/Istanbul');
 // error_reporting(0);
 // config files
 require_once("./config/cons.php");
