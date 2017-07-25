@@ -59,17 +59,17 @@
 	<div class="row navbaro hidden-xs">
             <div class="col-sm-4">
                 <ul>
-		    <li>Home</li>
-		    <li>Matches <i class="fa fa-sort-desc" aria-hidden="true"></i></li>
-		    <li>About</li>
-		    <li>Contact</li>
+		    <li>الرئيسية</li>
+		    <li>المباريات <i class="fa fa-sort-desc" aria-hidden="true"></i></li>
+		    <li>حول الموقع</li>
+		    <li>اتصل بنا</li>
 		    
                 </ul>
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-2">
 		<img src="<?php echo IMG_PATH ?>arrow.png">
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
 		
             </div>
             <div class="col-sm-4">
@@ -85,35 +85,20 @@
 	<div class="cont-body">
 	    <div class="row">
 	        <ul>
-	            <a class="index-active"><li><span data-day="tomorrow" class="get-matches-day">Tomorrow Matches</span></li></a>
-	            <a class="index-active"><li><span data-day="today" class="get-matches-day">Today's Matches</span></li></a>
-	            <a class="index-active"><li><span data-day="yesterday" class="get-matches-day">Yesterday Matches</span></li></a>
+	            <a class="index-active"><li><span data-day="tomorrow" class="get-matches-day">مباريات الغد</span></li></a>
+	            <a class="index-active"><li><span data-day="today" class="get-matches-day">مباريات اليوم</span></li></a>
+	            <a class="index-active"><li><span data-day="yesterday" class="get-matches-day">مباريات الأمس</span></li></a>
 	        </ul>
-		<!-- matches's place -->
-		<div class="matches-to-be-added">
-		    
-		</div>
+		
+                
+                    <div class="matches-to-be-added">
+                        
+                    </div>
+                
 	    </div>
 	</div>
 	
     </div>
 </div>
-<!--<div class="row">
-     <?php if($errMsg == ""){ ?>
-     <div id="player"></div>
-     <?php }else{ ?>
-     <div id="the-error-msg">
-     <?php echo $errMsg ?>
-     </div>
-     <?php } ?>
-     <script>
-     var player = jwplayer('player').setup({
-     width: "400",
-     height: "280",
-     autostart: true,
-     file: "https://live76.vkuserlive.com/620010/live/CteWO8xAf9A/playlist.m3u8"
-     
-     });
-     </script> 
-     </div> -->
+
 <?php include 'footer.php' ?>

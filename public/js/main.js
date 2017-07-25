@@ -96,8 +96,6 @@ try{
 }catch(err){
     console.log(err);
 }
-
-
 try{
     $('.change-s-url').on('click', function(){
 	$.get(window.baseUrl + '/get-match-url?s_url=' + $(this).data('surl'), function(data){

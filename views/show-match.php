@@ -1,41 +1,108 @@
 <?php include_once('header.php') ?>
-<?php if(time() > strtotime($this->match->mat_time) + (140 * 60)){ ?>
+<?php if(time() > strtotime($this->match->mat_time) + (110 * 60)){ ?>
     Matche Finished !!
-<?php }else if(time() < strtotime($this->match->mat_time)){ ?>
+<?php }else if(time() > strtotime($this->match->mat_time)){ ?>
     Not started yet
 <?php }else{ ?>
-    <br/>
-    <br/>
-    --------
-    <br/>
-    CHAN_ID : <?php echo $this->match->mat_id ?> <br/>
-    chan_NAME : <?php echo $this->match->chan_name ?> <br/>
-    CHAN_LOGO : <?php echo $this->match->chan_logo ?> <br/>
-    CHAN_LANG : <?php echo $this->match->chan_lang ?> <br/>
-    MAT_ID : <?php echo $this->match->mat_id ?> <br/>
-    MAT_TEAM1 : <?php echo $this->match->mat_team1 ?> <br/>
-    MAT_TEAM2 : <?php echo $this->match->mat_team2 ?> <br/>
-    MAT_TIME : <?php echo $this->match->mat_time ?> <br/>
-    MAT_CHAMP : <?php echo $this->match->mat_champ ?> <br/>
-    MAT_ADDRESS : <?php echo $this->match->mat_address ?> <br/>
-    MAT_NOTE : <?php echo $this->match->mat_note ?> <br/>
-    MAT_STATUS : <?php echo $this->match->mat_status ?> <br/>
-    MAT_LANG : <?php echo $this->match->mat_lang ?> <br/>
-    COMM_ID : <?php echo $this->match->comm_id ?> <br/>
-    COMM_NAME : <?php echo $this->match->comm_name ?> <br/>
-    COMM_COUNTRY : <?php echo $this->match->comm_country ?> <br/>
-    COMM_CHAN : <?php echo $this->match->comm_chan ?> <br/>
-    CHAMP_ID : <?php echo $this->match->champ_id ?> <br/>
-    CHAMP_NAME : <?php echo $this->match->champ_name ?> <br/>
-    CHAMP_LOC : <?php echo $this->match->champ_loc ?> <br/>
-    CHAMP_LOGO : <?php echo $this->match->champ_logo ?> <br/>
-    CHAMP_DATE : <?php echo $this->match->champ_date ?> <br/>
-    TEAM1_NAME : <?php echo $this->match->team1_name ?> <br/>
-    TEAM1_LOGO : <?php echo $this->match->team1_logo ?> <br/>
-    TEAM2_NAME : <?php echo $this->match->team2_name ?> <br/>
-    TEAM2_LOGO  : <?php echo $this->match->team2_logo  ?> <br/>
+    <div class="whole-site">
+    <!--<div class="bg-team">        
+	 </div>-->
+    <div>
+	<!-- <div class="bg-team"></div>-->
+	<div class="row line">
+	    <div class="col-sm-8"></div>
+	    <div class="col-sm-4"></div>
+	</div>
+	<div class="row lang">
+	    <div class="col-sm-3">
+	        <ul>
+	            <a><li>EN</li></a>
+	            <a><li>AR</li></a>
+	        </ul>
+	    </div>
+	    
+	</div>
+	
+	<div class="row logoz">
+            <div class="col-sm-6">
+		<div class="row">
+		    <div class="col-sm-2">
+			الأخبار
+		    </div>
+		    <div class="col-sm-10">
+			انتقال نيمار إلى باريس سانجرما ليس مؤكداً
+		    </div>
+		    
+		</div>
+		
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+		<img src=" <?php echo IMG_PATH ?>marma.png">
+            </div>
+	</div>
+	<div class="row navbaro hidden-xs">
+            <div class="col-sm-4">
+                <ul>
+		    <li>Home</li>
+		    <li>Matches <i class="fa fa-sort-desc" aria-hidden="true"></i></li>
+		    <li>About</li>
+		    <li>Contact</li>
+		    
+                </ul>
+            </div>
+            <div class="col-sm-1">
+		<img src="<?php echo IMG_PATH ?>arrow.png">
+            </div>
+            <div class="col-sm-3">
+		
+            </div>
+            <div class="col-sm-4">
+		<ul>
+                    <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-twitter" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-youtube-play" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-instagram" aria-hidden="true"></i></li>
+		</ul>
+            </div>
+            
+	</div>
+	<div class="cont-show">
+	    <div class="row text-center" >
+	        <div class="col-xs-3">جودة ضعيفة</div>
+	        <div class="col-xs-3">جودة متوسطة</div>
+	        <div class="col-xs-3">جودة عالية</div>
+	        <div class="col-xs-3">جودة عالية جداً</div>
+	    </div>
+	    <div class="row">
+	           <div class="col-xs-4">
+	               <img src="<?php echo $this->match->team1_logo ?>">
+	               <h4>VS</h4>
+	               <img src="<?php echo $this->match->team2_logo ?>">
+	           </div>
+	           <div class="col-xs-8">
+	               <h4>مشاهدة مباراة</h4>
+	               <h4>
+	               <span>
+	               <?php echo $this->match->mat_team1 ?>
+	                </span>
+	               و 
+	               <span>
+	                   <?php echo $this->match->mat_team2 ?>
+	               </span> بث مباشر</h4>
+	           </div>
+	           <div class="col-xs-12">
+	                بث المباراة
+	            </div>
+	    </div>
+	    
+	</div>
+	
+    </div>
+</div>
 
-    <p><h1>URLS Of MATCH: </h1></p>
+
+    <h1>URLS Of MATCH: </h1>
 
     <?php foreach($this->match->urls_streaming as $m_url){ ?>
 	URL_ID : <?php echo $m_url->url_id ?> <br/>
@@ -50,5 +117,24 @@
 	<br/>
     <?php } ?>
 <?php } ?>
-<div id="ref-player"></div>
+<div id="ref-player">
+    <div class="row">
+     <?php if($errMsg == ""){ ?>
+     <div id="player"></div>
+     <?php }else{ ?>
+     <div id="the-error-msg">
+     <?php echo $errMsg ?>
+     </div>
+     <?php } ?>
+     <script>
+     var player = jwplayer('player').setup({
+     width: "400",
+     height: "280",
+     autostart: true,
+     file: "https://live76.vkuserlive.com/620010/live/CteWO8xAf9A/playlist.m3u8"
+     
+     });
+     </script> 
+     </div>
+     </div>
 <?php include_once('footer.php') ?>
