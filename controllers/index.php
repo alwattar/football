@@ -96,8 +96,12 @@ class Index extends Controller{
                 $match = $this->getStreamingUrlsOfMatch($match);
                 $this->view->match = $match;
                 $m_status = $this->getMatchStatus($match->mat_time);
-                
-                $this->view->view('show-match');
+                if($m_status === 0)
+                    $this->view->view('match-summ');
+                elseif($m_status === 1)
+                    $this->redirect(URL);
+                else
+                    $this->view->view('show-match');
             }else{
                 echo "Match not found Template<br/>";
                 $this->view->view('404');
