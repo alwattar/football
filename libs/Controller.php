@@ -460,5 +460,21 @@ class Controller {
         else
             return false;
     }
+
+        // get match status
+    public function getMatchStatus($m_time){
+        /*
+          0 -> finished
+          1 -> not started yet
+          2 -> started
+         */
+        if(time() > strtotime($m_time) + (110 * 60)){
+            return 0;
+        }else if(time() < strtotime($m_time)){
+            return 1;
+        }else{
+            return 2;
+        }
+    }
 }   
 ?>

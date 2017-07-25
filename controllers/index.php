@@ -95,6 +95,8 @@ class Index extends Controller{
                 $match = $match[0];
                 $match = $this->getStreamingUrlsOfMatch($match);
                 $this->view->match = $match;
+                $m_status = $this->getMatchStatus($match->mat_time);
+                
                 $this->view->view('show-match');
             }else{
                 echo "Match not found Template<br/>";
@@ -129,6 +131,5 @@ class Index extends Controller{
             $this->view->view('change-url');
         }
     }
-
 }
 ?>
