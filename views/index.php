@@ -89,12 +89,7 @@
 	            <a class="index-active"><li><span data-day="today" class="get-matches-day">مباريات اليوم</span></li></a>
 	            <a class="index-active"><li><span data-day="yesterday" class="get-matches-day">مباريات الأمس</span></li></a>
 	        </ul>
-		
-                
-                    <div class="matches-to-be-added">
-                        
-                    </div>
-                
+                    <div class="matches-to-be-added"></div>
 	    </div>
 	</div>
 	

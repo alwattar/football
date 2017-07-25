@@ -1,5 +1,4 @@
 <?php if($this->matches != false && count($this->matches) > 0){ ?>
-
 <?php foreach($this->matches as $m){ ?>
 	    <div class="matchs-new">
 		<div>
@@ -51,7 +50,3 @@
 	<?php } ?>
 
 <?php } ?>
-
-	
-    
-

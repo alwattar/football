@@ -64,10 +64,10 @@ try{
     // matches-to-be-adde
     $.get(window.baseUrl + '/get-match?day=today', function(data){
 	$('.matches-to-be-added').html('');
-	if(data.length < 1)
+	if(data.trim().length < 1){
 	    data = noMMsg;
+	}
 	$('.matches-to-be-added').append(data);
-	console.log(data);
 	var index_active = document.getElementsByClassName('index-active')[1].classList.add("active");
     });
     $('.get-matches-day').click(function(){
@@ -88,7 +88,7 @@ try{
 	}
 	$.get(window.baseUrl + '/get-match?day=' + theDay, function(data){
 	    $('.matches-to-be-added').html('');
-	    if(data.length < 1)
+	    if(data.trim().length < 1)
 		data = noMMsg;
 	    $('.matches-to-be-added').append(data);
 	});
