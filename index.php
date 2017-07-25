@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Damascus');
 // error_reporting(0);
 // config files
 require_once("./config/cons.php");
