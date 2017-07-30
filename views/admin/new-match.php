@@ -43,49 +43,56 @@
 		<?php if($this->matches != false){ ?>
 		    <h1>جميع المباريات</h1>
 		    <div class="table-responsive">
-                 <table class="main-table table text-center">
-                  <thead>
-                    <tr>
-                        <td>الرقم</td>
-                        <td>اسم الفريق الأول</td>
-                        <td>اهداف الفريق الأول</td>
-                        <td>اسم الفريق الثاني</td>
-                        <td>اهداف الفريق الثاني</td>
-                        <td>ملخص المباراة</td>
-                        <td>ملخص الأهداف</td>
-                        <td>تحكم</td>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                       <td>الرقم</td>
-                        <td>اسم الفريق الأول</td>
-                        <td>اهداف الفريق الأول</td>
-                        <td>اسم الفريق الثاني</td>
-                        <td>اهداف الفريق الثاني</td>
-                        <td>ملخص المباراة</td>
-                        <td>ملخص الأهداف</td>
-                        <td>تحكم</td>
-                    </tr>
-                </tfoot>
-                     <tbody>
-                         <?php foreach($this->matches as $mat){ ?>
-             <tr>
-             <td data-label='الرقم'> <?php echo $mat->mat_id ?> </td>
-                <td data-label='اسم الفريق الأول '> <?php echo $team->name ?> </td>
-                 <td data-label='اهداف الفريق الأول '> <?php echo $mat->mat_team1_goal ?> </td>
-                 <td data-label='اسم الفريق الثاني '> <?php echo $team->name ?> </td>
-                 <td data-label='اهداف الفريق الثاني'> <?php echo $mat->mat_team2_goal ?> </td>
-                 <td data-label='ملخص المباراة'> <?php echo $mat->mat_summ ?> </td>
-                 <td data-label='ملخص الأهداف'> <?php echo $mat->mat_goals ?> </td>
-                 <td data-label='تحكم'>
-                     <a class="btn btn-success" href="<?php echo ADMIN_PATH ?>/new-match&do=edit&id=<?php echo $mat->mat_id ?>">تعديل</a>
-	<a class="btn btn-danger" href="<?php echo ADMIN_PATH ?>/new-match&do=delete&id=<?php echo $mat->mat_id ?>">حذف</a></td>
-            </tr>
-    <?Php } ?>
-                     </tbody>
-                 </table>
-             </div>
+			<table class="main-table table text-center">
+			    <thead>
+				<tr>
+				    <td>الرقم</td>
+				    <td>اسم الفريق الأول</td>
+				    <td>اهداف الفريق الأول</td>
+				    <td>اسم الفريق الثاني</td>
+				    <td>اهداف الفريق الثاني</td>
+				    <td>ملخص المباراة</td>
+				    <td>ملخص الأهداف</td>
+				    <td>تحكم</td>
+				</tr>
+			    </thead>
+			    <tfoot>
+				<tr>
+				    <td>الرقم</td>
+				    <td>اسم الفريق الأول</td>
+				    <td>اهداف الفريق الأول</td>
+				    <td>اسم الفريق الثاني</td>
+				    <td>اهداف الفريق الثاني</td>
+				    <td>ملخص المباراة</td>
+				    <td>ملخص الأهداف</td>
+				    <td>تحكم</td>
+				</tr>
+			    </tfoot>
+			    <tbody>
+				<?php foreach($this->matches as $mat){
+				    $team1 = $this->getTeam($mat->mat_team1);
+				    $team1_name = $team1['team'][$team1['p'] . '_name'];
+				    $team2 = $this->getTeam($mat->mat_team2);
+				    $team2_name = $team2['team'][$team2['p'] . '_name'];
+				?>
+				    
+				    <tr>
+					<td data-label='الرقم'> <?php echo $mat->mat_id ?> </td>
+					<td data-label='اسم الفريق الأول '> <?php echo $team1_name ?> </td>
+					<td data-label='اهداف الفريق الأول '> <?php echo $mat->mat_team1_goal ?> </td>
+					<td data-label='اسم الفريق الثاني '> <?php echo $team2_name ?> </td>
+					<td data-label='اهداف الفريق الثاني'> <?php echo $mat->mat_team2_goal ?> </td>
+					<td data-label='ملخص المباراة'> <?php echo $mat->mat_summ ?> </td>
+					<td data-label='ملخص الأهداف'> <?php echo $mat->mat_goals ?> </td>
+					<td data-label='تحكم'>
+					    <a class="btn btn-success" href="<?php echo ADMIN_PATH ?>/new-match&do=edit&id=<?php echo $mat->mat_id ?>">تعديل</a>
+					    <a class="btn btn-danger" href="<?php echo ADMIN_PATH ?>/new-match&do=delete&id=<?php echo $mat->mat_id ?>">حذف</a>
+					</td>
+				    </tr>
+				<?php } ?>
+			    </tbody>
+			</table>
+		    </div>
 		    
 		    
 		    

@@ -1,4 +1,3 @@
-
 <div id="player"></div>
 <script>
  var player = jwplayer('player').setup({

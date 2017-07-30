@@ -461,7 +461,7 @@ class Controller {
             return false;
     }
 
-        // get match status
+    // get match status
     public function getMatchStatus($m_time){
         /*
           0 -> finished
