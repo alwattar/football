@@ -1,5 +1,10 @@
 <?php require_once('include/header.php') ?>
-<p><h1>New URL</h1></p>
+<div class="adminpanel">
+<?php require_once('include/sidebar.php') ?>
+    <div class="mainbar">
+        <div class="mainbarcontainer">
+            <div class="row">
+<h1>تعديل الرابط</h1>
 <?php if($this->matches == false){ ?>
     <a href="<?php echo ADMIN_PATH ?>/new-match">Please add one MATCH at LEAST before adding new URL</a>
 <?php }else{ ?>
@@ -26,8 +31,10 @@
 	    <?php } ?>
 	</select>
 	<br/>
+        <input name="url_lang" type="text" placeholder="اللغة" value="<?php echo $this->url->url_lang ?>"/><br/>
 	<br/>
 	<button>SAVE</button>
     </form>
+            </div></div></div></div>
 <?php } ?>
 <?php require_once('include/footer.php') ?>

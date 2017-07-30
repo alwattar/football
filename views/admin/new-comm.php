@@ -10,6 +10,7 @@
 <?php }else{ ?>
     <form action="" method="post">
 	<input name="comm_name" type="text" placeholder="اسم المعلق"/><br/>
+	<input name="comm_name_en" type="text" placeholder="اسم المعلق اللاتيني"/><br/>
 	<input name="comm_country" type="text" placeholder="لغة التعليق"/><br/>
 	القناة 
 	<br/>	
@@ -29,8 +30,9 @@
 	    <form action="" method="post">
 		<input name="comm_edit" type="hidden" value="comm_edit"/><br/>
 		<input name="comm_id" type="hidden" value="<?php echo $com->comm_id ?>"/><br/>
-		<input name="comm_name" type="text" value="<?php echo $com->comm_name ?>" placeholder="Commentor Name"/><br/>
-		<input name="comm_country" type="text" value="<?php echo $com->comm_country ?>" placeholder="Commentor lang"/><br/>
+		<input name="comm_name" type="text" value="<?php echo $com->comm_name ?>" placeholder="اسم المعلق"/><br/>
+		<input name="comm_name_en" type="text" value="<?php echo $com->comm_name_en ?>" placeholder="اسم المعلق اللاتيني"/><br/>
+		<input name="comm_country" type="text" value="<?php echo $com->comm_country ?>" placeholder="لغة التعليق"/><br/>
 		
 		Commentor Channel
 		<br/>	
@@ -43,7 +45,7 @@
 		</select>
 		<br/>
 		<br/>
-		<button>SAVE</button> | <a href="<?php echo ADMIN_PATH ?>/new-commentor&del=<?php echo $com->comm_id ?>">DELETE</a>
+		<button>SAVE</button><a href="<?php echo ADMIN_PATH ?>/new-commentor&del=<?php echo $com->comm_id ?>">DELETE</a>
 	    </form>
 	<?php } ?>
     <?php } ?>

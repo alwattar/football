@@ -7,7 +7,7 @@
              
              <h1>روابط البث</h1>
 <?php if($this->matches == false){ ?>
-    <a href="<?php echo ADMIN_PATH ?>/new-match">Please add one MATCH at LEAST before adding new URL</a>
+    <a href="<?php echo ADMIN_PATH ?>/new-match">الرجاء اضافة مباراة واحدة على الأقل حتى تستطيع إضافة روابط بث لها</a>
 <?php }else{ ?>
     <form action="" method="post">
     <input name="url_name" type="text" placeholder="URL NAME"/><br/>
@@ -40,30 +40,57 @@
 	    <?php } ?>
 	</select>
 	<br/>
+        <input name="url_lang" type="text" placeholder="اللغة"/><br/>
 	<button>CREATE</button>
     </form>
 <?php } ?>
 <?php if($this->urls != false){ ?>
+     <h1>جميع روابط البث</h1>
+     <div class="table-responsive">
+                 <table class="main-table table text-center">
+                  <thead>
+                    <tr>
+                        <td>الرقم</td>
+                        <td>عنوان الرابط</td>
+                        <td>الرابط</td>
+                        <td>المباراة </td>
+                        <td>القناة</td>
+                        <td>تحكم</td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td>الرقم</td>
+                        <td>عنوان الرابط</td>
+                        <td>الرابط</td>
+                        <td>المباراة </td>
+                        <td>القناة</td>
+                        <td>تحكم</td>
+                    </tr>
+                </tfoot>
+                     <tbody>
+                         <?php foreach($this->urls as $url){ ?>
+             <tr>
+             <td data-label='الرقم'> <?php echo $url->url_id ?> </td>
+                 <td data-label='عنوان الرابط'> <?php echo $url->url_name ?> </td>
+                 <td data-label='الرابط'> <?php echo $url->url_href ?> </td>
+                 <td data-label='المباراة'>  <?php echo $url->mat_id ?> <?php echo $url->mat_time ?> <?php echo $url->mat_team1 ?> ضد <?php echo $url->mat_team2 ?></td>
+                 <td data-label='القناة'> <?php echo $url->chan_name ?> </td>
+                 <td data-label='تحكم'>
+                     <a class="btn btn-success" href="<?php echo ADMIN_PATH ?>/new-url&do=edit&id=<?php echo $url->url_id ?>">تعديل</a>
+	<a class="btn btn-danger" href="<?php echo ADMIN_PATH ?>/new-url&do=delete&id=<?php echo $url->url_id ?>">حذف</a></td>
+            </tr>
+    <?Php } ?>
+                     </tbody>
+                 </table>
+             </div>
     
-    <?php foreach($this->urls as $url){ ?>
-	Url #ID : <?php echo $url->url_id ?>
-	<br/>
-	Url NAME : <?php echo $url->url_name ?>
-	<br/>
-	Url Href : <?php echo $url->url_href ?>
-	<br/>
-	Url Game : <?php echo $url->mat_id ?> <?php echo $url->mat_time ?> <?php echo $url->mat_team1 ?> ضد <?php echo $url->mat_team2 ?>
-	<br/>
-	Url channel : <?php echo $url->chan_name ?>
-	<br/>
-	<a href="<?php echo ADMIN_PATH ?>/new-url&do=edit&id=<?php echo $url->url_id ?>">Edit</a> |
-	<a href="<?php echo ADMIN_PATH ?>/new-url&do=delete&id=<?php echo $url->url_id ?>">DELETE</a>
-	<br/>
-	------------
-	<br/>
-    <?php } ?>
 <?php } ?>
-
+             
+ 
+             
+             
+             
          </div></div></div>
 </div>
 

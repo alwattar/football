@@ -30,10 +30,10 @@ class Admin extends Controller{
                 $channel_id = intval($_GET['del']);
                 $del_channel = $this->model->delChannel($channel_id);
                 if($del_channel != false){
-                    $msg = "Channel Deleted";
+                    $msg = "تم حذف القناة بنجاح";
                     echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-chan'},1200)</script>";
                 }else{
-                    $msg = "Channel Not Deleted , err665";
+                    $msg = "لم يتم حذف القناة , err665";
                 }
                 
                 $this->view->chanMsg = $msg;
@@ -41,6 +41,7 @@ class Admin extends Controller{
             }
             if(isset($_POST['chan_edit']) && $_POST['chan_edit'] == 'chan_edit'){
                 if(isset($_POST['chan_name']) &&
+                   isset($_POST['chan_name_en']) &&
                    isset($_POST['chan_id']) &&
                    isset($_POST['chan_lang']) &&
                    isset($_POST['chan_logo'])){
@@ -48,6 +49,7 @@ class Admin extends Controller{
                     $e_channel = [
                         "chan_id" => intval($this->protect($_POST['chan_id'])),
                         "chan_name" => $this->protect($_POST['chan_name']),
+                        "chan_name_en" => $this->protect($_POST['chan_name_en']),
                         "chan_lang" => $this->protect($_POST['chan_lang']),
                         "chan_logo" => $this->protect($_POST['chan_logo']),
                     ];
@@ -55,10 +57,10 @@ class Admin extends Controller{
                     $edit_channel = $this->model->editChannel($e_channel);
 
                     if($edit_channel != false){
-                        $msg = "Channel Updated";
+                        $msg = "تم تعديل القناة بنجاح";
                         echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                     }else{
-                        $msg = "Channel Not Updated , err262432";
+                        $msg = "لم يتم تعديل القناة , err262432";
                     }
                 
                     $this->view->chanMsg = $msg;
@@ -67,22 +69,24 @@ class Admin extends Controller{
             }
             
             if(isset($_POST['chan_name']) &&
+               isset($_POST['chan_name_en']) &&
                isset($_POST['chan_lang']) &&
                !isset($_POST['chan_edit']) &&
                isset($_POST['chan_logo'])){
 
                 $nc = [
                     "chan_name" => $this->protect($_POST['chan_name']),
+                    "chan_name_en" => $this->protect($_POST['chan_name_en']),
                     "chan_lang" => $this->protect($_POST['chan_lang']),
                     "chan_logo" => $this->protect($_POST['chan_logo']),
                 ];
 
                 $create_new_channel = $this->model->newChan($nc);
                 if($create_new_channel === true){
-                    $msg = "Channel createed";
+                    $msg = "تم انشاء القناة";
                     echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-chan'},1200)</script>";
                 }else{
-                    $msg = "Channel Not created , 62432";
+                    $msg = "لم يتم إنشاء القناة , 62432";
                 }
                 
                 $this->view->chanMsg = $msg;
@@ -107,10 +111,10 @@ class Admin extends Controller{
                 $comm_id = intval($_GET['del']);
                 $del_comm = $this->model->delComm($comm_id);
                 if($del_comm != false){
-                    $msg = "Commentor Deleted";
+                    $msg = "تم حذف المعلق بنجاح";
                     echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-commentor'},1200)</script>";
                 }else{
-                    $msg = "Commentor Not Deleted , err62465";
+                    $msg = "لم يتم حذف المعلق , err62465";
                 }
                 
                 $this->view->chanMsg = $msg;
@@ -119,11 +123,13 @@ class Admin extends Controller{
             // edit commentor
             if(isset($_POST['comm_edit']) && $_POST['comm_edit'] == 'comm_edit'){
                 if(isset($_POST['comm_name']) &&
+                   isset($_POST['comm_name)en']) &&
                    isset($_POST['comm_country']) &&
                    isset($_POST['comm_chan'])){
                 
                     $ecomm = [
                         "comm_name" => $this->protect($_POST['comm_name']),
+                        "comm_name_en" => $this->protect($_POST['comm_name_en']),
                         "comm_country" => $this->protect($_POST['comm_country']),
                         "comm_id" => intval($this->protect($_POST['comm_id'])),
                         "comm_chan" => intval($this->protect($_POST['comm_chan'])),
@@ -132,10 +138,10 @@ class Admin extends Controller{
                     $edit_comm = $this->model->editComm($ecomm);
                     // echo var_dump($edit_comm);
                     if($edit_comm != false){
-                        $msg = "Commentor Updated";
+                        $msg = "تم تعدل المعلق بنجاح";
                         echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                     }else{
-                        $msg = "commentor Not Updated , Eroro26342";
+                        $msg = "لم يتم تعديل المعلق , Eroro26342";
                     }
 
                     echo $msg;
@@ -144,22 +150,24 @@ class Admin extends Controller{
             }
             // new commentor
             if(isset($_POST['comm_name']) &&
+               isset($_POST['comm_name_en']) &&
                !isset($_POST['comm_edit']) &&
                isset($_POST['comm_country']) &&
                isset($_POST['comm_chan'])){
                 
                 $ncomm = [
                     "comm_name" => $this->protect($_POST['comm_name']),
+                    "comm_name_en" => $this->protect($_POST['comm_name_en']),
                     "comm_country" => $this->protect($_POST['comm_country']),
                     "comm_chan" => intval($this->protect($_POST['comm_chan'])),
                 ];
 
                 $create_new_commentor = $this->model->newComm($ncomm);
                 if($create_new_commentor === true){
-                    $msg = "Commentor createed";
+                    $msg = "تم انشاء معلق بنجاح";
                     echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-commentor'},1200)</script>";
                 }else{
-                    $msg = "Commentor Not created , 6243251";
+                    $msg = "لم يتم إنشاء معلق , 6243251";
                 }
                 
                 $this->view->commMsg = $msg;
@@ -190,21 +198,23 @@ class Admin extends Controller{
                 }
             }else{
                 if(isset($_POST['nft_name']) &&
+                   isset($_POST['nft_name_en']) &&
                    isset($_POST['nft_logo']) &&
                    isset($_POST['nft_num'])){
 
                     $n_nft = [
                         "nft_name" => $this->protect($_POST['nft_name']),
+                        "nft_name_en" => $this->protect($_POST['nft_name_en']),
                         "nft_num" => intval($this->protect($_POST['nft_num'])),
                         "nft_logo" => $this->protect($_POST['nft_logo']),
                     ];
 
                     $create_new_nft = $this->model->newNFT($n_nft);
                     if($create_new_nft === true){
-                        $msg = "NFT createed";
+                        $msg = "تم إنشاء المنتخب بنجاح";
                         echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-nft'},1200)</script>";
                     }else{
-                        $msg = "NFT Not created , 53364";
+                        $msg = "لم يتم إنشاء المنتخب , 53364";
                     }
                 
                     $this->view->commMsg = $msg;
@@ -221,12 +231,14 @@ class Admin extends Controller{
         $nft = $this->model->getNFTById($id);
         if($nft !== false){
             if(isset($_POST['nft_name']) &&
+               isset($_POST['nft_name_en']) &&
                isset($_POST['nft_id']) &&
                isset($_POST['nft_logo']) &&
                isset($_POST['nft_num'])){
 
                 $e_nft = [
                     "nft_name" => $this->protect($_POST['nft_name']),
+                    "nft_name_en" => $this->protect($_POST['nft_name_en']),
                     "nft_id" => intval($this->protect($_POST['nft_id'])),
                     "nft_num" => intval($this->protect($_POST['nft_num'])),
                     "nft_logo" => $this->protect($_POST['nft_logo']),
@@ -234,10 +246,10 @@ class Admin extends Controller{
 
                 $edit_nft = $this->model->editNFT($e_nft);
                 if($edit_nft != false){
-                    $msg = "NFT UPDATED";
+                    $msg = "تم تعديل المنتخب بنجاح";
                     echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }else{
-                    $msg = "NFT Not UPDATED , trr2524";
+                    $msg = "لم يتم تعديل المنتخب , trr2524";
                 }
 
                 echo $msg;
@@ -254,10 +266,10 @@ class Admin extends Controller{
         $del_nft = $this->model->delNFT($id);
         // echo var_dump($del_nft);
         if($del_nft != false){
-            $msg = "NFT DELETED";
+            $msg = "تم حذف المنتخب بنجاح";
             echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-nft'},1200)</script>";
         }else{
-            $msg = "NFT Not DELETED , trr25248252";
+            $msg = "لم يتم حذف المنتخب , trr25248252";
         }
 
         echo $msg;
@@ -284,21 +296,23 @@ class Admin extends Controller{
                 }
             }else{
                 if(isset($_POST['cl_name']) &&
+                   isset($_POST['cl_name_en']) &&
                    isset($_POST['cl_logo']) &&
                    isset($_POST['cl_country'])){
 
                     $n_club = [
                         "cl_name" => $this->protect($_POST['cl_name']),
+                        "cl_name_en" => $this->protect($_POST['cl_name_en']),
                         "cl_country" => $this->protect($_POST['cl_country']),
                         "cl_logo" => $this->protect($_POST['cl_logo']),
                     ];
 
                     $create_new_club = $this->model->newClub($n_club);
                     if($create_new_club === true){
-                        $msg = "CLUB createed";
+                        $msg = "تم إنشاء النادي بنجاح";
                         echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-club'},1200)</script>";
                     }else{
-                        $msg = "CLUB Not created , 763364";
+                        $msg = "لم يتم إنشاء النادي , 763364";
                     }
                 
                     $this->view->commMsg = $msg;
@@ -316,12 +330,14 @@ class Admin extends Controller{
         $cl = $this->model->getClubById($id);
         if($cl !== false){
             if(isset($_POST['cl_name']) &&
+               isset($_POST['cl_name_en']) &&
                isset($_POST['cl_id']) &&
                isset($_POST['cl_logo']) &&
                isset($_POST['cl_country'])){
 
                 $e_cl = [
                     "cl_name" => $this->protect($_POST['cl_name']),
+                    "cl_name_en" => $this->protect($_POST['cl_name_en']),
                     "cl_country" => $this->protect($_POST['cl_country']),
                     "cl_id" => intval($this->protect($_POST['cl_id'])),
                     "cl_logo" => $this->protect($_POST['cl_logo']),
@@ -329,10 +345,10 @@ class Admin extends Controller{
 
                 $edit_club = $this->model->editClub($e_cl);
                 if($edit_club != false){
-                    $msg = "CLUB UPDATED";
+                    $msg = "تم تعديل النادي بنجاح";
                     echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }else{
-                    $msg = "CLUB Not UPDATED , dhft27353";
+                    $msg = "لم يتم تعديل النادي , dhft27353";
                 }
 
                 echo $msg;
@@ -349,10 +365,10 @@ class Admin extends Controller{
         $del_club = $this->model->delClub($id);
         // echo var_dump($del_club);
         if($del_club != false){
-            $msg = "CLUB DELETED";
+            $msg = "تم حذف النادي بنجاح";
             echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-club'},1200)</script>";
         }else{
-            $msg = "CLUB Not DELETED , errn2342524";
+            $msg = "لم يتم حذف النادي , errn2342524";
         }
 
         echo $msg;
@@ -381,12 +397,14 @@ class Admin extends Controller{
                 }
             }else{
                 if(isset($_POST['champ_name']) &&
+                   isset($_POST['champ_name_en']) &&
                    isset($_POST['champ_logo']) &&
                    isset($_POST['champ_date']) &&
                    isset($_POST['champ_loc'])){
 
                     $n_champ = [
                         "champ_name" => $this->protect($_POST['champ_name']),
+                        "champ_name_en" => $this->protect($_POST['champ_name_en']),
                         "champ_date" => $this->protect($_POST['champ_date']),
                         "champ_loc" => $this->protect($_POST['champ_loc']),
                         "champ_logo" => $this->protect($_POST['champ_logo']),
@@ -394,10 +412,10 @@ class Admin extends Controller{
 
                     $create_new_champ = $this->model->newChamp($n_champ);
                     if($create_new_champ === true){
-                        $msg = "Champ createed";
+                        $msg = "تم ان شاء بطولة بنجاح";
                         echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-champ'},1200)</script>";
                     }else{
-                        $msg = "Champ Not created , 765323";
+                        $msg = "لم يتم انشاء البطولة, 765323";
                     }
                 
                     $this->view->commMsg = $msg;
@@ -414,33 +432,26 @@ class Admin extends Controller{
         $champ = $this->model->getChampById($id);
         if($champ !== false){
             if(isset($_POST['champ_name']) &&
+               isset($_POST['champ_name_en']) &&
                isset($_POST['champ_logo']) &&
                isset($_POST['champ_date']) &&
-               isset($_POST['champ_h']) &&
-               isset($_POST['champ_m']) &&
                isset($_POST['champ_loc'])){
-
-                $h = $this->protect($_POST['champ_h']);
-                $m = $this->protect($_POST['champ_m']);
-                $d = $this->protect($_POST['champ_date']);
-                $d = explode('/', $d);
-                
-                $champ_date = $d[2] . '-' . $d[0] . '-' . $d[1] . " $h:$m:00";
 
                 $e_champ = [
                     "champ_id" => intval($this->protect($_POST['champ_id'])),
                     "champ_name" => $this->protect($_POST['champ_name']),
-                    "champ_date" => $champ_date,
+                    "champ_name_en" => $this->protect($_POST['champ_name_en']),
+                    "champ_date" => $this->protect($_POST['champ_date']),
                     "champ_loc" => $this->protect($_POST['champ_loc']),
                     "champ_logo" => $this->protect($_POST['champ_logo']),
                 ];
 
                 $edit_champ = $this->model->editChamp($e_champ);
                 if($edit_champ != false){
-                    $msg = "CHAMP UPDATED";
+                    $msg = "تم تعديل البطولة";
                     echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }else{
-                    $msg = "CHAMP Not UPDATED , 2724bh225";
+                    $msg = "لم يتم تعديل البطولة , 2724bh225";
                 }
 
                 echo $msg;
@@ -457,10 +468,10 @@ class Admin extends Controller{
         $del_champ = $this->model->delChamp($id);
         // echo var_dump($del_champ);
         if($del_champ != false){
-            $msg = "CHAMP DELETED";
+            $msg = "تم حذف البطولة بنجاح";
             echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-champ'},1200)</script>";
         }else{
-            $msg = "CHAMP Not DELETED , errn23435324";
+            $msg = "لم يتم حذف البطولة , errn23435324";
         }
 
         echo $msg;
@@ -532,10 +543,10 @@ class Admin extends Controller{
 
                     $create_new_mat = $this->model->newMatch($n_mat);
                     if($create_new_mat === true){
-                        $msg = "Match createed";
+                        $msg = "تم إنشاء المباراة بنجاح";
                         echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-match'},1200)</script>";
                     }else{
-                        $msg = "Match Not created , 729351173";
+                        $msg = "لم يتم إنشاء المباراة , 729351173";
                     }
                 
                     $this->view->commMsg = $msg;
@@ -557,7 +568,6 @@ class Admin extends Controller{
                isset($_POST['mat_time']) &&
                isset($_POST['mat_address']) &&
                isset($_POST['mat_note']) &&
-               isset($_POST['mat_lang']) &&
                isset($_POST['mat_team1_goal']) &&
                isset($_POST['mat_team2_goal']) &&
                isset($_POST['mat_summ']) &&
@@ -571,7 +581,6 @@ class Admin extends Controller{
                     "mat_time" => $this->protect($_POST['mat_time']),
                     "mat_address" => $this->protect($_POST['mat_address']),
                     "mat_note" => $this->protect($_POST['mat_note']),
-                    "mat_lang" => $this->protect($_POST['mat_lang']),
                     "mat_team1_goal" => $this->protect($_POST['mat_team1_goal']),
                     "mat_team2_goal" => $this->protect($_POST['mat_team2_goal']),
                     "mat_summ" => $this->protect($_POST['mat_summ']),
@@ -581,10 +590,10 @@ class Admin extends Controller{
 
                 $edit_match = $this->model->editMatch($e_mat);
                 if($edit_match != false){
-                    $msg = "Match updates";
+                    $msg = "تم تعديل المباراة بنجاح";
                     echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }else{
-                    $msg = "Match Not updates , 253h253";
+                    $msg = "لم يتم تعديل المباراة , 253h253";
                 }
                 
                 $this->view->commMsg = $msg;
@@ -602,10 +611,10 @@ class Admin extends Controller{
         $del_match = $this->model->delMatch($id);
         // echo var_dump($del_match);
         if($del_match != false){
-            $msg = "MATCH DELETED";
+            $msg = "تم حذف المباراة بنجاح";
             echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-match'},1200)</script>";
         }else{
-            $msg = "MATCH Not DELETED , errn231324";
+            $msg = "لم يتم حذف المباراة , errn231324";
         }
 
         echo $msg;
@@ -637,7 +646,10 @@ class Admin extends Controller{
                     isset($_POST['url_href']) &&
                    isset($_POST['url_channel']) &&
                    isset($_POST['url_comm']) &&
-                   isset($_POST['url_game'])){
+                   isset($_POST['url_game'])
+                   &&
+                   isset($_POST['url_lang'])
+                  ){
                     
                     $n_url = [
                         "url_name" => $this->protect($_POST['url_name']),
@@ -645,14 +657,15 @@ class Admin extends Controller{
                         "url_channel" => intval($this->protect($_POST['url_channel'])),
                         "url_comm" => intval($this->protect($_POST['url_comm'])),
                         "url_game" => intval($this->protect($_POST['url_game'])),
+                        "url_lang" => $this->protect($_POST['url_lang']),
                     ];
 
                     $create_new_url = $this->model->newUrl($n_url);
                     if($create_new_url === true){
-                        $msg = "URL createed";
+                        $msg = "تم إنشاء الرابط بنجاح";
                         echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-url'},1200)</script>";
                     }else{
-                        $msg = "URL Not created , 7626373";
+                        $msg = "لم يتم إنشاء الرابط , 7626373";
                     }
                 
                     $this->view->commMsg = $msg;
@@ -671,21 +684,25 @@ class Admin extends Controller{
             if(isset($_POST['url_href']) &&
                isset($_POST['url_id']) &&
                isset($_POST['url_channel']) &&
-               isset($_POST['url_game'])){
+               isset($_POST['url_game'])
+               &&
+               isset($_POST['url_lang'])
+              ){
                     
                 $e_url = [
                     "url_href" => $this->protect($_POST['url_href']),
                     "url_id" => intval($this->protect($_POST['url_id'])),
                     "url_channel" => intval($this->protect($_POST['url_channel'])),
                     "url_game" => intval($this->protect($_POST['url_game'])),
+                    "url_lang" => $this->protect($_POST['url_lang']),
                 ];
 
                 $edit_url = $this->model->editUrl($e_url);
                 if($edit_url != false){
-                    $msg = "URL UPDATED";
+                    $msg = "تم تعديل الرابط بنجاح";
                     echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }else{
-                    $msg = "URL Not UPDATED , 2125";
+                    $msg = "لم يتم تعديل الرابط , 2125";
                 }
 
                 echo $msg;
@@ -702,10 +719,10 @@ class Admin extends Controller{
         $del_url = $this->model->delUrl($id);
         // echo var_dump($del_url);
         if($del_url != false){
-            $msg = "URL DELETED";
+            $msg = "تم حذف الرابط بنجاح";
             echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-url'},1200)</script>";
         }else{
-            $msg = "URL Not DELETED , urlErr8262";
+            $msg = "لم يتم حذف الرابط , urlErr8262";
         }
 
         echo $msg;
@@ -744,10 +761,10 @@ class Admin extends Controller{
 
                     $create_new_transfer = $this->model->newTransfer($nc_transfer);
                     if($create_new_transfer === true){
-                        $msg = "Transfer createed";
+                        $msg = "تم انشاء انتقال بنجاح";
                         echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-transfer'},1200)</script>";
                     }else{
-                        $msg = "Transfer Not created , 25312";
+                        $msg = "لم يتم انشاء انتقال , 25312";
                     }
                 
                     $this->view->chanMsg = $msg;
@@ -785,10 +802,10 @@ class Admin extends Controller{
                 $edit_mov = $this->model->editTransfer($e_transfer);
                 
                 if($edit_mov != false){
-                    $msg = "Transfer UPDATED";
+                    $msg = "تم تعديل الانتقال بنجاح";
                     echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }else{
-                    $msg = "Transfer Not UPDATED , er22125";
+                    $msg = "لم يتم تعديل الانتقال  , er22125";
                 }
 
                 echo $msg;
@@ -805,10 +822,10 @@ class Admin extends Controller{
         $del_transfer = $this->model->delTransfer($id);
         // echo var_dump($del_transfer);
         if($del_transfer != false){
-            $msg = "Transfer DELETED";
+            $msg = "تم حذف الانتقال بنجاح";
             echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-transfer'},1200)</script>";
         }else{
-            $msg = "Transfer Not DELETED , transErr826219";
+            $msg = "لم يتم حذف الانتقال , transErr826219";
         }
 
         echo $msg;
@@ -835,6 +852,7 @@ class Admin extends Controller{
                 }
             }else{
                 if(isset($_POST['pl_name']) &&
+                   isset($_POST['pl_name_en']) &&
                    isset($_POST['pl_nat']) &&
                    isset($_POST['pl_leng']) &&
                    isset($_POST['pl_chanum']) &&
@@ -844,6 +862,7 @@ class Admin extends Controller{
                 
                     $nc_player = [
                         "pl_name" => $this->protect($_POST['pl_name']),
+                        "pl_name_en" => $this->protect($_POST['pl_name_en']),
                         "pl_nat" => $this->protect($_POST['pl_nat']),
                         "pl_leng" => intval($this->protect($_POST['pl_leng'])),
                         "pl_chanum" => intval($this->protect($_POST['pl_chanum'])),
@@ -853,10 +872,10 @@ class Admin extends Controller{
 
                     $create_new_player = $this->model->newPlayer($nc_player);
                     if($create_new_player === true){
-                        $msg = "Player createed";
+                        $msg = "تم انشاء لاعب بنجاح";
                         echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-player'},1200)</script>";
                     }else{
-                        $msg = "Player Not created , 252163p23";
+                        $msg = "لم يتم إنشاء لاعبٍ , 252163p23";
                     }
                 
                     $this->view->chanMsg = $msg;
@@ -874,6 +893,7 @@ class Admin extends Controller{
         $pl = $this->model->getPlayerById($id);
         if($pl != false){
             if(isset($_POST['pl_name']) &&
+               isset($_POST['pl_name_en']) &&
                isset($_POST['pl_id']) &&
                isset($_POST['pl_nat']) &&
                isset($_POST['pl_leng']) &&
@@ -884,6 +904,7 @@ class Admin extends Controller{
                 
                 $e_player = [
                     "pl_name" => $this->protect($_POST['pl_name']),
+                    "pl_name_en" => $this->protect($_POST['pl_name_en']),
                     "pl_nat" => $this->protect($_POST['pl_nat']),
                     "pl_id" => intval($this->protect($_POST['pl_id'])),
                     "pl_leng" => intval($this->protect($_POST['pl_leng'])),
@@ -895,10 +916,10 @@ class Admin extends Controller{
                 $edit_pl = $this->model->editPlayer($e_player);
                 
                 if($edit_pl != false){
-                    $msg = "Player UPDATED";
+                    $msg = "تم تعديل معلومات اللاعب بنجاح";
                     echo "<script>setTimeout(function(){window.location.href = ''},1200)</script>";
                 }else{
-                    $msg = "Player Not UPDATED , plErr2753";
+                    $msg = "لم يتم تعديل معلومات اللاعب , plErr2753";
                 }
 
                 echo $msg;
@@ -915,10 +936,10 @@ class Admin extends Controller{
         $del_player = $this->model->delPlayer($id);
         // echo var_dump($del_player);
         if($del_player != false){
-            $msg = "Player DELETED";
+            $msg = "تم حذف اللاعب بنجاح";
             echo "<script>setTimeout(function(){window.location.href = '". ADMIN_PATH . "/new-player'},1200)</script>";
         }else{
-            $msg = "Player Not DELETED , playerErr9301";
+            $msg = "لم يتم حذف اللاعب , playerErr9301";
         }
 
         echo $msg;

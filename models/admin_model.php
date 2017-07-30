@@ -21,7 +21,7 @@ class Admin_Model extends Model{
     // craete new channel
     public function newChan($d){
         $cnc = $this->db->table('channels')
-             ->insert("(chan_name, chan_lang, chan_logo) values(:chan_name, :chan_lang, :chan_logo)", $d);
+             ->insert("(chan_name, chan_name_en, chan_lang, chan_logo) values(:chan_name, :chan_name_en, :chan_lang, :chan_logo)", $d);
 
         return $cnc;
     }
@@ -30,7 +30,8 @@ class Admin_Model extends Model{
     public function editChannel($d){
         $ec = $this->db->table('channels')
             ->at('where chan_id = :chan_id')
-            ->update('chan_name = :chan_name, chan_lang = :chan_lang, chan_logo = :chan_logo', $d);
+            ->update('chan_name = :chan_name, 
+            chan_name_en = :chan_name_en,chan_lang = :chan_lang, chan_logo = :chan_logo', $d);
         return $ec;
     }
 
@@ -135,7 +136,7 @@ class Admin_Model extends Model{
     // new commentor
     public function newComm($d){
         $cncomm = $this->db->table('commentor')
-             ->insert("(comm_name, comm_country, comm_chan) values(:comm_name, :comm_country, :comm_chan)", $d);
+             ->insert("(comm_name, comm_name_en, comm_country, comm_chan) values(:comm_name, :comm_name_en, :comm_country, :comm_chan)", $d);
 
         return $cncomm;
     }
@@ -145,7 +146,8 @@ class Admin_Model extends Model{
         $ecomm = $this->db
                ->table('commentor')
                ->at("where comm_id = :comm_id")
-               ->update("comm_name = :comm_name, comm_chan = :comm_chan, comm_country = :comm_country", $d);
+               ->update("comm_name = :comm_name,
+               comm_name_en = :comm_name_en,comm_chan = :comm_chan, comm_country = :comm_country", $d);
 
         return $ecomm;
     }
@@ -161,7 +163,7 @@ class Admin_Model extends Model{
     // new NTF
     public function newNFT($d){
         $cn_nft = $this->db->table('nft')
-             ->insert("(nft_name, nft_logo, nft_num) values(:nft_name, :nft_logo, :nft_num)", $d);
+             ->insert("(nft_name, nft_name_en, nft_logo, nft_num) values(:nft_name, :nft_name_en, :nft_logo, :nft_num)", $d);
 
         return $cn_nft;
     }
@@ -171,7 +173,8 @@ class Admin_Model extends Model{
         $edit_nft = $this->db
                 ->table('nft')
                 ->at("where nft_id = :nft_id")
-                ->update("nft_name = :nft_name, nft_logo = :nft_logo, nft_num = :nft_num", $d);
+                ->update("nft_name = :nft_name,
+                nft_name_en = :nft_name_en,nft_logo = :nft_logo, nft_num = :nft_num", $d);
         
         return $edit_nft;
     }
@@ -187,7 +190,7 @@ class Admin_Model extends Model{
     // new club
     public function newClub($d){
         $cn_club = $this->db->table('clubs')
-             ->insert("(cl_name, cl_logo, cl_country) values(:cl_name, :cl_logo, :cl_country)", $d);
+             ->insert("(cl_name, cl_name_en, cl_logo, cl_country) values(:cl_name, :cl_name_en, :cl_logo, :cl_country)", $d);
 
         return $cn_club;
     }
@@ -204,7 +207,7 @@ class Admin_Model extends Model{
     // new Champ
     public function newChamp($d){
         $cn_champ = $this->db->table('champs')
-             ->insert("(champ_name, champ_logo, champ_date, champ_loc) values(:champ_name, :champ_logo, :champ_date, :champ_loc)", $d);
+             ->insert("(champ_name, champ_name_en, champ_logo, champ_date, champ_loc) values(:champ_name, :champ_name_en, :champ_logo, :champ_date, :champ_loc)", $d);
 
         return $cn_champ;
     }
@@ -221,7 +224,7 @@ class Admin_Model extends Model{
     // new URL
     public function newUrl($d){
         $cn_url = $this->db->table('urls')
-             ->insert("(url_name, url_href, url_channel, url_comm, url_game) values(:url_name, :url_href, :url_channel, :url_comm, :url_game)", $d);
+             ->insert("(url_name, url_href, url_channel, url_comm, url_game, url_lang) values(:url_name, :url_href, :url_channel, :url_comm, :url_game, :url_lang)", $d);
 
         return $cn_url;
     }
@@ -239,7 +242,7 @@ class Admin_Model extends Model{
     // new transfer
     public function newPlayer($d){
         $cn_player = $this->db->table('players')
-             ->insert("(pl_name, pl_nat, pl_leng, pl_chanum, pl_goals, pl_curclub) VALUES(:pl_name, :pl_nat, :pl_leng, :pl_chanum, :pl_goals, :pl_curclub)", $d);
+             ->insert("(pl_name, pl_name_en, pl_nat, pl_leng, pl_chanum, pl_goals, pl_curclub) VALUES(:pl_name, :pl_name_en, :pl_nat, :pl_leng, :pl_chanum, :pl_goals, :pl_curclub)", $d);
 
         return $cn_player;
     }
@@ -249,7 +252,8 @@ class Admin_Model extends Model{
         $ec = $this->db
             ->table('clubs')
             ->at("where cl_id = :cl_id")
-            ->update("cl_name = :cl_name, cl_country = :cl_country, cl_logo = :cl_logo", $d);
+            ->update("cl_name = :cl_name,
+            cl_name_en = :cl_name_en, cl_country = :cl_country, cl_logo = :cl_logo", $d);
         return $ec;
     }
     // del champ
@@ -298,7 +302,8 @@ class Admin_Model extends Model{
         $ec = $this->db
             ->table('champs')
             ->at("where champ_id = :champ_id")
-            ->update("champ_name = :champ_name, champ_date = :champ_date, champ_logo = :champ_logo, champ_loc = :champ_loc", $d);
+            ->update("champ_name = :champ_name,
+            champ_name_en = :champ_name_en, champ_date = :champ_date, champ_logo = :champ_logo, champ_loc = :champ_loc", $d);
         return $ec;
     }
 
@@ -308,7 +313,7 @@ class Admin_Model extends Model{
                 ->table('matches')
                 ->at("where mat_id = :mat_id")
                 ->update(" mat_team1 = :mat_team1, mat_team2 = :mat_team2, mat_time = :mat_time, mat_champ = :mat_champ, mat_team1_goal = :mat_team1_goal, mat_team2_goal = :mat_team2_goal,
-                mat_summ = :mat_summ, mat_goals = :mat_goals , mat_address = :mat_address, mat_note = :mat_note, mat_lang = :mat_lang", $d);
+                mat_summ = :mat_summ, mat_goals = :mat_goals , mat_address = :mat_address, mat_note = :mat_note", $d);
 
         return $ematch;
     }
@@ -319,7 +324,7 @@ class Admin_Model extends Model{
         $eurl = $this->db
                ->table('urls')
                ->at("where url_id = :url_id")
-               ->update("url_href = :url_href, url_id = :url_id, url_channel = :url_channel, url_game = :url_game", $d);
+               ->update("url_href = :url_href, url_id = :url_id, url_channel = :url_channel, url_game = :url_game, url_lang = :url_lang", $d);
 
         return $eurl;
     }
@@ -376,7 +381,7 @@ class Admin_Model extends Model{
         $ep = $this->db
             ->table('players')
             ->at("where pl_id = :pl_id")
-            ->update("pl_name = :pl_name, pl_nat = :pl_nat, pl_leng = :pl_leng, pl_chanum = :pl_chanum, pl_goals = :pl_goals, pl_curclub = :pl_curclub" ,$d);
+            ->update("pl_name = :pl_name, pl_name_en = :pl_name_en, pl_nat = :pl_nat, pl_leng = :pl_leng, pl_chanum = :pl_chanum, pl_goals = :pl_goals, pl_curclub = :pl_curclub" ,$d);
         
         return $ep;
         

@@ -5,7 +5,7 @@
 	<div class="mainbarcontainer">
             <div class="row">
             
-            <h1>EDIT MATCH</h1>
+            <h1>تعديل المباراة</h1>
 <form action="" method="post">
     <input name="mat_id" type="hidden" value="<?php echo $this->mat->mat_id ?>"/> <br/>
     <br/>
@@ -26,9 +26,8 @@
 	<?php } ?>
     </select>
     <br/>
-    <input name="mat_address" type="text" placeholder="Match address" value="<?php echo $this->mat->mat_address ?>"/> <br/>
-    <input name="mat_lang" type="text" placeholder="Match Lang" value="<?php echo $this->mat->mat_lang ?>"/> <br/>
-    <textarea name="mat_note" type="text" placeholder="Match note"><?php echo $this->mat->mat_note ?></textarea> <br/>
+    <input name="mat_address" type="text" placeholder="مكان المباراة" value="<?php echo $this->mat->mat_address ?>"/> <br/>
+    <textarea name="mat_note" type="text" placeholder="الملاحاظات"><?php echo $this->mat->mat_note ?></textarea> <br/>
     Match champ
     <select name="mat_champ">
 	<option value="<?php echo $this->mat->mat_champ ?>"><?php echo $this->mat->champ_name ?></option>
@@ -37,15 +36,15 @@
 	<?php } ?>
     </select>
     <br/>
-    <input name="mat_team1_goal" value="<?php echo $this->mat->mat_team1_goal ?>" type="text" placeholder="نتائج الفريق الأول"/> 
+    <input name="mat_team1_goal" value="<?php echo $this->mat->mat_team1_goal ?>" type="text" placeholder="أهداف الفريق الأول"/> 
     <br/>
-    <input name="mat_team2_goal" value="<?php echo $this->mat->mat_team2_goal ?>" type="text" placeholder="نتائج الفريق الثاني"/> 
+    <input name="mat_team2_goal" value="<?php echo $this->mat->mat_team2_goal ?>" type="text" placeholder="أهداف الفريق الثاني"/> 
     <br/>
     <input name="mat_summ" value="<?php echo $this->mat->mat_summ ?>" type="text" placeholder="ملخص المباراة"/> 
     <br/>
     <input name="mat_goals" value="<?php echo $this->mat->mat_goals ?>" type="text" placeholder="ملخص الأهداف"/> 
     <br/>
-    <button>SAVE</button>
+    <button>حفظ</button>
 </form>
             
         </div></div></div>
