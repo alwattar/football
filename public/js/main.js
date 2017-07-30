@@ -98,7 +98,14 @@ try{
 }
 try{
     $('.change-s-url').on('click', function(){
-	$.get(window.baseUrl + '/get-match-url?s_url=' + $(this).data('surl'), function(data){
+	var sUrl = $(this).data('surl');
+	var streaming_tabs = document.getElementsByClassName('change-s-url');
+	for(var i = 0; i < streaming_tabs.length; i++){
+	    var dataSurl = streaming_tabs[i].getAttribute('data-surl');
+	    streaming_tabs[i].classList.remove("active-streaming");
+	}
+	$(this).addClass('active-streaming');
+	$.get(window.baseUrl + '/get-match-url?s_url=' + sUrl, function(data){
 	    $('#ref-player').html(data);
 	    console.log(data);
 	});

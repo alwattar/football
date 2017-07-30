@@ -21,11 +21,15 @@ $urlscount = count($this->match->urls_streaming);
 	    <div class="cont-show">
 		
 		<div class="row text-center" >
-	            <?php foreach($this->match->urls_streaming as $m_url){ ?>
-			
-			<div class="col-xs-<?php echo'12'/$urlscount;?> change-s-url" data-surl="<?php echo $m_url->url_href ?>"><div><?php echo $m_url->url_name ?></div></div>
-			
-			
+		    <style>
+		     .active-streaming>div{
+			 color:red;
+		     }
+		    </style>
+	            <?php foreach($this->match->urls_streaming as $k => $m_url){ ?>
+			<div class="col-xs-<?php echo'12'/$urlscount;?> change-s-url <?php echo ($k == 0) ? 'active-streaming' : '' ?>" data-surl="<?php echo $m_url->url_href ?>">
+			    <div><?php echo $m_url->url_name ?></div>
+			</div>
 		    <?php } ?>
 		</div>
 		<div class="row">
