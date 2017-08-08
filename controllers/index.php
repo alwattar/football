@@ -99,7 +99,7 @@ class Index extends Controller{
                 if($m_status === 0)
                     $this->view->view('match-summ');
                 elseif($m_status === 1)
-                    $this->redirect(URL);
+                    $this->view->view('show-match');
                 else
                     $this->view->view('show-match');
             }else{

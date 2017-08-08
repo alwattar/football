@@ -476,5 +476,25 @@ class Controller {
             return 2;
         }
     }
+    // get days and hrs and m and seconds
+    public function getDHMS($total_seconds){
+        $d = floor($total_seconds / 86400);
+        $total_seconds -= $d * 86400;
+
+        $h = floor(($total_seconds / 3600) % 24);
+        $total_seconds -= $h * 3600;
+        
+        $m = floor(($total_seconds / 60) % 60);
+        $total_seconds -= $m * 60;
+
+        $s = $total_seconds % 60;
+
+        return [
+            'd' => intval($d),
+            'h' => intval($h),
+            'm' => intval($m),
+            's' => intval($s)
+        ];
+    }
 }   
 ?>

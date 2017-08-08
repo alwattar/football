@@ -1,4 +1,5 @@
 window.baseUrl = '/football';
+
 //----START--------ANIMATE ON SCROLL----------------//
 wow = new WOW({animateClass: 'animated',
                offset: 100});
@@ -103,16 +104,65 @@ try{
 	for(var i = 0; i < streaming_tabs.length; i++){
 	    var dataSurl = streaming_tabs[i].getAttribute('data-surl');
 	    streaming_tabs[i].classList.remove("active-streaming");
-         
-        
+            
+            
 	}
 	$(this).addClass('active-streaming');
-      $(this).children('i').addClass('lololo fa fa-check-square-o');
+	$(this).children('i').addClass('lololo fa fa-check-square-o');
 	$.get(window.baseUrl + '/get-match-url?s_url=' + sUrl, function(data){
 	    $('#ref-player').html(data);
 	    console.log(data);
 	});
     });
 }catch(err){
+    console.log(err);
+}
+
+// count down show-match page
+try{
+    function Padder(len, pad) {
+	if (len === undefined) {
+	    len = 1;
+	} else if (pad === undefined) {
+	    pad = '0';
+	}
+
+	var pads = '';
+	while (pads.length < len) {
+	    pads += pad;
+	}
+
+	this.pad = function (what) {
+	    var s = what.toString();
+	    return pads.substring(0, pads.length - s.length) + s;
+	};
+    }
+    
+    var zero1 = new Padder(2);
+    var totalSeconds = parseInt($('#mat-sec').text());
+    function updateCD(){
+	var days = '' + Math.floor(totalSeconds / 86400);
+	// totalSeconds -= days * 86400;
+	
+	// calculate (and subtract) whole hours
+	var hours = '' + Math.floor((totalSeconds - days * 86400) / 3600) % 24;
+	// totalSeconds -= hours * 3600;
+
+	// calculate (and subtract) whole minutes
+	var minutes = '' + Math.floor(((totalSeconds - days * 86400 ) - hours * 3600) / 60) % 60;
+	// totalSeconds -= minutes * 60;
+
+	// what's left is seconds
+	var seconds = '' + (((totalSeconds - days * 86400 ) - hours * 3600) - minutes * 60) % 60;  // in theory the modulus is not required
+	totalSeconds = totalSeconds - 1;
+	return zero1.pad(hours) + ':' + zero1.pad(minutes) + ':' + zero1.pad(seconds);
+    }
+    setInterval(function(){
+	$('#mat-cd').text(updateCD());
+	if(updateCD() == '00:00:00')
+	    window.location.href = '';
+    },1000);
+}
+catch(err){
     console.log(err);
 }
