@@ -99,6 +99,8 @@ try{
 }
 try{
     $('.change-s-url').on('click', function(){
+	if($(this).data('title') != null)
+	    $('#vid-title-summ').text($(this).data('title'));
 	var sUrl = $(this).data('surl');
 	var streaming_tabs = document.getElementsByClassName('change-s-url');
 	for(var i = 0; i < streaming_tabs.length; i++){

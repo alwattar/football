@@ -496,5 +496,35 @@ class Controller {
             's' => intval($s)
         ];
     }
+
+
+    public function getWLD($match){
+        if($match->mat_team1_goal > $match->mat_team2_goal){
+            $info = [
+                'status' => '',
+                'winner' => $match->team1_name,
+                'winner_goals' => $match->mat_team1_goal,
+                'loser' => $match->team2_name,
+                'loser_goals' => $match->mat_team2_goal,
+            ];
+        }elseif($match->mat_team2_goal > $match->mat_team1_goal){
+            $info = [
+                'status' => '',
+                'winner' => $match->team2_name,
+                'winner_goals' => $match->mat_team2_goal,
+                'loser' => $match->team1_name,
+                'loser_goals' => $match->mat_team1_goal,
+            ];
+        }else{
+            $info = [
+                'status' => 'draw',
+                'team1' => $match->team1_name,
+                'team2' => $match->team2_name,
+                'goals' => $match->mat_team1_goal,
+            ];
+        }
+        // echo var_dump($info);
+        return $info;
+    }
 }   
 ?>
