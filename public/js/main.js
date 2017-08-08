@@ -104,8 +104,12 @@ try{
 	for(var i = 0; i < streaming_tabs.length; i++){
 	    var dataSurl = streaming_tabs[i].getAttribute('data-surl');
 	    streaming_tabs[i].classList.remove("active-streaming");
-            
-            
+	    var childClasses = streaming_tabs[i].children[0].classList;
+	    if(childClasses.length >= 1){
+		childClasses.remove('lololo');
+		childClasses.remove('fa');
+		childClasses.remove('fa-check-square-o');
+            }
 	}
 	$(this).addClass('active-streaming');
 	$(this).children('i').addClass('lololo fa fa-check-square-o');
