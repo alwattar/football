@@ -388,7 +388,7 @@ textarea::placeholder{
     
 }
 .cont-show>div:nth-child(1)>div>div{
-    line-height: 1;
+    line-height: 2;
     position: absolute;
     padding:15px;
     font-size: 20px;
@@ -953,15 +953,14 @@ width:50px;
 
 
 .active-streaming>div{
-			 color:red;
 		     }
                 .lololo{
-                    font-size: 22px;
-                    color:red;
-                    background: green;
+                    font-size: 29px;
+                    color:white;
                     position: absolute;
                     z-index: 9999;
-                    top:0;
+                    right:50px;
+                    top:20px;
                 }
 
 
