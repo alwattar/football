@@ -1,4 +1,4 @@
-<div class="survey " style="display:none">
+<!--<div class="survey " style="display:none">
     <div class="loading-bg">
 	
     </div>
@@ -16,4 +16,4 @@
             </div>
 	</div>
     </div>
-</div>
+</div>-->

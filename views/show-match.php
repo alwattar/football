@@ -7,7 +7,7 @@ $urlscount = count($this->match->urls_streaming);
 <?php if(time() > strtotime($this->match->mat_time) + (110 * 60)){ ?>
     Matche Finished !!
 <?php }else if(time() < strtotime($this->match->mat_time)){ ?>
-    Not started yet
+    <h2>Not started yet</h2>
 <?php }else{ ?>
     <?php include_once('survey.php') ?>
     <div class="whole-site">
@@ -18,25 +18,24 @@ $urlscount = count($this->match->urls_streaming);
 	    <!-- <div class="bg-team"></div>-->
 	    <?php include_once('navbar.php') ?>
 	    
-	    <div class="cont-show">
+            <div class="cont-show">
 		
 		<div class="row text-center" >
-		    <style>
-		     .active-streaming>div{
-			 color:red;
-		     }
-		    </style>
+
 	            <?php foreach($this->match->urls_streaming as $k => $m_url){ ?>
-			<div class="col-xs-<?php echo'12'/$urlscount;?> change-s-url <?php echo ($k == 0) ? 'active-streaming' : '' ?>" data-surl="<?php echo $m_url->url_href ?>">
-			    <div><?php echo $m_url->url_name ?></div>
+			<div class="col-xs-<?php echo'12'/$urlscount ?> change-s-url <?php echo ($k == 0) ? 'active-streaming' : '' ?>" data-surl="<?php echo $m_url->url_href ?>">
+			    <i></i><div><?php echo $m_url->url_name ?></div>
 			</div>
 		    <?php } ?>
 		</div>
 		<div class="row">
 	            <div class="col-xs-4">
-			<img src="<?php echo $this->match->team1_logo ?>">
-			<h4>VS</h4>
-			<img src="<?php echo $this->match->team2_logo ?>">
+	            <div class="col-sm-4"><img src="<?php echo $this->match->team1_logo ?>"></div>
+	            <div class="col-sm-4"><h4>VS</h4></div>
+	            <div class="col-sm-4"><img src="<?php echo $this->match->team2_logo ?>"></div>
+	            
+	           
+			
 	            </div>
 	            <div class="col-xs-8">
 			<h4>مشاهدة مباراة</h4>
@@ -80,8 +79,8 @@ $urlscount = count($this->match->urls_streaming);
 		</div>
 		
 	    </div>
-	    
+	    <?php include_once('footer.php') ?>
 	</div>
     </div>
 <?php } ?>
-<?php include_once('footer.php') ?>
+

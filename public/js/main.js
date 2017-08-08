@@ -60,7 +60,7 @@ try{
 }
 
 try{
-    var noMMsg = 'والله ما بعرف شو بدي قلك بس مافي مباريات حاليا بهالصفحة';
+    var noMMsg = 'لا يوجد مباريات مهمة لهذا اليوم';
     // matches-to-be-adde
     $.get(window.baseUrl + '/get-match?day=today', function(data){
 	$('.matches-to-be-added').html('');
@@ -103,8 +103,11 @@ try{
 	for(var i = 0; i < streaming_tabs.length; i++){
 	    var dataSurl = streaming_tabs[i].getAttribute('data-surl');
 	    streaming_tabs[i].classList.remove("active-streaming");
+         
+        
 	}
 	$(this).addClass('active-streaming');
+      $(this).children('i').addClass('lololo fa fa-check-square-o');
 	$.get(window.baseUrl + '/get-match-url?s_url=' + sUrl, function(data){
 	    $('#ref-player').html(data);
 	    console.log(data);

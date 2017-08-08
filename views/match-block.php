@@ -2,10 +2,12 @@
     <?php foreach($this->matches as $m){ ?>
 	<div class="matchs-new">
 	    <div>
-		<div class="row text-center">
+		<div class="text-center">
 		    <div class="col-sm-5">
 			
-			<h4><?php echo $m->team1_name; ?></h4>
+			<div>
+			    <h4><?php echo $m->team1_name; ?></h4>
+			</div>
 			<div>
 			    <img src="<?php echo $m->team1_logo; ?>">
 			</div>
@@ -24,39 +26,32 @@
 			<div>
 			    <img src="<?php echo $m->team2_logo; ?>">
 			</div>
-			<h4><?php echo $m->team2_name; ?></h4>
+			<div>
+			    <h4><?php echo $m->team2_name; ?></h4>
+			</div>
 		    </div>
 		</div>
-		<ul>
-		    <a href="">
-			<li>
-			    <span>البطولة</span>
-			    <h5><?php echo $m->champ_name; ?></h5>
-			</li>
-		    </a>
-		    <a href="">
-			<li>
-			    <span>المعلق</span>
-			    <h5><?php echo $m->comm_name; ?></h5>
-			</li>
-		    </a>
-		    <a href="">
-			<li>
-			    <span>القناة الناقلة</span>
-			    <h5><?php echo $m->chan_name; ?></h5>
-			</li>
-		    </a>
-		</ul>
-		<center>
+		
+		<div class="row text-center">
+		    <div class="col-sm-4"> <span>البطولة</span>
+			    <h5><?php echo $m->champ_name; ?></h5></div>
+		    <div class="col-sm-4"><span>المعلق</span>
+			    <h5><?php echo $m->comm_name; ?></h5></div>
+		    <div class="col-sm-4"><span>القناة الناقلة</span>
+			    <h5><?php echo $m->chan_name; ?></h5></div>
+		</div>
+			
+		
+		</div>
+    <div class="match-hover">
 		    <?php if(time() > strtotime($m->mat_time) + (110 * 60)){ ?>
-			<a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3>انتهت المباراة - مشاهدة النتائج</h3></a>
+			<a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3> شاهد الأهداف</h3></a>
 		    <?php }else if(time() < strtotime($m->mat_time)){ ?>
-			<a><h3>لم تبدأ المباراة بعد</h3></a>
+			<a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3>لم تبدأ المباراة بعد</h3></a>
 		    <?php }else{ ?>
 			<a href="<?php echo URL ?>/index/show-match?id=<?php echo $m->mat_id ?>"><h3>شاهد الأن</h3></a>
 		    <?php } ?>
-		    </center>
-		</div>
+		    </div>
 	    </div>
 	<?php } ?>
 

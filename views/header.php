@@ -32,4 +32,4 @@
     <link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css">
     </head>
     <body>
-	
+	<?php include 'preloader.php' ?>
