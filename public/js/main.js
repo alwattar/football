@@ -115,7 +115,7 @@ try{
 	$(this).children('i').addClass('lololo fa fa-check-square-o');
 	$.get(window.baseUrl + '/get-match-url?s_url=' + sUrl, function(data){
 	    $('#ref-player').html(data);
-	    console.log(data);
+	    // console.log(data);
 	});
     });
 }catch(err){
