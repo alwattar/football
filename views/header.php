@@ -13,9 +13,13 @@
 	    <!-- jwplayer7 script and license key-->
 	    <script src="//ssl.p.jwpcdn.com/player/v/7.6.0/jwplayer.js"></script>
 	    <script>jwplayer.key = 'peXGRRnW8gklGrcCXkX0IdhS2sy0t3iwtGFTwkU4Mfw=';</script>
-	<?php }else if($bname == 'unknown-1'){
-	    $errMsg = "Are you donkey ? ,,, tell us!! .. are you ? ... use another shit browser !!"
-	?>
+	<?php }else if($bname == 'unknown-1'){ ?>
+	    <?php $errMsg = "" ?>
+	    <script src="//api.peer5.com/peer5.js?id=237pkv12fsq1bm4r7qnd"></script>
+	    <script src="//api.peer5.com/peer5.jwplayer7.plugin.js"></script>
+	    <!-- jwplayer7 script and license key-->
+	    <script src="//ssl.p.jwpcdn.com/player/v/7.6.0/jwplayer.js"></script>
+	    <script>jwplayer.key = 'peXGRRnW8gklGrcCXkX0IdhS2sy0t3iwtGFTwkU4Mfw=';</script>
 	<?php }else{ ?>
 	    <script src="http://api.peer5.com/peer5.js?id=6xs6419f3f6p92a5tyx8"></script>
 	    <script src="http://api.peer5.com/peer5.jwplayer7.plugin.js"></script>
