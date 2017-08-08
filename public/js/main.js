@@ -158,9 +158,10 @@ try{
 	return zero1.pad(hours) + ':' + zero1.pad(minutes) + ':' + zero1.pad(seconds);
     }
     setInterval(function(){
-	$('#mat-cd').text(updateCD());
-	if(updateCD() == '00:00:00')
+	if(totalSeconds <= 0)
 	    window.location.href = '';
+	else
+	    $('#mat-cd').text(updateCD());
     },1000);
 }
 catch(err){
