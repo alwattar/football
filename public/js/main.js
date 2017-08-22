@@ -64,12 +64,14 @@ try{
     var noMMsg = 'لا يوجد مباريات مهمة لهذا اليوم';
     // matches-to-be-adde
     $.get(window.baseUrl + '/get-match?day=today', function(data){
-	$('.matches-to-be-added').html('');
-	if(data.trim().length < 1){
-	    data = noMMsg;
+	if($('.matches-to-be-added').data('days') != 'all'){
+	    $('.matches-to-be-added').html('');
+	    if(data.trim().length < 1){
+		data = noMMsg;
+	    }
+	    $('.matches-to-be-added').append(data);
+	    var index_active = document.getElementsByClassName('index-active')[1].classList.add("active");
 	}
-	$('.matches-to-be-added').append(data);
-	var index_active = document.getElementsByClassName('index-active')[1].classList.add("active");
     });
     $('.get-matches-day').click(function(){
 	var theDay = $(this).data('day');

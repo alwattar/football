@@ -135,5 +135,23 @@ class Index extends Controller{
             $this->view->view('change-url');
         }
     }
+
+
+    // get all matches
+    public function getAllMatches(){
+        $m_time = false;
+        
+        $matches = $this->model->getMatchOfDay();
+        if($matches != false){
+            $final_matches = $this->getMatchesByDay($matches, $m_time);
+            $final_matches = $this->procMatches($final_matches);
+            // echo var_dump($final_matches);
+            $this->view->matches = $final_matches;
+            $this->view->view('all-matches');
+        }
+        else
+            $final_matches = [];
+
+    }
 }
 ?>
