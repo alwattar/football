@@ -175,3 +175,16 @@ try{
 catch(err){
     console.log(err);
 }
+
+try{
+        $('#ghaithwarning').show(100);
+
+setTimeout(function() {
+    $('#ghaithwarning').hide(100);
+}, 15000);
+   
+       
+} 
+catch(err){
+    console.log(err);
+}

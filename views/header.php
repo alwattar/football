@@ -38,3 +38,7 @@
     </head>
     <body>
 	<?php include 'preloader.php' ?>
+    <div id="ghaithwarning">
+        <span>ملاحظة:</span> الموقع الآن في مرحلته التجريبية 
+        </div>
+        
