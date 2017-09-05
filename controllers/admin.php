@@ -548,7 +548,7 @@ class Admin extends Controller{
                     $t1_name = $team_1_info['team'][$team_1_info['p'] . '_name'];
                     $t2_name = $team_2_info['team'][$team_1_info['p'] . '_name'];
 
-                    $url_name = ucfirst($t1_name) . '-ضد-' . ucfirst($t2_name) . '-' . date('Y') . '-' . date('m') . '-' . date('d');
+                    $url_name = date('Y') . '-' . date('m') . '-' . date('d') . ucfirst($t1_name) . '-ضد-' . ucfirst($t2_name) . '-';
                     /* ending generate url name */
                     $n_mat['mat_url_name'] = str_ireplace(' ', '-', $url_name);
                     

@@ -14,13 +14,20 @@
     </div>
     
     <br/>
+    <?php
+    $t1i = $this->getTeam($this->mat->mat_team1);
+    $t2i = $this->getTeam($this->mat->mat_team2);
+    
+    ?>
     <select name="mat_team1">
+	<option value="<?php echo $t1i['team'][$t1i['p'] . '_id'] . '_' . $t1i['p'][0] ?>"><?php echo $t1i['team'][$t1i['p'] . "_name"] ?></option>
 	<?php foreach($this->teams as $team){ $team = (object) $team; ?>
 	    <option value="<?php echo $team->id ?>"><?php echo $team->name ?></option>
 	<?php } ?>
     </select>
     <br/>
     <select name="mat_team2">
+	<option value="<?php echo $t2i['team'][$t2i['p'] . '_id'] . '_' . $t2i['p'][0] ?>"><?php echo $t2i['team'][$t2i['p'] . "_name"] ?></option>
 	<?php foreach($this->teams as $team){ $team = (object) $team; ?>
 	    <option value="<?php echo $team->id ?>"><?php echo $team->name ?></option>
 	<?php } ?>
