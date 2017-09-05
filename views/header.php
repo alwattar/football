@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="<?php echo CSS_PATH ?>font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH ?>animate.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css">
+    <link rel="stylesheet" href="<?php echo CSS_PATH ?>main.css">
     </head>
     <body>
 	<?php include 'preloader.php' ?>

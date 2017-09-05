@@ -61,7 +61,7 @@ try{
 }
 
 try{
-    var noMMsg = 'لا يوجد مباريات مهمة لهذا اليوم';
+    var noMMsg = '<center><div id="coco">لا يوجد مباريات مهمة لهذا اليوم</div></center><br/>';
     // matches-to-be-adde
     $.get(window.baseUrl + '/get-match?day=today', function(data){
 	if($('.matches-to-be-added').data('days') != 'all'){
