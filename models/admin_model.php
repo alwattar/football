@@ -215,7 +215,7 @@ class Admin_Model extends Model{
     // new Match
     public function newMatch($d){
         $cn_mat = $this->db->table('matches')
-             ->insert("(mat_team1, mat_team2, mat_time, mat_champ, mat_address, mat_note) VALUES(:mat_team1, :mat_team2, :mat_time, :mat_champ, :mat_address, :mat_note)", $d);
+             ->insert("(mat_url_name,mat_team1, mat_team2, mat_time, mat_champ, mat_address, mat_note) VALUES(:mat_url_name, :mat_team1, :mat_team2, :mat_time, :mat_champ, :mat_address, :mat_note)", $d);
 
         return $cn_mat;
     }

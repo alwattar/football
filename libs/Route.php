@@ -36,6 +36,7 @@ class Route {
                 $correct_route = intval($pattern == $route);
             }else{
                 // echo $pattern . "<br/>";
+                // echo $route . "<br/>";
                 $correct_route = intval(preg_match($pattern, $route));
             }
             // echo var_dump($pattern) . "<br/>";

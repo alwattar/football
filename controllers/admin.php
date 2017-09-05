@@ -541,6 +541,17 @@ class Admin extends Controller{
                         
                     ];
 
+                    /* Starting generate url name */
+                    $team_1_info = $this->getTeam($n_mat['mat_team1']);
+                    $team_2_info = $this->getTeam($n_mat['mat_team2']);
+
+                    $t1_name = $team_1_info['team'][$team_1_info['p'] . '_name'];
+                    $t2_name = $team_2_info['team'][$team_1_info['p'] . '_name'];
+
+                    $url_name = ucfirst($t1_name) . '-ضد-' . ucfirst($t2_name) . '-' . date('Y') . '-' . date('m') . '-' . date('d');
+                    /* ending generate url name */
+                    $n_mat['mat_url_name'] = str_ireplace(' ', '-', $url_name);
+                    
                     $create_new_mat = $this->model->newMatch($n_mat);
                     if($create_new_mat === true){
                         $msg = "تم إنشاء المباراة بنجاح";

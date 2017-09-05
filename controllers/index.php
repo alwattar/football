@@ -85,9 +85,14 @@ class Index extends Controller{
 
 
     // get match by id
-    public function showMatch(){
-        if(isset($_GET['id'])){
-            $id = intval($_GET['id']);
+    public function showMatch($info){
+        if(isset($info['the_url_name'])){
+            $mid = $this->model->getMatchByUrlName($info['the_url_name']);
+            if($mid != false)
+                $id = $mid[0]->mat_id;
+            else
+                $this->redirect(URL);
+            
             $match = $this->model->getMatchById($id);
             if($match != false){
                 // to get teams info 

@@ -36,6 +36,7 @@ require_once("./libs/Route.php");
 // index controller
 $r->addRoute("/index","index@index");
 $r->addRoute("/index/show-match","index@showMatch");
+$r->addRoute("/match/(the_url_name)","index@showMatch");
 $r->addRoute("/get-match","index@getMatchOfDay");
 $r->addRoute("/matches","index@getAllMatches");
 $r->addRoute("/get-match-url","index@changeUrlStreaming");
