@@ -36,11 +36,16 @@ require_once("./libs/Route.php");
 // index controller
 $r->addRoute("/index","index@index");
 $r->addRoute("/index/show-match","index@showMatch");
+// news
+$r->addRoute("/news","index@getAllNews");
+$r->addRoute("/news/(new_name)","index@getNew");
+$r->addRoute("/news/(new_section)","index@getNewSection");
+// matches
 $r->addRoute("/match/(the_url_name)","index@showMatch");
 $r->addRoute("/get-match","index@getMatchOfDay");
 $r->addRoute("/matches","index@getAllMatches");
 $r->addRoute("/get-match-url","index@changeUrlStreaming");
-
+// admin panel
 $r->addRoute(ADMIN_R ,"admin@index");  // done
 $r->addRoute(ADMIN_R . '/login' ,"admin@login");  // done
 $r->addRoute(ADMIN_R . '/new-chan' ,"admin@newChan");  // done
@@ -52,6 +57,10 @@ $r->addRoute(ADMIN_R . '/new-match' ,"admin@newMatch"); // done
 $r->addRoute(ADMIN_R . '/new-url' ,"admin@newUrl");  // done
 $r->addRoute(ADMIN_R . '/new-player' ,"admin@newPlayer");  // done
 $r->addRoute(ADMIN_R . '/new-transfer' ,"admin@newTransfer");  // done
+// news
+$r->addRoute(ADMIN_R . '/new-nsec' ,"admin@newNSec");  // done
+$r->addRoute(ADMIN_R . '/new-new' ,"admin@newNew");  // done
+
 $r->addRoute(ADMIN_R . '/logout' ,"admin@logout");
 
 if(isset($_GET['route'])){

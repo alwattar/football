@@ -7,6 +7,88 @@ class Admin_Model extends Model{
     }
 
 
+    
+    public function editNewNew($info){
+        $go = $this->db
+            ->table("new")
+            ->at("where n_title_url_ar = '". $info['n_title_url_ar'] ."' OR n_title_url_en = '". $info['n_title_url_en'] ."' OR n_title_url_tr = '". $info['n_title_url_tr'] ."'")
+            ->select("*");
+
+        
+        if($this->db->rowCount > 0)
+            return "ex";
+        else{
+            $koko = $this->db->table("new")
+                ->at("where n_id = :n_id")
+                ->update("n_user = :n_user,n_date = :n_date,n_img = :n_img,n_section = :n_section,n_title_ar = :n_title_ar,n_title_en = :n_title_en,n_title_tr = :n_title_tr,n_desc_ar = :n_desc_ar,n_desc_en = :n_desc_en,n_desc_tr = :n_desc_tr,n_title_url_ar = :n_title_url_ar,n_title_url_en = :n_title_url_en,n_title_url_tr = :n_title_url_tr", $info);
+            if($koko != false)
+                return 'good';
+        }
+    }
+    public function getTheNewById($id){
+        return $this->db
+            ->table('new inner join news_sections on news_sections.ns_id = new.n_section')
+            ->at("where n_id = " . $id)
+            ->select("*");
+    }
+    public function getAllNews(){
+        return $this->db->table("new")->select("*");
+    }
+    public function deleteTheNew($id){
+        $this->db->table("new")->at("where n_id = " . $id)->delete();
+    }
+    
+    public function createNewNew($info){
+        $go = $this->db
+            ->table("new")
+            ->at("where n_title_url_ar = '". $info['n_title_url_ar'] ."' OR n_title_url_en = '". $info['n_title_url_en'] ."' OR n_title_url_tr = '". $info['n_title_url_tr'] ."'")
+            ->select("*");
+
+        
+        if($this->db->rowCount > 0)
+            return "ex";
+        else{
+            $cnn = $this->db
+                 ->table('new')
+                 ->insert("(n_title_ar, n_title_en, n_title_tr, n_desc_ar, n_desc_en, n_desc_tr, n_date, n_img, n_section, n_user, n_title_url_ar, n_title_url_en, n_title_url_tr) 
+values(:n_title_ar, :n_title_en, :n_title_tr, :n_desc_ar, :n_desc_en, :n_desc_tr, :n_date, :n_img, :n_section, :n_user, :n_title_url_ar, :n_title_url_en, :n_title_url_tr)", $info);
+            return 'good';
+        }
+    }
+    
+    public function editNSec($info){
+        return $this->db
+            ->table('news_sections')
+            ->at("where ns_id = :id")
+            ->update("ns_name = :ns_name, ns_name_en = :ns_name_en, ns_name_tr = :ns_name_tr", $info);
+    }
+    public function getNSecById($id){
+        return $this->db
+            ->table('news_sections')
+            ->at("where ns_id = " . $id)
+            ->select("*");
+    }
+    
+    public function delNSec($id){
+        return $this->db
+            ->table('news_sections')
+            ->at("where ns_id = " . $id)
+            ->delete();
+    }
+    public function getAllNewsSections(){
+        $nsections = $this->db
+                  ->table("news_sections")
+                  ->select("*");
+        return $nsections;
+    }
+    public function createNSec($info){
+        $nnsec = $this->db
+            ->table('news_sections')
+            ->insert("(ns_name, ns_name_en, ns_name_tr) VALUES(:ns_name, :ns_name_en, :ns_name_tr)", $info);
+
+        return $nnsec;
+    }
+    
     // login 
     public function login($u, $p){
 
@@ -14,7 +96,6 @@ class Admin_Model extends Model{
               ->table('users')
               ->at("where u_name = '{$u}' and u_pass = '{$p}'")
               ->select('*');
-
         return $user;
     }
 

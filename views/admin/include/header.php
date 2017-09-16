@@ -2,11 +2,12 @@
     <head>
 	<meta charset="UTF-8">
 	<title>AlMarma for Online football streaming</title>
-<script src="<?php echo CK_E_PATH ?>ckeditor.js"></script>
-<script src="<?php echo CK_F_PATH ?>ckfinder.js"></script>
- <link rel="stylesheet" href="<?php echo CSS_PATH ?>bootstrap.min.css">
- 
-<script src="<?php echo JS_PATH ?>jq.js"></script>
+	<script src="<?php echo CK_E_PATH ?>ckeditor.js"></script>
+	<script src="<?php echo CK_F_PATH ?>ckfinder.js"></script>
+	<link rel="stylesheet" href="<?php echo CSS_PATH ?>bootstrap.min.css">
+	
+	<script src="<?php echo JS_PATH ?>jq.js"></script>
+	<script src="<?php echo JS_PATH ?>jq.ui.js"></script>
 <script src="<?php echo JS_PATH ?>bootstrap.min.js"></script>
 <script src="<?php echo JS_PATH ?>bootstrap-datetimepicker.min.js"></script>
 <script src="<?php echo JS_PATH ?>wow.min.js"></script>

@@ -21,7 +21,7 @@ class Admin extends Controller{
             $this->view->new = $nn[0];
         // echo var_dump($nn);
         if(
-            isset($_POST['n_date']) && !empty(trim($_POST['n_date'])) &&
+            isset($_post['n_date']) && !empty(trim($_POST['n_date'])) &&
             isset($_POST['n_img']) && !empty(trim($_POST['n_img'])) &&
             isset($_POST['n_section']) && !empty(trim($_POST['n_section'])) &&
             isset($_POST['n_title_ar']) && !empty(trim($_POST['n_title_ar'])) &&

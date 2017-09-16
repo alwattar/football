@@ -1,5 +1,38 @@
 window.baseUrl = '/football';
 
+// this function to open finder popup to select image
+function finderPopup(inputId) {
+    var finderPopup = CKFinder.popup( {
+	chooseFiles: true,
+	width: 800,
+	height: 600,
+	onInit: function( finder ) {
+	    console.log('lol');
+	    finder.on( 'files:choose', function( evt ) {
+		var file = evt.data.files.first();
+		var output = document.getElementById( inputId );
+		output.value = file.getUrl();
+	    } );
+
+	    finder.on( 'file:choose:resizedImage', function( evt ) {
+		var output = document.getElementById( inputId );
+		output.value = evt.data.resizedUrl;
+	    } );
+	}
+    } );
+}
+
+try{
+    var ckeditor = CKEDITOR.replace( 'ckeditor',{
+	filebrowserBrowseUrl: baseUrl + '/public/ckfinder/ckfinder.html',
+	filebrowserImageBrowseUrl: baseUrl + '/public/ckfinder/ckfinder.html?type=Images',
+	filebrowserUploadUrl: baseUrl + '/public/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+	filebrowserImageUploadUrl: baseUrl + '/public/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images'
+    });
+}catch(err){
+    console.log(err);
+}
+
 //----START--------ANIMATE ON SCROLL----------------//
 wow = new WOW({animateClass: 'animated',
                offset: 100});
@@ -29,28 +62,6 @@ $('.count').each(function () {
 
 
 
-// this function to open finder popup to select image
-function finderPopup(inputId) {
-    var finderPopup = CKFinder.popup( {
-	chooseFiles: true,
-	width: 800,
-	height: 600,
-	onInit: function( finder ) {
-	    console.log('lol');
-	    finder.on( 'files:choose', function( evt ) {
-		var file = evt.data.files.first();
-		var output = document.getElementById( inputId );
-		output.value = file.getUrl();
-	    } );
-
-	    finder.on( 'file:choose:resizedImage', function( evt ) {
-		var output = document.getElementById( inputId );
-		output.value = evt.data.resizedUrl;
-	    } );
-	}
-    } );
-}
-
 try{
     $('.datetimepicker').datetimepicker({
 	locale: 'ru'
@@ -70,7 +81,9 @@ try{
 		data = noMMsg;
 	    }
 	    $('.matches-to-be-added').append(data);
-	    var index_active = document.getElementsByClassName('index-active')[1].classList.add("active");
+	    var index_active = document.getElementsByClassName('index-active')[1]
+	    if(index_active != undefined)
+		index_active.classList.add("active");
 	}
     });
     $('.get-matches-day').click(function(){
