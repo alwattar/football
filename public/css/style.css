@@ -309,7 +309,7 @@ textarea::placeholder{
     width:95%;
     height: 200px;
     margin: 0 auto;
-    margin-bottom: 80px;
+    margin-bottom: 25px;
     background: #19b090;
     color:white;
     
@@ -1092,7 +1092,7 @@ width:50px;
 
 #coco{
     color:white;
-    background-color: #c93838;
+    background-color: #042851;
     padding:20px;
     width:50%;
     text-align:center;
